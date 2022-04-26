@@ -4,8 +4,6 @@
 event_inherited();
 
 //area defined as the walkable space of the player's units
-control_radius_left = 256;
-control_radius_right = 256;
 
 building_id = buildings.town_center;
 

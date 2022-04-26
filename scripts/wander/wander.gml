@@ -2,10 +2,10 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function wander(){
 	var _base = global.base;
-	if in_range(x,_base.x-_base.control_radius_left,_base.x+_base.control_radius_right) {
+	if in_range(x,_base.x-global.control_radius_left,_base.x+global.control_radius_right) {
 		if timer == 0 {
 			if target_x==-1 {
-				target_x = irandom_range(_base.x-_base.control_radius_left,_base.x+_base.control_radius_right);
+				target_x = irandom_range(_base.x-global.control_radius_left,_base.x+global.control_radius_right);
 				image_xscale = sign(target_x-x+0.001);
 				sprite_index=spr_peasant_walk;
 				image_index = 0;

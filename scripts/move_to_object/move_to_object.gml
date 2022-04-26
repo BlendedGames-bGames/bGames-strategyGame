@@ -19,7 +19,7 @@ function move_to_object(){
 			}
 		image_xscale = sign(target_instance.x-x+0.001);
 		x+=image_xscale*run_speed;
-		if in_range(x,target_instance.x,target_instance.x+target_instance.sprite_width) {
+		if in_range(x,target_instance.x,target_instance.x+target_instance.sprite_width*target_instance.image_xscale) {
 			show_debug_message("llegue");
 			timer = room_speed*3;
 			sprite_index = spr_peasant;

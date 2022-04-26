@@ -35,6 +35,8 @@ if !pause {
 					}		
 				}
 			#endregion
+			
+			#region select building to build 
 			if _can_move_camera {
 				if current_menu==menu.job { 
 					if current_submenu == submenu.none {
@@ -85,8 +87,9 @@ if !pause {
 						}
 					}
 				}
+			#endregion			
 			}
-		
+			
 		//select exploration order
 		
 		if show_min_button and point_in_rectangle(_mouse_x,_mouse_y,24,global.h/2-24,24+48,global.h/2-24+48) {

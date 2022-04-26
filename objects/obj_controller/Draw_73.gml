@@ -10,5 +10,3 @@ if current_submenu == submenu.build_mode {
 	draw_sprite(global.building_data[selected_building].sprite_index,1+!can_build,build_x,global.ground_level);
 	}
 	
-
-

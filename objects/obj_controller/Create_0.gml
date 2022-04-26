@@ -117,6 +117,13 @@ moving_building = false;
 mouse_x_old = 0;
 initial_x = 0;
 
+//base area and control
+global.control_radius_left = 256;
+global.control_radius_right = 256;
+
+global.left_wall = noone;
+global.right_wall = noone;
+
 //in-game variables
 
 global.time = 0;
@@ -147,7 +154,6 @@ render_submenu = true;
 
 surf_resources = -1;
 render_resources = true;
-
 
 //pause variables
 pause_sprite = noone;

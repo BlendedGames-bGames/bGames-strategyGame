@@ -26,3 +26,5 @@ current_wall_pos = pos;
 right_side = (global.base.x < x); //defines whether it's in the righe or left side of the map.
 
 finished_placing_background_walls = false;
+
+can_call_wall_function = true;
