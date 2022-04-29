@@ -18,7 +18,7 @@ if pause {
 	var _len = array_length(current_pause_menu);
 	var _yy = _guih/2 - _len*54/2;
 	draw_set_halign(fa_center);
-	if bgames_settings_login_timer>0 { 
+	if bgames_settings_request_timer>0 { 
 		var _yy = _guih/2 - 54*1.5;
 		draw_sprite_ext(spr_hud_bar,0,_guiw/2-3*_bar_width,_yy,6,3,0,c_white,1);
 		draw_text(_guiw/2,_guih/2-64,"Connecting to service");		
@@ -59,19 +59,6 @@ if pause {
 			}
 		draw_set_halign(fa_left);
 		}
-	else if current_pause_menu == bgames_get_points {
-		var _yy = _guih/2 - 160;
-		draw_set_halign(fa_left);
-		for (var i = 0; i < _len ;i++) {
-			draw_sprite_ext(spr_hud_bar,0,_guiw/2-1.5*128+(i mod 3) * 128+16,_yy+128*floor(i/3),2,2,0,c_white,1);
-			draw_sprite(spr_points_shop,i,_guiw/2-1.5*128+(i mod 3) * 128+16+24,_yy+128*floor(i/3)+24);
-			draw_text(_guiw/2-1.5*128+(i mod 3) * 128+8+16,_yy+128*floor(i/3)+12,string(current_pause_menu[i][0])+" tokens");
-			draw_text(_guiw/2-1.5*128+(i mod 3) * 128+8+16,_yy+128*floor(i/3)+78,string(current_pause_menu[i][1])+" point(s)");
-			}
-		draw_set_halign(fa_center);
-		draw_sprite_ext(spr_hud_bar,0,_guiw/2-3.75*_bar_width,_guih-80,7.5,1,0,c_white,1);
-		draw_text(_guiw/2,_guih-80+16,"Go back");	
-		}
 	else if current_pause_menu == bgames_bonus {
 		var _yy = _guih/2 - 160;
 		draw_set_halign(fa_center);
@@ -80,8 +67,15 @@ if pause {
 			draw_sprite_ext(spr_hud_bar,0,_guiw/2-1.5*128+(i mod 3) * 128+16,_yy+128*floor(i/3),2,2,0,c_white,1);
 			//draw_sprite(spr_points_shop,i,_guiw/2-1.5*128+(i mod 3) * 128+16+24,_yy+128*floor(i/3)+24);
 			draw_text(_guiw/2-1.5*128+(i mod 3) * 128+16 + 48,_yy+128*floor(i/3)+24,current_pause_menu[i][shop.name]);
-			draw_text(_guiw/2-1.5*128+(i mod 3) * 128+16 + 48,_yy+128*floor(i/3)+80,string(bgames_prices[current_pause_menu[i][shop.times_bought]])+" tokens");
-			draw_text(_guiw/2-1.5*128+(i mod 3) * 128+16 + 48,_yy+128*floor(i/3)+54,string(current_pause_menu[i][shop.times_bought]+1)+"/"+string(current_pause_menu[i][shop.max_stock]));
+			var _str;
+			if bgames_bonus[i][shop.times_bought]<bgames_bonus[i][shop.max_stock] {
+				_str = string(bgames_prices[current_pause_menu[i][shop.times_bought]])+" point(s)";
+				}
+			else {
+				_str = "Maxed";
+			}
+			draw_text(_guiw/2-1.5*128+(i mod 3) * 128+16 + 48,_yy+128*floor(i/3)+80,_str);
+			draw_text(_guiw/2-1.5*128+(i mod 3) * 128+16 + 48,_yy+128*floor(i/3)+54,string(current_pause_menu[i][shop.times_bought])+"/"+string(current_pause_menu[i][shop.max_stock]));
 			}
 		draw_set_valign(fa_top);
 		draw_set_halign(fa_center);
@@ -90,7 +84,7 @@ if pause {
 		}
 	else if current_pause_menu == bgames_payment_method {
 		var _yy = _guih/2 - 160;
-		_len = ds_list_size(bgames_attributes);
+		_len = array_length(bgames_attributes);
 		draw_set_halign(fa_center);
 		draw_set_valign(fa_middle);
 		
@@ -98,10 +92,9 @@ if pause {
 			draw_sprite_ext(spr_hud_bar,0,_guiw/2-1.5*128+(i mod 3) * 128+16,_yy+128*floor(i/3),2,2,0,c_white,1);
 			//draw_sprite(spr_points_shop,i,_guiw/2-1.5*128+(i mod 3) * 128+16+24,_yy+128*floor(i/3)+24);
 			draw_set_color(c_gray);
-			draw_text(_guiw/2-1.5*128+(i mod 3) * 128+16 + 48,_yy+128*floor(i/3)+24,bgames_attributes[|i].namecategory);
+			draw_text(_guiw/2-1.5*128+(i mod 3) * 128+16 + 48,_yy+128*floor(i/3)+24,bgames_attributes[i].name);
 			draw_set_color(c_white);
-			draw_text(_guiw/2-1.5*128+(i mod 3) * 128+16 + 48,_yy+128*floor(i/3)+48,bgames_attributes[|i].nameat);
-			draw_text(_guiw/2-1.5*128+(i mod 3) * 128+16 + 48,_yy+128*floor(i/3)+80,"points: "+string(bgames_attributes[|i].data));
+			draw_text(_guiw/2-1.5*128+(i mod 3) * 128+16 + 48,_yy+128*floor(i/3)+80,"points: "+string(bgames_attributes[i].data));
 			}
 		draw_set_valign(fa_top);
 		draw_set_halign(fa_center);
@@ -238,8 +231,6 @@ else {
 			else {
 				_content+=(string(current_instance.hp)+"/"+string(current_instance.max_hp));
 				}
-			
-			
 			draw_text(global.w-33-_bar_width*7+6,room_height-80+3,_title+" ("+_content+")");
 			
 			if !current_instance.built {
@@ -251,8 +242,12 @@ else {
 			}
 			else {
 				if current_instance.object_index == obj_building_lumberjack_hut {
+					
+					//chop tress button
 					draw_sprite_ext(spr_hud_bar,0,global.w-33-_bar_width,room_height-80,1,1,0,c_white,1);
 					draw_sprite(spr_hud_building_icon,0,global.w-33-_bar_width,room_height-80);
+					
+					
 					draw_text(global.w-33-_bar_width*7+6,room_height-80+28,"Workers: "+string(current_instance.workers)+"/"+string(current_instance.max_workers) + "    Effectivity: "+string(current_instance.efficienty*100)+"%");
 					}
 				}
@@ -306,7 +301,6 @@ else {
 			}
 		}
 	//draw_minimap
-	var _ratio = (((global.w/64)/global.world.size)*(_guiw-64))/72
 	draw_sprite_ext(spr_minimap_bar,0,32+(min_camera_chunk/(global.world.size)*(_guiw-64)),_guih-18,(((max_camera_chunk-min_camera_chunk)/global.world.size)*(_guiw-64))/72,1,0,c_white,1);
 	draw_sprite_ext(spr_minimap_camera,0,32+(x/(global.world.size*64)*(_guiw-64)),_guih-18,1,1,0,c_white,1);
 	}

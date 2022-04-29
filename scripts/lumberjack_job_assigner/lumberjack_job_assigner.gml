@@ -16,7 +16,12 @@ function lumberjack_job_assigner(){
 					}
 				}
 			if _free_lumberjack != noone {
+				show_debug_message("lumberjack,assigned to work: "+string(_free_lumberjack));
 				_free_lumberjack.state = move_to_object;
+				_free_lumberjack.check_state = -1;
+				_free_lumberjack.next_state = work_lumberjack;
+				_free_lumberjack.cancel_state = cancel_lumberjack;
+				_free_lumberjack.on_finish_state = -1;
 				_free_lumberjack.target_instance = id;
 				workers++;
 				}

@@ -53,7 +53,9 @@ enum explore {
 	}
 	
 enum request {
-	login
+	login,
+	attributes,
+	consume
 	}	
 	
 //Camera variables
@@ -214,16 +216,19 @@ bgames_bonus[5][0] = "Gather bonus";
 bgames_bonus[5][shop.times_bought] = 0;
 bgames_bonus[5][shop.max_stock] = 3;
 
-bgames_prices = [50, 125, 250];
+bgames_prices = [1, 2, 3];
 
 
 bgames_login[0] = "Log In";
 bgames_login[1] = "Go Back";
 
-bgames_selected_item = 0;
-bgames_attributes = ds_list_create();
-bgames_points = 0;
-bgames_settings_login_timer = 0;
+bgames_selected_item = 0; //selected bonus when consuming bgames points
+
+
+bgames_settings_request_timer = 0;
+bgames_settings_request_wait = room_speed*5;
+
+
 bgames_login_angle = 0;
 bgames_login_selection = -1; //0 = user, 1 = pass, -1 = noone
 bgames_user_has_logon = false;
@@ -234,10 +239,19 @@ bgames_user = {
 	}
 input = false;
 
+//bgames_attributes = ds_list_create();
+
+bgames_attributes = noone
+
+//bgames_attributes[0] = {
+//	name: "Social",
+//	data: 2
+//	}
 
 current_pause_menu = main_options;
 
 get = 1;
+
 
 request_type = -1;
 
@@ -247,7 +261,8 @@ error_message = {
 	}
 
 user_management_service = "http://192.168.1.196:3010";
-
+dimensions_get_service = "http://192.168.1.196:3001";
+dimensions_post_service = "http://192.168.1.196:3002";
 #endregion
 
 
@@ -345,20 +360,6 @@ bgames_settings_step = function(_mouse_x,_mouse_y,_len) {
 			}
 		}
 	}
-
-bgames_get_points_step = function(_mouse_x,_mouse_y,_len) {
-	for (var i = 0; i < _len ;i++) {
-		var _yy = global.h/2 - _len*54/2;
-		if point_in_rectangle(_mouse_x,_mouse_y,global.w/2-1.5*128+(i mod 3) * 128+16,_yy+128*floor(i/3),global.w/2-1.5*128+(i mod 3) * 128+16+96,_yy+128*floor(i/3)+96) {
-			current_pause_menu = bgames_payment_method;
-			bgames_selected_item = i;
-			break;
-			}
-		}
-	if point_in_rectangle(_mouse_x,_mouse_y,global.w/2-3.75*48,global.h-80,global.w/2+(7.5-3.75)*48,global.h-80+48) {
-		current_pause_menu = bgames_settings;
-		}
-	}
 	
 bgames_login_step = function(_mouse_x,_mouse_y) {
 	var _yy = global.h/2-56*1.5;
@@ -366,7 +367,7 @@ bgames_login_step = function(_mouse_x,_mouse_y) {
 	if point_in_button(_mouse_x,_mouse_y,global.w/2-3*48,_yy+96,2.5,.75) {//if mouse in login button
 		get = http_get(user_management_service+"/player/"+bgames_user.user+"/"+bgames_user.password);	
 		request_type = request.login;
-		bgames_settings_login_timer = room_speed*5;
+		bgames_settings_request_timer = bgames_settings_request_wait;
 		input = false;
 		}
 	else if point_in_button(_mouse_x,_mouse_y,global.w/2+24,_yy+96,2.5,.75) { //if mouse in go back button

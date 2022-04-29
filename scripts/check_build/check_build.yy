@@ -6,7 +6,7 @@
     "path": "folders/Scripts/peasant machine states/builder.yy",
   },
   "resourceVersion": "1.0",
-  "name": "build",
+  "name": "check_build",
   "tags": [],
   "resourceType": "GMScript",
 }

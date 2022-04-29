@@ -4,8 +4,9 @@
 event_inherited();
 
 level = 1;
+
+building_id = buildings.lumberjack_hut;
 workers = 0;
-building_id = buildings.lumberjack_hut
 workers_working = 0;
 max_workers = 4;
 

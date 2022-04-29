@@ -86,6 +86,27 @@ if !pause {
 							}
 						}
 					}
+				else if current_menu = menu.structure {
+					
+					if !current_instance.built {
+						if point_in_button(_mouse_x,_mouse_y,global.w-33-48,room_height-80,1,1) {
+							
+							var _building = current_instance;
+							show_debug_message(_building);
+							current_instance = noone;
+							with _building {
+								instance_destroy();
+								}
+							current_menu = submenu.none;
+							}
+						}
+					else if current_instance.object_index == obj_building_lumberjack_hut {
+						//chop trees button 
+						if point_in_button(_mouse_x,_mouse_y,global.w-33-48,room_height-80,1,1) {
+							show_debug_message("chop chop");
+							}
+						}
+					}
 				}
 			#endregion			
 			}
@@ -245,52 +266,69 @@ else {
 		input = false;
 		}
 	if device_mouse_check_button_pressed(0,mb_left) {
-		var _guiw = display_get_gui_width();
-		var _guih = display_get_gui_height();
-		var _len = array_length(current_pause_menu);
-		if current_pause_menu == main_options {
-			main_options_step(_mouse_x,_mouse_y,_len);
-			}
-		else if current_pause_menu == bgames_login {
-			bgames_login_step(_mouse_x,_mouse_y);
-			}
-		else if current_pause_menu == bgames_settings {
-			bgames_settings_step(_mouse_x,_mouse_y,_len);
-			}
-		else if current_pause_menu == bgames_get_points {
-			bgames_get_points_step(_mouse_x,_mouse_y,_len);
-			}
-		else if current_pause_menu == bgames_payment_method {
-			_len = ds_list_size(bgames_attributes);
-			for (var i = 0; i < _len ;i++) {
-				var _yy = _guih/2 - _len*54/2;
-				if point_in_rectangle(_mouse_x,_mouse_y,_guiw/2-1.5*128+(i mod 3) * 128+16,_yy+128*floor(i/3),_guiw/2-1.5*128+(i mod 3) * 128+16+96,_yy+128*floor(i/3)+96) {
-					bgames_points+=bgames_get_points[bgames_selected_item][0];
-					current_pause_menu = bgames_get_points;
-					break;
-					}
+		if bgames_settings_request_timer<=0 {
+			var _guiw = global.w;
+			var _guih = global.h;
+			var _len = array_length(current_pause_menu);
+		
+			if current_pause_menu == main_options {
+				main_options_step(_mouse_x,_mouse_y,_len);
 				}
-			if point_in_rectangle(_mouse_x,_mouse_y,_guiw/2-3.75*48,_guih-80,_guiw/2+(7.5-3.75)*48,_guih-80+48) {
-				current_pause_menu = bgames_settings;
+			else if current_pause_menu == bgames_login {
+				bgames_login_step(_mouse_x,_mouse_y);
 				}
-			}
-		else if current_pause_menu == bgames_bonus {
-			for (var i = 0; i < _len ;i++) {
-				var _yy = _guih/2 - _len*54/2;
-				if point_in_rectangle(_mouse_x,_mouse_y,_guiw/2-1.5*128+(i mod 3) * 128+16,_yy+128*floor(i/3),_guiw/2-1.5*128+(i mod 3) * 128+16+96,_yy+128*floor(i/3)+96) {
-					if bgames_bonus[i][shop.times_bought]<bgames_bonus[i][shop.max_stock]-1 {
-						bgames_bonus[i][shop.times_bought]++;
+			else if current_pause_menu == bgames_settings {
+				bgames_settings_step(_mouse_x,_mouse_y,_len);
+				}
+			//else if current_pause_menu == bgames_get_points {
+			//	bgames_get_points_step(_mouse_x,_mouse_y,_len);
+			//	}
+			else if current_pause_menu == bgames_payment_method {
+				_len = array_length(bgames_attributes);
+				for (var i = 0; i < _len ;i++) {
+					var _yy = _guih/2 - 160;
+					if point_in_rectangle(_mouse_x,_mouse_y,_guiw/2-1.5*128+(i mod 3) * 128+16,_yy+128*floor(i/3),_guiw/2-1.5*128+(i mod 3) * 128+16+96,_yy+128*floor(i/3)+96) {
+						if bgames_attributes[i].data>=bgames_prices[bgames_bonus[bgames_selected_item][shop.times_bought]] {	
+							var _str = "id_player="+string(bgames_user.id)+
+							           "&id_attributes="+string(bgames_attributes[i].id_attributes)+
+									   "&new_data="+string( bgames_prices[bgames_bonus[bgames_selected_item][shop.times_bought]]);
+							
+							get = http_post_string(dimensions_post_service+"/spend_attribute/",_str);
+							request_type = request.consume;
+							bgames_settings_request_timer = bgames_settings_request_wait;
+							
+							}
+						break;
 						}
-					break;
+					}
+				if point_in_rectangle(_mouse_x,_mouse_y,_guiw/2-3.75*48,_guih-80,_guiw/2+(7.5-3.75)*48,_guih-80+48) {
+					current_pause_menu = bgames_bonus;
 					}
 				}
-			if point_in_rectangle(_mouse_x,_mouse_y,_guiw/2-3.75*48,_guih-80,_guiw/2+(7.5-3.75)*48,_guih-80+48) {
-				current_pause_menu = bgames_settings;
+			else if current_pause_menu == bgames_bonus {
+				for (var i = 0; i < _len ;i++) {
+					var _yy = _guih/2 - _len*54/2;
+					if point_in_rectangle(_mouse_x,_mouse_y,_guiw/2-1.5*128+(i mod 3) * 128+16,_yy+128*floor(i/3),_guiw/2-1.5*128+(i mod 3) * 128+16+96,_yy+128*floor(i/3)+96) {
+						if bgames_bonus[i][shop.times_bought]<bgames_bonus[i][shop.max_stock] {
+							current_pause_menu = bgames_payment_method;
+							bgames_selected_item = i;
+							
+							get = http_get(dimensions_get_service+"/player_all_attributes/"+string(bgames_user.id));	
+							request_type = request.attributes;
+							bgames_settings_request_timer = bgames_settings_request_wait;
+							
+							}
+						break;
+						}
+					}
+				if point_in_rectangle(_mouse_x,_mouse_y,_guiw/2-3.75*48,_guih-80,_guiw/2+(7.5-3.75)*48,_guih-80+48) {
+					current_pause_menu = bgames_settings;
+					}
 				}
 			}
 		}
-	if bgames_settings_login_timer>0 {
-		bgames_settings_login_timer = max(0, bgames_settings_login_timer-1);
+	if bgames_settings_request_timer>0 {
+		bgames_settings_request_timer = max(0, bgames_settings_request_timer-1);
 		bgames_login_angle+=6;
 		} 
 	

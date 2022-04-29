@@ -2,7 +2,7 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function move_to_pos(){
 
-	if target_x!=-1 and obj_controller.exploration_active[target_side] {
+	if target_x!=-1 and (check_state==-1 or (check_state!=-1 and check_state()))  {
 		if sprite_index!=spr_peasant_walk {
 			sprite_index=spr_peasant_walk;
 			image_index = 0;
@@ -10,18 +10,13 @@ function move_to_pos(){
 		image_xscale = sign(target_x-x+0.001);
 		x+=image_xscale*run_speed;
 		if abs(x-target_x)<run_speed*2 {
-			if job == jobs.soldier {
-				state = explore_new_land;
-				obj_controller.units_exploring[target_side]++; 
-				timer = 0;
-				target_x = -1;
-				}
+			timer = 0;
+			target_x = -1;
+			if on_finish_state!=-1 on_finish_state();
+			state = next_state;
 			}
 		}	
 	else {
-		state = wander;
-		if job == jobs.soldier {
-			obj_controller.units_going_to_explore[target_side]--; 
-			}
+		cancel_state();
 		}
 	}

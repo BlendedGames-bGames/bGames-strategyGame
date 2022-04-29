@@ -6,7 +6,7 @@
     "path": "folders/Scripts/peasant machine states/soldier/explore lands.yy",
   },
   "resourceVersion": "1.0",
-  "name": "explore_new_land",
+  "name": "exploration_is_active",
   "tags": [],
   "resourceType": "GMScript",
 }

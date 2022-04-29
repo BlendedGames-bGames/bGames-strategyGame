@@ -16,7 +16,13 @@ function builder_job_assigner(){
 					}
 				}
 			if _free_builder != noone {
+				
 				_free_builder.state = move_to_object;
+				_free_builder.check_state = check_build;
+				_free_builder.next_state = build;
+				_free_builder.cancel_state = build_cancelled;
+				_free_builder.on_finish_state = -1;
+				
 				_free_builder.target_instance = id;
 				builders++;
 				}

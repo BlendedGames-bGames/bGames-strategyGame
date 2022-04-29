@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "builder",
-    "path": "folders/Scripts/peasant machine states/builder.yy",
+    "name": "explore lands",
+    "path": "folders/Scripts/peasant machine states/soldier/explore lands.yy",
   },
   "resourceVersion": "1.0",
-  "name": "build",
+  "name": "start_exploring",
   "tags": [],
   "resourceType": "GMScript",
 }

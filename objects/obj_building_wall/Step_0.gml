@@ -19,11 +19,13 @@ else {
 	//Wall construction process. Each time a wall is built, it will build background walls until it finds another wall.
 	if !finished_placing_background_walls {
 		if (pos==current_wall_pos) {
-			if right_side {
-				global.world.wall_sprite[current_wall_pos] = spr_wall_border_right;
-				}
-			else {
-				global.world.wall_sprite[current_wall_pos] = spr_wall_border_left;
+			if global.world.wall_sprite[current_wall_pos]==noone {
+				if right_side {
+					global.world.wall_sprite[current_wall_pos] = spr_wall_border_right;
+					}
+				else {
+					global.world.wall_sprite[current_wall_pos] = spr_wall_border_left;
+					}
 				}
 			}
 		else {
