@@ -26,9 +26,11 @@
   "frames": [
     {"compositeImage":{"FrameId":{"name":"54d269be-1110-4653-8faf-51b0d617efab","path":"sprites/spr_peasant_parts/spr_peasant_parts.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
         {"FrameId":{"name":"54d269be-1110-4653-8faf-51b0d617efab","path":"sprites/spr_peasant_parts/spr_peasant_parts.yy",},"LayerId":{"name":"07aab946-39e8-4e99-8416-0257b340920b","path":"sprites/spr_peasant_parts/spr_peasant_parts.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+        {"FrameId":{"name":"54d269be-1110-4653-8faf-51b0d617efab","path":"sprites/spr_peasant_parts/spr_peasant_parts.yy",},"LayerId":{"name":"4d0191df-e413-4f34-8acc-be124d816ba6","path":"sprites/spr_peasant_parts/spr_peasant_parts.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
       ],"parent":{"name":"spr_peasant_parts","path":"sprites/spr_peasant_parts/spr_peasant_parts.yy",},"resourceVersion":"1.0","name":"54d269be-1110-4653-8faf-51b0d617efab","tags":[],"resourceType":"GMSpriteFrame",},
     {"compositeImage":{"FrameId":{"name":"f4bc5165-cd22-4531-a827-351ba54d07bb","path":"sprites/spr_peasant_parts/spr_peasant_parts.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
         {"FrameId":{"name":"f4bc5165-cd22-4531-a827-351ba54d07bb","path":"sprites/spr_peasant_parts/spr_peasant_parts.yy",},"LayerId":{"name":"07aab946-39e8-4e99-8416-0257b340920b","path":"sprites/spr_peasant_parts/spr_peasant_parts.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+        {"FrameId":{"name":"f4bc5165-cd22-4531-a827-351ba54d07bb","path":"sprites/spr_peasant_parts/spr_peasant_parts.yy",},"LayerId":{"name":"4d0191df-e413-4f34-8acc-be124d816ba6","path":"sprites/spr_peasant_parts/spr_peasant_parts.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
       ],"parent":{"name":"spr_peasant_parts","path":"sprites/spr_peasant_parts/spr_peasant_parts.yy",},"resourceVersion":"1.0","name":"f4bc5165-cd22-4531-a827-351ba54d07bb","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
@@ -69,6 +71,7 @@
     "resourceType": "GMSequence",
   },
   "layers": [
+    {"visible":false,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"Layer 1","resourceVersion":"1.0","name":"4d0191df-e413-4f34-8acc-be124d816ba6","tags":[],"resourceType":"GMImageLayer",},
     {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"07aab946-39e8-4e99-8416-0257b340920b","tags":[],"resourceType":"GMImageLayer",},
   ],
   "nineSlice": null,

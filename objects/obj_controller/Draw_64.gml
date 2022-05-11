@@ -6,7 +6,7 @@ draw_set_font(fnt_text);
 var _bar_width = 48;
 if pause {
 	
-	draw_sprite_ext(pause_sprite,0,0,0,_guiw/res_w,_guih/res_h,0,c_white,1);
+	//draw_sprite_ext(pause_sprite,0,0,0,_guiw/res_w,_guih/res_h,0,c_white,1);
 	
 	draw_set_color(c_black);
 	draw_set_alpha(0.5);
@@ -125,6 +125,12 @@ else {
 		render_resources = true;
 		}
 	
+	if !surface_exists(surf_lighting) {
+		surf_lighting = surface_create(global.w,global.h);
+		}	
+	
+	draw_text(32,global.h/2,global.time/global.day_time);
+	
 	//Drawing resources
 	if render_resources {
 		surface_set_target(surf_resources);
@@ -204,21 +210,39 @@ else {
 				}
 			else {
 				draw_sprite_ext(spr_hud_bar,0,global.w-33-_bar_width*7,room_height-80,5,1,0,c_white,1);
-				
-				draw_sprite_ext(spr_hud_bar,0,global.w-33-_bar_width,room_height-80,1,1,0,c_white,1);
-				draw_sprite(spr_hud_icon,8,global.w-33-_bar_width+24,room_height-80+12);
-			
-				draw_sprite_ext(spr_hud_bar,0,global.w-33-_bar_width*2,room_height-80,1,1,0,c_white,1);
-				draw_sprite(spr_hud_icon,9,global.w-33-_bar_width*2+24,room_height-80+12);
-			
 				draw_set_halign(fa_center);
-				draw_text(global.w-33-_bar_width+24,room_height-80+24,"Cancel");
-				draw_text(global.w-33-_bar_width*2+24,room_height-80+24,"Build");
+				draw_standard_button(spr_hud_icon,8,"Cancel",global.w-33-_bar_width,room_height-80);
+				draw_standard_button(spr_hud_icon,9,"Build",global.w-33-_bar_width*2,room_height-80);
 				draw_set_halign(fa_left);
-				draw_text_ext(global.w-33-_bar_width*7+8,room_height-72,global.building_data[selected_building].desc,9,_bar_width*6);
+				draw_text_ext(global.w-33-_bar_width*7+8,room_height-76,global.building_data[selected_building].desc,12,_bar_width*6);
+				
+				
+				var _struct = global.building_data[selected_building];
+				var _pos = 32;
+				draw_set_font(fnt_small);
+				draw_set_valign(fa_bottom);
+				draw_text(global.w-33-_bar_width*7+8,room_height-72+22+20,"Cost:");
+				if _struct.wood_cost>0 {
+					draw_sprite(spr_resource_font,1,global.w-33-_bar_width*7+8+_pos,room_height-72+22);
+					draw_text(global.w-33-_bar_width*7+8+_pos+16,room_height-72+22+20,string(_struct.wood_cost));
+					_pos+=48;
+					}
+				if _struct.stone_cost>0 {
+					draw_sprite(spr_resource_font,2,global.w-33-_bar_width*7+8+_pos,room_height-72+22);
+					draw_text(global.w-33-_bar_width*7+8+_pos+16,room_height-72+22+20,string(_struct.stone_cost));
+					_pos+=48;
+					}
+				if _struct.gold_cost>0 {
+					draw_sprite(spr_resource_font,0,global.w-33-_bar_width*7+8+_pos,room_height-72+22);
+					draw_text(global.w-33-_bar_width*7+8+_pos+16,room_height-72+22+20,string(_struct.gold_cost));
+					_pos+=48;
+					}
+				draw_set_valign(fa_top);
+				draw_set_font(fnt_text);
+				
 				}
 			}
-		else if current_menu == menu.structure {
+		else if current_menu == menu.structure and instance_exists(current_instance) {
 			draw_sprite(spr_hud_center,1,global.w,room_height-80);
 			draw_sprite_ext(spr_hud_bar,0,global.w-33-_bar_width*7,room_height-80,7,1,0,c_white,1);
 			draw_set_halign(fa_left);
@@ -234,10 +258,8 @@ else {
 			draw_text(global.w-33-_bar_width*7+6,room_height-80+3,_title+" ("+_content+")");
 			
 			if !current_instance.built {
-				draw_sprite_ext(spr_hud_bar,0,global.w-33-_bar_width,room_height-80,1,1,0,c_white,1);
-				draw_sprite(spr_hud_icon,8,global.w-33-_bar_width+24,room_height-80+12);
 				draw_set_halign(fa_center);
-				draw_text(global.w-33-_bar_width+24,room_height-80+24,"Cancel");
+				draw_standard_button(spr_hud_icon,8,"Cancel",global.w-33-_bar_width,room_height-80);
 				draw_set_halign(fa_left);
 			}
 			else {
@@ -245,20 +267,39 @@ else {
 					
 					//chop tress button
 					draw_sprite_ext(spr_hud_bar,0,global.w-33-_bar_width,room_height-80,1,1,0,c_white,1);
-					draw_sprite(spr_hud_building_icon,0,global.w-33-_bar_width,room_height-80);
-					
+					var _index = 2 + (current_instance.cut_zone!=noone);
+					draw_sprite(spr_hud_skills_icon,_index,global.w-33-_bar_width,room_height-80);
 					
 					draw_text(global.w-33-_bar_width*7+6,room_height-80+28,"Workers: "+string(current_instance.workers)+"/"+string(current_instance.max_workers) + "    Effectivity: "+string(current_instance.efficienty*100)+"%");
 					}
 				}
 			}
+		else if current_menu = menu.place_lumberjack_zone {
+			draw_sprite(spr_hud_center,1,global.w,room_height-80);
+			draw_sprite_ext(spr_hud_bar,0,global.w-33-_bar_width*7,room_height-80,5,1,0,c_white,1);
+			
+			draw_text(global.w-33-_bar_width*7+6,room_height-80+3,"Select the area \nto cut trees");
+			
+			draw_set_halign(fa_center);
+			draw_standard_button(spr_hud_icon,8,"Cancel",global.w-33-_bar_width,room_height-80);
+			draw_standard_button(spr_hud_icon,9,"Build",global.w-33-_bar_width*2,room_height-80);
+			draw_standard_button(spr_hud_icon,10,"Bigger",global.w-33-_bar_width*3,room_height-80);
+			draw_standard_button(spr_hud_icon,11,"Smaller",global.w-33-_bar_width*4,room_height-80);
+			draw_set_halign(fa_left);
+			
+			}
 		surface_reset_target()
 	
 		render_submenu = false;
 		}
-	draw_surface(surf_menu,0,0);
-	draw_surface(surf_submenu,0,0);	
-	draw_surface(surf_resources,0,0);	
+		
+		
+	draw_sprite_ext(spr_unknown_border,0,(min_camera_chunk-1)*64-x+global.w/2,0,1,5,0,c_white,1);
+	draw_sprite_ext(spr_unknown_border,0,(max_camera_chunk+1)*64-x+global.w/2,0,-1,5,0,c_white,1);	
+		
+	draw_surface_ext(surf_menu,0,global.h,1,-1,0,c_white,1);
+	draw_surface_ext(surf_submenu,0,global.h,1,-1,0,c_white,1);
+	draw_surface_ext(surf_resources,0,128,1,-1,0,c_white,1);
 	
 	if current_submenu == submenu.moving_peasant {
 		if selected_job == 0 {
@@ -301,9 +342,18 @@ else {
 			}
 		}
 	//draw_minimap
+	
+	
 	draw_sprite_ext(spr_minimap_bar,0,32+(min_camera_chunk/(global.world.size)*(_guiw-64)),_guih-18,(((max_camera_chunk-min_camera_chunk)/global.world.size)*(_guiw-64))/72,1,0,c_white,1);
 	draw_sprite_ext(spr_minimap_camera,0,32+(x/(global.world.size*64)*(_guiw-64)),_guih-18,1,1,0,c_white,1);
 	}
 	
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
+
+
+		
+	
+	
+
+

@@ -12,14 +12,41 @@ function initialize_global_modifiers(){
 	global.pop_cap = 10;
 	global.pops = 0;
 
-	global.daily_wood_gather_base = 3;
-	global.daily_gold_gather_base = 3;
-	global.daily_stone_gather_base = 3;
-	global.daily_food_gather_base = 3;
+
+	global.daily_wood_gather_base = 2;
+	global.daily_gold_gather_base = 2;
+	global.daily_stone_gather_base = 2;
+	global.daily_food_gather_base = 2;
+	
+	global.daily_wood_gather = 2;
+	global.daily_gold_gather = 2;
+	global.daily_stone_gather = 2;
+	global.daily_food_gather = 2;
+
+	global.daily_wood_gather_percent_bonus = 0;
+	global.daily_gold_gather_percent_bonus = 0;
+	global.daily_stone_gather_percent_bonus = 0;
+	global.daily_food_gather_percent_bonus = 0;
+	
+	global.daily_gather_percent_bonus = 0;
+	
 	global.build_speed_percent_bonus = 0;
-	global.building_max_hp_bonus = 0;
+	global.building_max_hp_percent_bonus = 0;
 	global.soldier_attack_speed_bonus = 0;
 	global.soldier_attack_damage_bonus = 0;
+	
 	global.pop_cap_bonus = 0;
-	global.peasant_move_speed_bonus = 0;
+	global.pop_cap_base = 10;
+	
+	global.peasant_walk_speed_base = 0.5;
+	global.peasant_run_speed_base = 1;
+	
+	global.peasant_walk_speed_percent_bonus = 0;
+	global.peasant_run_speed_percent_bonus = 0;
+	
+	global.peasant_walk_speed = .5;
+	global.peasant_run_speed = 1;
+	
+	global.carcass_run_speed = 1.5;
+	
 }

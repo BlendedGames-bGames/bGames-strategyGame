@@ -12,7 +12,7 @@ workers_working = 0;
 max_workers = 4;
 
 hp = 0;
-max_hp = 480;
+max_hp = 32;
 
 image_speed = 0;
 yscale = 0;

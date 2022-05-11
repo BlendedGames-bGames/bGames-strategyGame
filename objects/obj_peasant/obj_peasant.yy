@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "spr_peasant",
-    "path": "sprites/spr_peasant/spr_peasant.yy",
+    "name": "spr_builder",
+    "path": "sprites/spr_builder/spr_builder.yy",
   },
   "solid": false,
   "visible": true,

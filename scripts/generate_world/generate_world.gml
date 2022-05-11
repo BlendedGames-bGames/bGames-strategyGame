@@ -16,13 +16,14 @@ function generate_world(_size){
 	//set up ground
 	for (var i=0;i<_size;i++) {
 		
-		_world.wall_sprite[i] = noone;
-		_world.wall_y[i] = 0;
-		_world.chunk_sprite[i]=spr_ground;
+		_world.wall_sprite[i] = noone; //sprite used for background walls
+		_world.wall_y[i] = 0; //the Y coordinate of the background walls
+		_world.chunk_sprite[i]=spr_ground; //the ground's sprite
 		_world.chunk_type[i]=2; //0 baldío, 1 pradera, 2 bosque, 3 rio, 4 concrete
-		_world.forest_bg_index[i]=irandom_range(0,12);
-		_world.forest_bg_index2[i]=irandom_range(0,12);
-		_world.forest_tree_amount[i]=0;
+		_world.forest_bg_index[i]=irandom_range(0,12); //image index of the background forest image 1
+		_world.forest_bg_index2[i]=irandom_range(0,12); //image index of the background forest image 2
+		_world.forest_tree_amount[i]=0; // how many tress the chunk has
+		_world.forest_needs_to_be_animated[i] = false; //flag to check if the chunk need to have his trees animated.
 		for (var j=0;j<3;j++) {
 			_world.forest_tree[i][j]=-1;
 			}
@@ -50,8 +51,10 @@ function generate_world(_size){
 	for (var i=0;i<_size;i++) {
 		if _world.chunk_type[i]==2 {
 			_world.forest_tree_amount[i]=irandom_range(1,3);
-			for (var j=0;j<_world.forest_tree_amount[i];j++) {
-				_world.forest_tree[i][j] = new Tree(irandom_range(8,56),choose(1,-1));
+			var _pos = 0;
+			repeat ( _world.forest_tree_amount[i]) {
+				_world.forest_tree[i][_pos] = new Tree(irandom_range(8,56),choose(1,-1));
+				_pos++;
 				}
 			}
 		}

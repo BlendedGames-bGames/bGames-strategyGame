@@ -15,7 +15,7 @@ function draw_pop(_pop_list, _x, _y, _width, _height){
 		}
 	else {
 		for (var i = 0; i < _size; i++) {
-			draw_sprite(spr_pop_icon,0,_x + _width - 5 - 8 * (i mod _row_length), _y + _height - 2- 8 * floor(i/_row_length));
+			draw_sprite(spr_pop_icon,0,_x + _width - 5 - 8 * (i mod _row_length), _y + _height - 4- 8 * floor(i/_row_length));
 			}
 		}
 	}

@@ -3,31 +3,57 @@
 var _mouse_x = device_mouse_x_to_gui(0);
 var _mouse_y = device_mouse_y_to_gui(0);
 
-#region Camera control & HUD/units selection
 if !pause {
-	
-	
+
 	global.gather_timer = max(global.gather_timer-1,0);
 	if global.gather_timer == 0 {
 		global.gather_timer = room_speed*3;
 		collect_resources();
 		}
 	
-	if device_mouse_check_button_pressed(0,mb_left) {
-		var _can_move_camera = true;
+	builder_job_assigner();
+	lumberjack_job_assigner();
+	soldier_job_assigner();
+	bgames_modifiers();
+	global.time = ((global.time+1) mod global.day_time);
+	day_cycle_step();
 	
+		
+	var _can_move_camera = true;
+	mouse_hold_time += mouse_hold;
+
+	if device_mouse_check_button_pressed(0,mb_left) {
+		
 		//pause 
 		click_pause(_mouse_x,_mouse_y);
-	
-		//HUD handling
+
+		if current_submenu!=submenu.build_mode {
+			//check if selecting a structure
+			if current_menu!=menu.place_lumberjack_zone and position_meeting(x-global.w/2+_mouse_x,_mouse_y,obj_building_parent) {
+				touched_an_instance = true;
+				}
+			//moving the camera
+			if _can_move_camera and _mouse_y<global.ground_level+32 {
+		
+				mouse_mode = mouse.moving_camera;
+				prev_mouse_pos.x = _mouse_x;
+				initial_x = x;
+				}
+			}
+		
+		//selection variables reset
+		sel_menu = -1;
+		sel_submenu = -1;
+		sel_index = -1;
+		sel_choose_a_menu = false;
+		mouse_hold = true;
+		
 		if _mouse_y>=global.ground_level+32 {
-			
 			#region menu select
 			for (var i = 0; i<3; i++) {
 				if point_in_rectangle(_mouse_x,_mouse_y,32+72*i,room_height-80,32+72*(i+1),room_height-80+48) {
-					current_menu = i;
-					current_submenu = submenu.none;
-					current_submenu_function = -1;
+					sel_menu = i;
+					sel_choose_a_menu = true;
 					render_menu = true;
 					render_submenu = true;
 					_can_move_camera = false;
@@ -35,109 +61,265 @@ if !pause {
 					}		
 				}
 			#endregion
-			
-			#region select building to build 
-			if _can_move_camera {
-				if current_menu==menu.job { 
-					if current_submenu == submenu.none {
-						// Check if moving peasants between jobs
-						for (var i = 0; i<6; i++) {
-							if !ds_list_empty(global.peasant_list[i]) {
-								if (i == 0 and point_in_rectangle(_mouse_x,_mouse_y,global.w-33-64,room_height-80,global.w-33,room_height-80+48)) or
-									(i != 0 and point_in_rectangle(_mouse_x,_mouse_y,global.w-33-64-48*i,room_height-80,global.w-33-64-48*(i-1),room_height-80+48)) {
-									current_submenu = submenu.moving_peasant;
-									current_submenu_function = submenu_peasant_function;
-									selected_job = i;
-									target_job = i;
-									_can_move_camera = false;
-									break;
-									}
-								}
+			#region build menu
+			if current_menu == menu.build { 
+				if current_submenu == submenu.none { 
+					for (var i = 0; i<8; i++) {
+						if point_in_rectangle(_mouse_x,_mouse_y,global.w-33-48*(i+1),room_height-80,global.w-33-48*(i),room_height-80+48) {
+							sel_menu = current_menu;
+							sel_submenu = current_submenu;
+							sel_index = i;
+							render_submenu = true;
+							_can_move_camera = false;
+							break;
 							}
 						}
 					}
-				else if current_menu == menu.build { 
-					if current_submenu == submenu.none { 
-						for (var i = 0; i<8; i++) {
-							if point_in_rectangle(_mouse_x,_mouse_y,global.w-33-48*(i+1),room_height-80,global.w-33-48*(i),room_height-80+48) {
-								current_submenu = submenu.build_mode;
-								current_submenu_function = submenu_build_function;
-								build_x = floor((x)/64)*64;
-								selected_building = i;
-								render_submenu = true;
-								_can_move_camera = false;
-							
-								break;
-								}
-							}
+				else if current_submenu == submenu.build_mode {
+					if point_in_rectangle(_mouse_x,_mouse_y,global.w-33-48,room_height-80,global.w-33,room_height-80+48) {
+						sel_menu = current_menu;
+						sel_submenu = current_submenu;
+						sel_index = 0;
+						render_submenu = true;
+						_can_move_camera = false;
 						}
-					else if current_submenu == submenu.build_mode {
-						if point_in_rectangle(_mouse_x,_mouse_y,global.w-33-48,room_height-80,global.w-33,room_height-80+48) {
-							current_submenu = submenu.none;
-							render_submenu = true;
-							_can_move_camera = false;
-							}
-						else if can_build and point_in_rectangle(_mouse_x,_mouse_y,global.w-33-48*2,room_height-80,global.w-33-48,room_height-80+48) {
-							var _new_build_site = instance_create_layer(build_x,global.ground_level,"Buildings",global.building_data[selected_building].object)
-							ds_list_add(global.building_in_need,_new_build_site);
-							current_submenu = submenu.none;
-							render_submenu = true;
-							_can_move_camera = false;
-							}
+					else if can_build and point_in_rectangle(_mouse_x,_mouse_y,global.w-33-48*2,room_height-80,global.w-33-48,room_height-80+48) {
+						sel_menu = current_menu;
+						sel_submenu = current_submenu;
+						sel_index = 1;
+
+						render_submenu = true;
+						_can_move_camera = false;
 						}
 					}
-				else if current_menu = menu.structure {
-					
+				}
+			#endregion
+			#region structure menu
+			else if current_menu = menu.structure {
+				if instance_exists(current_instance) {
 					if !current_instance.built {
 						if point_in_button(_mouse_x,_mouse_y,global.w-33-48,room_height-80,1,1) {
-							
-							var _building = current_instance;
-							show_debug_message(_building);
-							current_instance = noone;
-							with _building {
-								instance_destroy();
-								}
-							current_menu = submenu.none;
+							sel_menu = current_menu;
+							sel_submenu = current_submenu;
+							sel_index = 0;
+							render_submenu = true;
+							_can_move_camera = false;
 							}
 						}
 					else if current_instance.object_index == obj_building_lumberjack_hut {
 						//chop trees button 
 						if point_in_button(_mouse_x,_mouse_y,global.w-33-48,room_height-80,1,1) {
-							show_debug_message("chop chop");
+							sel_menu = current_menu;
+							sel_submenu = current_submenu;
+							sel_index = 0;
+							render_submenu = true;
+							_can_move_camera = false;
 							}
 						}
 					}
 				}
-			#endregion			
+			#endregion
+			#region place lumberjack zone
+			else if current_menu = menu.place_lumberjack_zone {
+				if point_in_button(_mouse_x,_mouse_y,global.w-33-48,room_height-80,1,1) {
+					sel_menu = current_menu;
+					sel_submenu = current_submenu;
+					sel_index = 0;
+					render_submenu = true;
+					_can_move_camera = false;
+					}
+				else if can_build and point_in_button(_mouse_x,_mouse_y,global.w-33-48*2,room_height-80,1,1) {
+					sel_menu = current_menu;
+					sel_submenu = current_submenu;
+					sel_index = 1;
+					render_submenu = true;
+					_can_move_camera = false;
+					}
+				else if point_in_button(_mouse_x,_mouse_y,global.w-33-48*3,room_height-80,1,1) {
+					sel_menu = current_menu;
+					sel_submenu = current_submenu;
+					sel_index = 2;
+					render_submenu = true;
+					_can_move_camera = false;
+					}
+				else if point_in_button(_mouse_x,_mouse_y,global.w-33-48*4,room_height-80,1,1) {
+					sel_menu = current_menu;
+					sel_submenu = current_submenu;
+					sel_index = 3;
+					render_submenu = true;
+					_can_move_camera = false;
+					}
+				}
+			#endregion
 			}
-			
-		//select exploration order
 		
-		if show_min_button and point_in_rectangle(_mouse_x,_mouse_y,24,global.h/2-24,24+48,global.h/2-24+48) {
-			exploration_active[explore.left_side] = !exploration_active[explore.left_side];
-			show_debug_message("EXPLORING");
-			_can_move_camera = false;
-			}
-		else if show_max_button and point_in_rectangle(_mouse_x,_mouse_y,global.w-72,global.h/2-24,global.w-72+48,global.h/2-24+48){
-			exploration_active[explore.right_side] = !exploration_active[explore.right_side];
-			_can_move_camera = false;
+		if current_menu==menu.job { 
+			if current_submenu == submenu.none {
+				// Check if moving peasants between jobs
+				for (var i = 0; i<6; i++) {
+					if !ds_list_empty(global.peasant_list[i]) {
+						if (i == 0 and point_in_rectangle(_mouse_x,_mouse_y,global.w-33-64,room_height-80,global.w-33,room_height-80+48)) or
+							(i != 0 and point_in_rectangle(_mouse_x,_mouse_y,global.w-33-64-48*i,room_height-80,global.w-33-64-48*(i-1),room_height-80+48)) {
+							current_submenu = submenu.moving_peasant;
+							current_submenu_function = submenu_peasant_function;
+							selected_job = i;
+							target_job = i;
+							mouse_hold = false;
+							_can_move_camera = false;
+							break;
+							}
+						}
+					}
+				}
 			}
 		
-		//check if selecting a structure
-		if position_meeting(x-global.w/2+_mouse_x,_mouse_y,obj_building_parent) {
-			touched_an_instance = true;
-			}
-		//moving the camera
-		if _can_move_camera and current_submenu!=submenu.build_mode and _mouse_y<global.ground_level+32 {
-		
-			mouse_mode = mouse.moving_camera;
-			prev_mouse_pos.x = _mouse_x;
-			initial_x = x;
-			}
 		}
 	else if device_mouse_check_button_released(0,mb_left) {
+		mouse_hold = false;
+		//HUD handling
+		if mouse_hold_time<room_speed/2 and mouse_hold_time > 0{
+			
+ 			if _mouse_y>=global.ground_level+32 {
+				#region menu select
+				if sel_choose_a_menu {
+					if current_menu = menu.structure {
+						with current_instance {
+							if on_deselected!=-1 {
+								on_deselected();
+								}
+							}
+						current_instance = noone;
+						}
+					current_menu = sel_menu;
+					current_submenu = submenu.none;
+					current_submenu_function = -1;
+					render_menu = true;
+					render_submenu = true;
+					}		
+				#endregion
+				#region current submenu events
+				else {
+					#region build menu
+					if sel_menu == menu.build { 
+						if sel_submenu == submenu.none { 
+							current_submenu = submenu.build_mode;
+							current_submenu_function = submenu_build_function;
+							build_x = floor((x)/64)*64;
+							selected_building = sel_index;
+							render_submenu = true;
+							_can_move_camera = false;
+							
+							}
+						else if sel_submenu == submenu.build_mode {
+							if sel_index == 0 {
+								current_submenu = submenu.none;
+								render_submenu = true;
+								_can_move_camera = false;
+								}
+							else if sel_index == 1 {
+								var _new_build_site = instance_create_layer(build_x,global.ground_level,"Buildings",global.building_data[selected_building].object);
+								current_submenu = submenu.none;
+								render_submenu = true;
+								_can_move_camera = false;
+								}
+							}
+						}
+					#endregion
+					#region structure menu 
+					else if sel_menu == menu.structure {
+					
+						if !current_instance.built {
+							if sel_index == 0 {
+								
+								var _building = current_instance;
+								show_debug_message(_building);
+								current_instance = noone;
+								with _building {
+									instance_destroy();
+									}
+								current_menu = menu.none;
+								render_submenu = true;
+								}
+							}
+						else if current_instance.object_index == obj_building_lumberjack_hut {
+							//chop trees button 
+							if sel_index == 0 {
+								if current_instance.cut_zone==noone {
+									current_menu = menu.place_lumberjack_zone;
+									render_submenu = true;
+									woodcutting_area.x = floor((x)/64)*64;
+									woodcutting_area.image_xscale = 1;
+									current_submenu_function = submenu_lumberjack_zone_function;
+									}
+								else {
+									instance_destroy(current_instance.cut_zone);
+									current_instance.cut_zone = noone;
+									render_submenu = true;
+									}
+								}
+							}
+						}
+					#endregion
+					#region place lumberjack zone
+					else if sel_menu == menu.place_lumberjack_zone {
+						if sel_index == 0 {
+							current_menu = menu.structure;
+							render_submenu = true;
+							_can_move_camera = false;
+							}
+						else if sel_index == 1 {
+							var _new_build_site = instance_create_layer(woodcutting_area.x,global.ground_level,"Buildings",obj_chop_zone);
+							_new_build_site.image_xscale = woodcutting_area.image_xscale;
+							_new_build_site.owner = current_instance;
+							current_instance.cut_zone = _new_build_site;
+
+							current_menu = menu.structure;
+							render_submenu = true;
+							_can_move_camera = false;
+							}
+						else if sel_index == 2 {
+							woodcutting_area.image_xscale = min(woodcutting_area.image_xscale+1,4);
+							}
+						else if sel_index == 3 {
+							woodcutting_area.image_xscale = max(woodcutting_area.image_xscale-1,1);
+							}
+						}
+					}
+					#endregion	
+				#endregion			
+				}
+			else {
+				#region select exploration order
+		
+				if show_min_button and point_in_rectangle(_mouse_x,_mouse_y,24,global.h/2-24,24+48,global.h/2-24+48) {
+					exploration_active[explore.left_side] = !exploration_active[explore.left_side];
+					show_debug_message("EXPLORING");
+					_can_move_camera = false;
+					}
+				else if show_max_button and point_in_rectangle(_mouse_x,_mouse_y,global.w-72,global.h/2-24,global.w-72+48,global.h/2-24+48){
+					exploration_active[explore.right_side] = !exploration_active[explore.right_side];
+					_can_move_camera = false;
+					}
+				#endregion
+				}
+			}
+		
+		mouse_hold_time = 0;
 		if touched_an_instance and abs(initial_x-x)<16 and position_meeting(x-global.w/2+_mouse_x,_mouse_y,obj_building_parent) {
+			if current_menu = menu.structure {
+				with current_instance {
+					if on_deselected!=-1 {
+						on_deselected();
+						}
+					}
+				current_instance = noone;
+				}
 			current_instance = instance_position(x-global.w/2+_mouse_x,_mouse_y,obj_building_parent);
+			with current_instance {
+				if on_selected!=-1 {
+					on_selected();
+					}
+				}
 			current_menu = menu.structure;
 			render_menu = true;
 			render_submenu = true;
@@ -172,37 +354,46 @@ if !pause {
 							if _which_free_peasant == -1 {
 								_which_free_peasant = global.peasant_list[selected_job][|_size-1];
 								_free_peasant_pos = _size-1;
+								_free_peasant_pos = _size-1;
 								}
 							
-
-							if _which_free_peasant.job=jobs.builder {
-								if _which_free_peasant.target_instance!=noone {
-									_which_free_peasant.target_instance.builders--;
-									}
-								}
-							else if _which_free_peasant.job=jobs.lumberjack {
-								if _which_free_peasant.target_instance!=noone {
-									_which_free_peasant.target_instance.workers--;
-									if _which_free_peasant.state == work_lumberjack {
-	
-										_which_free_peasant.target_instance.workers_working--;
-										}
-									}
-								}
-							else if _which_free_peasant.job=jobs.soldier {
-								if _which_free_peasant.state==explore_new_land {
-									units_exploring[_which_free_peasant.target_side]--;
-									units_going_to_explore[_which_free_peasant.target_side]--;
-									
-									}
-								else if _which_free_peasant.state==move_to_pos {
-									units_going_to_explore[_which_free_peasant.target_side]--;
-									}
-								}
+							before_switching_jobs(_which_free_peasant);
+							
 							_which_free_peasant.state = wander;
 							_which_free_peasant.job = i;
+							_which_free_peasant.is_busy = false;
 							ds_list_add(global.peasant_list[target_job],_which_free_peasant);
 							ds_list_delete(global.peasant_list[selected_job],_free_peasant_pos);
+							
+							if i = jobs.soldier {
+								_which_free_peasant.spr_walk = spr_archer_walk;
+								_which_free_peasant.spr_idle = spr_archer;
+								var _size_right = ds_list_size(global.peasant_list[jobs.soldier_right]);
+								var _size_left = ds_list_size(global.peasant_list[jobs.soldier_left]);
+								if _size_right<_size_left {
+									_which_free_peasant.side = 1;
+									ds_list_add(global.peasant_list[jobs.soldier_right],_which_free_peasant.id);
+									}	
+								else {
+									_which_free_peasant.side = 0;
+									ds_list_add(global.peasant_list[jobs.soldier_left],_which_free_peasant.id);
+									}
+								}
+							else if i == jobs.builder {
+								_which_free_peasant.spr_walk = spr_builder_walk;
+								_which_free_peasant.spr_idle = spr_builder;
+								_which_free_peasant.spr_work = spr_builder_work;
+								}
+							else if i == jobs.lumberjack {
+								_which_free_peasant.spr_walk = spr_builder_walk;
+								_which_free_peasant.spr_idle = spr_builder;
+								_which_free_peasant.spr_work = spr_builder_work;
+								}
+							else if i == jobs.unemployed {
+								_which_free_peasant.spr_walk = spr_peasant_walk;
+								_which_free_peasant.spr_idle = spr_peasant;
+								}
+							
 							render_submenu = true;
 							break;
 							}
@@ -211,6 +402,11 @@ if !pause {
 				}
 			#endregion
 			}
+		}
+
+	if mouse_hold_time>room_speed {
+		mouse_hold = false;
+		mouse_hold_time = 0;
 		}
 
 	if current_submenu_function!=-1 current_submenu_function(_mouse_x,_mouse_y);
@@ -243,12 +439,7 @@ if !pause {
 
 	camera_set_view_pos(camera,x-global.w/2,0);
 
-	#endregion
-
-	builder_job_assigner();
-	lumberjack_job_assigner();
-	exploration_job_assigner();
-	global.time++;
+	
 
 }
 else {
@@ -323,6 +514,20 @@ else {
 					}
 				if point_in_rectangle(_mouse_x,_mouse_y,_guiw/2-3.75*48,_guih-80,_guiw/2+(7.5-3.75)*48,_guih-80+48) {
 					current_pause_menu = bgames_settings;
+					}
+				}
+			}
+		}
+	if keyboard_check_pressed(vk_tab) {
+		if bgames_settings_request_timer<=0 {
+			if current_pause_menu == bgames_login {
+				if bgames_login_selection == 0 {
+					bgames_login_selection = 1;
+					keyboard_string = bgames_user.password;
+					}
+				else if bgames_login_selection == 1{
+					bgames_login_selection = 0;
+					keyboard_string = bgames_user.user;
 					}
 				}
 			}

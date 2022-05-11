@@ -4,5 +4,6 @@ function cancel_exploration(){
 	state = wander;
 	if job == jobs.soldier {
 		obj_controller.units_going_to_explore[target_side]--; 
+		is_busy = false;
 		}
 }

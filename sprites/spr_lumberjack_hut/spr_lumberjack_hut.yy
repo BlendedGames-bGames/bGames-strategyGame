@@ -24,15 +24,15 @@
   "gridX": 0,
   "gridY": 0,
   "frames": [
-    {"compositeImage":{"FrameId":{"name":"423505a8-2f88-4cfb-ae5c-1296edd2b628","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"423505a8-2f88-4cfb-ae5c-1296edd2b628","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"LayerId":{"name":"1ebf1c4e-94cf-4ffc-a323-56d76eece490","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"spr_lumberjack_hut","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"resourceVersion":"1.0","name":"423505a8-2f88-4cfb-ae5c-1296edd2b628","tags":[],"resourceType":"GMSpriteFrame",},
-    {"compositeImage":{"FrameId":{"name":"95a8001b-ba9a-4279-b140-68bd3bcc8b71","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"95a8001b-ba9a-4279-b140-68bd3bcc8b71","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"LayerId":{"name":"1ebf1c4e-94cf-4ffc-a323-56d76eece490","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"spr_lumberjack_hut","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"resourceVersion":"1.0","name":"95a8001b-ba9a-4279-b140-68bd3bcc8b71","tags":[],"resourceType":"GMSpriteFrame",},
-    {"compositeImage":{"FrameId":{"name":"4be2fc77-ae6e-4147-95ea-457a141c8e60","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"4be2fc77-ae6e-4147-95ea-457a141c8e60","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"LayerId":{"name":"1ebf1c4e-94cf-4ffc-a323-56d76eece490","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"spr_lumberjack_hut","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"resourceVersion":"1.0","name":"4be2fc77-ae6e-4147-95ea-457a141c8e60","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"0566e8a8-3d60-4830-9fac-8633196367e1","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"0566e8a8-3d60-4830-9fac-8633196367e1","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"LayerId":{"name":"92e919fb-2f0e-4f35-9eeb-518c6abcee7e","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"spr_lumberjack_hut","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"resourceVersion":"1.0","name":"0566e8a8-3d60-4830-9fac-8633196367e1","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"d8487536-f883-4de8-a732-d4a146cfefd4","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"d8487536-f883-4de8-a732-d4a146cfefd4","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"LayerId":{"name":"92e919fb-2f0e-4f35-9eeb-518c6abcee7e","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"spr_lumberjack_hut","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"resourceVersion":"1.0","name":"d8487536-f883-4de8-a732-d4a146cfefd4","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"4123c723-5a7d-49c7-bce9-8eff631ec81f","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"4123c723-5a7d-49c7-bce9-8eff631ec81f","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"LayerId":{"name":"92e919fb-2f0e-4f35-9eeb-518c6abcee7e","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"spr_lumberjack_hut","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"resourceVersion":"1.0","name":"4123c723-5a7d-49c7-bce9-8eff631ec81f","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
     "spriteId": {"name":"spr_lumberjack_hut","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},
@@ -47,9 +47,9 @@
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
     "tracks": [
       {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
-            {"id":"df1ac435-3ac4-4fc2-9fa9-1e58a4a3ce21","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"423505a8-2f88-4cfb-ae5c-1296edd2b628","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
-            {"id":"70fa921d-7fc3-41b3-b608-17ecb6f37d0d","Key":1.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"95a8001b-ba9a-4279-b140-68bd3bcc8b71","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
-            {"id":"9a46e1ab-0a88-4627-8136-92b6f9df7fde","Key":2.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"4be2fc77-ae6e-4147-95ea-457a141c8e60","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"5efde7dd-aca0-42f8-be29-9e99c69671ce","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"0566e8a8-3d60-4830-9fac-8633196367e1","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"4d69c4b9-3736-426e-b518-b898b0c22eaa","Key":1.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"d8487536-f883-4de8-a732-d4a146cfefd4","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"88e079a6-e44a-4139-95a9-3b9323544bbe","Key":2.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"4123c723-5a7d-49c7-bce9-8eff631ec81f","path":"sprites/spr_lumberjack_hut/spr_lumberjack_hut.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
           ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack","modifiers":[],},
     ],
     "visibleRange": null,
@@ -73,7 +73,7 @@
     "resourceType": "GMSequence",
   },
   "layers": [
-    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"1ebf1c4e-94cf-4ffc-a323-56d76eece490","tags":[],"resourceType":"GMImageLayer",},
+    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"92e919fb-2f0e-4f35-9eeb-518c6abcee7e","tags":[],"resourceType":"GMImageLayer",},
   ],
   "nineSlice": null,
   "parent": {

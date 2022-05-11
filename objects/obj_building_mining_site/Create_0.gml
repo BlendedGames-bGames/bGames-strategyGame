@@ -9,9 +9,9 @@ building_id = buildings.lumberjack_hut
 workers_working = 0;
 max_workers = 4;
 
+base_max_hp = 80
+max_hp = base_max_hp * (1+global.building_max_hp_percent_bonus);
 hp = 0;
-max_hp = 240;
-
 
 image_speed = 0;
 

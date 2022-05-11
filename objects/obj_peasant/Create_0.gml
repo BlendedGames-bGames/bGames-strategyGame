@@ -1,7 +1,7 @@
-/// @description Insert description here
+// @description Insert description here
 // You can write your code in this editor
 
-
+hp = 5;
 
 job = jobs.unemployed;
 
@@ -21,19 +21,35 @@ on_finish_state = -1;
 
 timer = 0;
 
+is_busy = false;
+
 //general behaviour varibles
 effect_done = false;
 target_x = -1;
 
 target_instance = noone;
-target_side = 0;
+
 //lumberjack variables
 
 current_chunk = -1;
 current_tree = -1;
+current_tree_pos = -1;
 
-walk_speed = .5;
-run_speed = 1;
+//soldier variables
+side = 1;
+can_attack = true;
+attack_cooldown = 0;
+clock_offset = irandom(9);
+
+
+hit_dir = 1;
+scared_timer = 0;
+
+spr_walk = spr_peasant_walk;
+spr_idle = spr_peasant;
+spr_work = spr_builder_work;
 
 ds_list_add(global.peasant_list[jobs.unemployed],id);
 global.pops++;
+
+

@@ -5,5 +5,6 @@ function explore_new_land(){
 		state = wander;
 		obj_controller.units_exploring[target_side]--; 
 		obj_controller.units_going_to_explore[target_side]--; 
+		is_busy = false;
 		}
 }

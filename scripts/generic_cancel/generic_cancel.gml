@@ -4,4 +4,5 @@ function generic_cancel(){
 	state = wander;
 	target_instance = noone;
 	target_x = -1;
+	is_busy = false;
 }

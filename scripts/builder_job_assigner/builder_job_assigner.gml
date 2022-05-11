@@ -10,20 +10,19 @@ function builder_job_assigner(){
 			var _min_distance = 999999;
 			for (var i = 0 ; i < _builders ; i++) {
 				var _builder = global.peasant_list[jobs.builder][|i];
-				if _builder.state == wander and abs(x-_builder.x)<_min_distance {
+				if !_builder.is_busy and abs(x-_builder.x)<_min_distance {
 					_free_builder = _builder;
 					_min_distance = abs(x-_builder.x);
 					}
 				}
 			if _free_builder != noone {
-				
 				_free_builder.state = move_to_object;
 				_free_builder.check_state = check_build;
 				_free_builder.next_state = build;
 				_free_builder.cancel_state = build_cancelled;
 				_free_builder.on_finish_state = -1;
-				
 				_free_builder.target_instance = id;
+				_free_builder.is_busy = true;
 				builders++;
 				}
 			}

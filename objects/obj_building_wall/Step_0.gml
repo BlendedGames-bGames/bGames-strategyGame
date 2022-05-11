@@ -3,7 +3,7 @@
 
 hp = clamp(hp,0,max_hp);
 
-
+event_inherited();
 
 built = built or (hp==max_hp);
 
@@ -36,10 +36,8 @@ else {
 			global.world.wall_y[current_wall_pos]+=0.05;
 			}
 		else {
+			var _pos = current_wall_pos;
 			current_wall_pos -= right_side - !right_side;
-			
-			var _pos = current_wall_pos + right_side;
-			
 			if (_pos)!=pos and instance_position((_pos)*64+8,global.ground_level-8,obj_building_wall) or instance_position((_pos)*64+8,global.ground_level-8,obj_building_capitol) {
 				finished_placing_background_walls = true;
 				}

@@ -1,10 +1,10 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function find_furthest_walls(){
-	var _furthest_right = -1;
+	var _furthest_right = global.base;
 	var _pos_right = global.base.x;
 	
-	var _furthest_left = -1;
+	var _furthest_left = global.base;
 	var _pos_left = global.base.x;
 	
 	with obj_building_wall {
@@ -23,5 +23,17 @@ function find_furthest_walls(){
 		}
 	if _furthest_right != -1 {
 		global.right_wall = _furthest_right;
+		}
+	global.control_radius_left = min(_furthest_left.x + 160,global.base.x+64-128);
+	global.control_radius_right = max(_furthest_right.x-128,global.base.x+64+256);
+	
+	var _size = ds_list_size(global.peasant_list[jobs.soldier]);
+	for (var i = 0; i< _size; i++) {
+		var _soldier = global.peasant_list[jobs.soldier][|i];
+		with _soldier {
+			if !is_busy {
+				state = move_to_pos;
+				}
+			}
 		}
 }

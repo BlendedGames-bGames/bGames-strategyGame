@@ -24,15 +24,15 @@ function work_lumberjack(){
 					}
 				target_x = current_chunk*64+current_tree.x;
 				image_xscale = sign(target_x-x+0.001);
-				sprite_index=spr_peasant_walk;
+				sprite_index=spr_walk;
 				image_index = 0;
 				}
-			x+=image_xscale*walk_speed;
+			x+=image_xscale*global.peasant_walk_speed;
 			if abs(target_x-x)<10 {
 				effect_done = false;
 				timer = room_speed*3;
 				image_index=0;
-				sprite_index = spr_peasant_work;
+				sprite_index = spr_work;
 				target_x=-1;
 				}
 			}
@@ -42,7 +42,11 @@ function work_lumberjack(){
 				}
 			else if round(image_index) == 6 and !effect_done {
 				//global.wood+=global.daily_wood_gather_base;
-				current_tree.image_angle+=-3*(image_xscale);
+				current_tree.image_angle=-3*(image_xscale);
+				if global.world.forest_needs_to_be_animated[current_chunk] = false {
+					ds_list_add(obj_ground.forest_chunk_to_animate,current_chunk);
+					global.world.forest_needs_to_be_animated[current_chunk] = true;
+					}
 				effect_done = true; 
 				}
 		
@@ -53,13 +57,13 @@ function work_lumberjack(){
 			if target_x==-1 {
 				target_x = irandom_range(target_instance.x-128,target_instance.x+256);
 				image_xscale = sign(target_x-x+0.001);
-				sprite_index=spr_peasant_walk;
+				sprite_index=spr_walk;
 				image_index = 0;
 				}
-			x+=image_xscale*walk_speed;
-			if abs(target_x-x)<walk_speed {
+			x+=image_xscale*global.peasant_walk_speed;
+			if abs(target_x-x)<global.peasant_walk_speed {
 				timer = room_speed*3;
-				sprite_index = spr_peasant;
+				sprite_index = spr_idle;
 				image_index=0;
 				target_x=-1;
 				}

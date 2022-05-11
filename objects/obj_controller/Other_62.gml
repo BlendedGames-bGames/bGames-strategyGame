@@ -51,7 +51,42 @@ if bgames_settings_request_timer>0 {
 					
 					current_pause_menu = bgames_bonus;
 					bgames_bonus[bgames_selected_item][shop.times_bought]++;
-						
+					switch bgames_selected_item {
+						case 0:
+							//population cap bonus
+							global.pop_cap_bonus+=5;
+							break;
+						case 1: 
+							// Faster Peasants
+							global.peasant_run_speed_percent_bonus+=0.25;
+							global.peasant_walk_speed_percent_bonus+=0.25;
+							break;
+						case 2: 
+							//stronger soldiers
+							break;
+						case 3: 
+							//build speed bonus
+							global.build_speed_percent_bonus+=0.25;
+							break;
+						//case 4: 
+						//	//build hp bonus
+						//	global.building_max_hp_percent_bonus+=0.15;
+						//	instance_activate_object(obj_building_parent);
+						//	with obj_building_parent {
+						//		var _percent = hp/max_hp;
+						//		max_hp = base_max_hp * (1+global.building_max_hp_percent_bonus);
+						//		hp = _percent * max_hp;
+						//		hp_per_hit = max_hp/40;
+						//		}
+						//	instance_deactivate_object(obj_building_parent);
+						//	break;
+						case 4: 
+							//gather bonus
+							global.daily_gather_percent_bonus+=0.25;
+							break;
+						}
+						bgames_modifiers();
+						render_resources = true;
 					
 					}
 				catch(_err) {
