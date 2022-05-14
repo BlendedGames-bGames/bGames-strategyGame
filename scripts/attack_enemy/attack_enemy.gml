@@ -41,6 +41,7 @@ function attack_enemy(){
 					vspeed=choose(-2,-3,-4);
 					hspeed=4*hit_dir;
 					scared_timer=room_speed*2;
+					time_before_going_back_to_pos = room_speed*2;
 					}
 				}
 			can_attack = false;

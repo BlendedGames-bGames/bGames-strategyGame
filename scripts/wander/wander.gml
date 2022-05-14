@@ -11,7 +11,7 @@ function wander(){
 				image_index = 0;
 				}
 			x+=image_xscale*global.peasant_walk_speed;
-			if abs(target_x-x)<global.peasant_walk_speed {
+			if abs(target_x-x)<global.peasant_walk_speed*2 {
 				timer = room_speed*3;
 				sprite_index = spr_idle;
 				image_index=0;
@@ -24,8 +24,10 @@ function wander(){
 			sprite_index=spr_walk;
 			image_index = 0;
 			}
-		image_xscale = sign(_base.x-x+0.001);
+		image_xscale = sign(global.world.size/2*64-x+0.001);
 		x+=image_xscale*global.peasant_walk_speed;
-		timer=0;
+		if timer!=0 {
+			timer=0;
+			}
 	}	
 }

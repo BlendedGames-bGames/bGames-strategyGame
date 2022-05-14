@@ -151,7 +151,7 @@ global.right_wall = noone;
 //in-game variables
 
 global.time = 0;
-
+global.old_time = 0;
 global.gather_timer = 0;
 
 global.peasant_list[jobs.unemployed] = ds_list_create();
@@ -180,13 +180,14 @@ render_submenu = true;
 surf_resources = -1;
 render_resources = true;
 
-//surf_parallax = -1;
 
 surf_pause = -1;
 
 surf_lighting = -1;
 
 surf_entities = -1;
+
+surf_water = -1;
 #endregion
 
 //pause variables
@@ -340,8 +341,10 @@ submenu_build_function = function(_mouse_x,_mouse_y) {
 		}
 		
 	can_build = true;
+	
+	
 	for (var i = 0; i < global.building_data[selected_building].length; i++) {
-		if position_meeting(build_x+32+i*64,global.ground_level-16,obj_building_parent) {
+		if place_meeting(build_x+i*64,global.ground_level,obj_building_parent) {
 			can_build = false;
 			break;
 			}
@@ -543,3 +546,27 @@ layer_script_end("Buildings",layer_end);
 
 layer_script_begin("Ground",layer_start);
 layer_script_end("Ground",layer_end);
+
+#region water variables
+
+sprite_distort		= spr_water_side_distortion;
+
+shader				= shd_water_side;
+u_distort_tex		= shader_get_sampler_index(shader, "distort_tex");
+u_water_shift_RGB	= shader_get_uniform(shader, "water_shift_RGB");
+u_distort_strength	= shader_get_uniform(shader, "distort_strength");	// could be turned into a constant
+u_pattern_size		= shader_get_uniform(shader, "pattern_size");		// could be turned into a constant
+u_water_col			= shader_get_uniform(shader, "water_col");			// could be turned into a constant
+u_col_mix			= shader_get_uniform(shader, "col_mix");			// could be turned into a constant
+u_brt_sat_con		= shader_get_uniform(shader, "brt_sat_con");		// could be turned into a constant
+
+//u_blend_mode		= shader_get_uniform(shader, "blend_mode");			// for testing only
+//u_show_result		= shader_get_uniform(shader, "show_result");		// for debugging only
+
+distort_tex			= sprite_get_texture(sprite_distort, 0);
+water_shift_R		= 0;
+water_shift_G		= 0;
+water_shift_B		= 0;
+
+#endregion 
+

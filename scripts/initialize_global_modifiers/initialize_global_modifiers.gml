@@ -35,6 +35,12 @@ function initialize_global_modifiers(){
 	global.soldier_attack_speed_bonus = 0;
 	global.soldier_attack_damage_bonus = 0;
 	
+	global.soldier_attack_damage_base = 1;
+	global.soldier_attack_speed_base = room_speed;
+	
+	global.soldier_attack_damage = 1;
+	global.soldier_attack_speed = room_speed;
+	
 	global.pop_cap_bonus = 0;
 	global.pop_cap_base = 10;
 	

@@ -1,5 +1,8 @@
 {
-  "spriteId": null,
+  "spriteId": {
+    "name": "spr_wall_bg",
+    "path": "sprites/spr_wall_bg/spr_wall_bg.yy",
+  },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,

@@ -1,6 +1,7 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function builder_job_assigner(){
+	if (global.time/global.day_time <0.65) {
 	var _builders = ds_list_size(global.peasant_list[jobs.builder]);
 	with obj_building_parent {
 
@@ -24,7 +25,9 @@ function builder_job_assigner(){
 				_free_builder.target_instance = id;
 				_free_builder.is_busy = true;
 				builders++;
+				show_debug_message("assigning "+string(_free_builder));
 				}
 			}
 		}
+	}
 }

@@ -10,3 +10,5 @@ if obj_controller.current_instance == id and old_hp!=hp {
 	}	
 	
 old_hp = hp;
+
+

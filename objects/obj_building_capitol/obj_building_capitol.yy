@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "spr_base",
-    "path": "sprites/spr_base/spr_base.yy",
+    "name": "spr_castle2",
+    "path": "sprites/spr_castle2/spr_castle2.yy",
   },
   "solid": false,
   "visible": true,

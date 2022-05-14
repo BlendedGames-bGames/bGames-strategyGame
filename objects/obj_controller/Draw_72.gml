@@ -10,4 +10,7 @@ else {
 	draw_clear_alpha(c_black,0);
 	surface_reset_target()
 	}		
-
+	
+if !surface_exists(surf_water) {
+	surf_water = surface_create(global.w+1,global.h);
+	}	

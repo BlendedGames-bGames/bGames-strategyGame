@@ -58,9 +58,9 @@ function define_building_info(){
 		stone_cost: 100,
 		wood_cost: 150,
 		cost_per_chunk: true,
-		sprite_index: spr_miner_site,
-		object: obj_building_wall,
-		length: 1
+		sprite_index: spr_house,
+		object: obj_building_house,
+		length: 2
 		};
 	_structures[buildings.lab]= {
 		name: "Laboratorium",
@@ -108,7 +108,7 @@ function define_building_info(){
 		cost_per_chunk: false,
 		sprite_index: spr_base,
 		object: obj_building_capitol,
-		length: 2
+		length: 6
 		};
 	return _structures;
 }

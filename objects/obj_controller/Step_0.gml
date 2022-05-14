@@ -437,7 +437,7 @@ if !pause {
 	x = clamp(x,_left_border,_right_border);
 
 
-	camera_set_view_pos(camera,x-global.w/2,0);
+	camera_set_view_pos(camera,x-global.w/2,16);
 
 	
 

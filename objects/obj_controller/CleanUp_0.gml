@@ -15,3 +15,4 @@ surface_free(surf_resources);
 //surface_free(surf_parallax);
 surface_free(surf_pause);
 surface_free(surf_lighting);
+surface_free(surf_water);

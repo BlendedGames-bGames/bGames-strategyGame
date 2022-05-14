@@ -39,10 +39,10 @@ max_workers = 4;
 base_max_hp = 80;
 max_hp = base_max_hp * (1+global.building_max_hp_percent_bonus);
 hp = 0;
-
+hp_per_hit = max_hp/40;
 image_speed = 0;
 yscale = 0;
-hp_per_hit = max_hp/40;
+
 
 max_forest_chunks = 6;
 var _pos = floor(x/64);

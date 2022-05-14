@@ -8,6 +8,10 @@ function bgames_modifiers(){
 	global.daily_stone_gather = global.daily_stone_gather_base * (1+global.daily_stone_gather_percent_bonus+ global.daily_gather_percent_bonus);
 	global.daily_food_gather  = global.daily_food_gather_base  * (1+global.daily_food_gather_percent_bonus + global.daily_gather_percent_bonus);
 	
+	global.soldier_attack_damage = global.soldier_attack_damage_base * (1+global.soldier_attack_damage_bonus);
+	global.soldier_attack_speed = global.soldier_attack_speed_base * (1+global.soldier_attack_speed_bonus);
+	
+	
 	global.peasant_walk_speed = global.peasant_walk_speed_base * (1+global.peasant_walk_speed_percent_bonus);
 	global.peasant_run_speed = global.peasant_run_speed_base   * (1+global.peasant_run_speed_percent_bonus);
 }

@@ -9,9 +9,10 @@ obj_controller.x = _center;
 
 obj_controller.min_camera_chunk = _size/2-8;
 obj_controller.max_camera_chunk = _size/2+8;
+
 //obj_controller.min_camera_chunk = 0;
 //obj_controller.max_camera_chunk = _size-1;
-global.base = instance_create_layer(_center-64,global.ground_level,"Buildings",obj_building_capitol);
+global.base = instance_create_layer(_center-64*3,global.ground_level,"Buildings",obj_building_capitol);
 
 global.left_wall = global.base;
 global.right_wall = global.base;
@@ -24,4 +25,4 @@ repeat(5) {
 	
 forest_chunk_to_animate = ds_list_create();
 
-
+surf_parallax = -1;

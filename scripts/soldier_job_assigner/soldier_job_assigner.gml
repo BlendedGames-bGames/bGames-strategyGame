@@ -62,6 +62,7 @@ function soldier_job_assigner(){
 			else {
 				_soldier.target_x = global.control_radius_left -64-irandom(48);
 			}
+			show_debug_message("triggering this because my state is: "+string(script_get_name(_soldier.state)));
 			_soldier.state = move_to_pos;
 			_soldier.check_state = -1;
 			_soldier.next_state = soldier_idle;

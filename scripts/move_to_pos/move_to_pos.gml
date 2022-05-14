@@ -1,7 +1,7 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function move_to_pos(){
-
+	show_debug_message("my target is: "+string(target_x));
 	if target_x!=-1 and (check_state==-1 or (check_state!=-1 and check_state()))  {
 		if sprite_index!=spr_walk {
 			sprite_index=spr_walk;
@@ -11,7 +11,7 @@ function move_to_pos(){
 		x+=image_xscale*global.peasant_run_speed;
 		if abs(x-target_x)<global.peasant_run_speed*2 {
 			timer = 0;
-			target_x = -1;
+			//target_x = -1;
 			if on_finish_state!=-1 on_finish_state();
 			state = next_state;
 			}
