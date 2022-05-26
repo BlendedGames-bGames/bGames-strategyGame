@@ -1,5 +1,8 @@
 {
-  "spriteId": null,
+  "spriteId": {
+    "name": "spr_river_loop_parallax",
+    "path": "sprites/spr_river_loop_parallax/spr_river_loop_parallax.yy",
+  },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,

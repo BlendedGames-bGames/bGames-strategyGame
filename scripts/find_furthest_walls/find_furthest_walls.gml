@@ -8,13 +8,15 @@ function find_furthest_walls(){
 	var _pos_left = global.base.x;
 	
 	with obj_building_wall {
-		if x<_pos_left {
-			_pos_left = x;
-			_furthest_left = self;
-			}
-		else if x>_pos_right {
-			_pos_right = x;
-			_furthest_right = self;
+		if built {
+			if x<_pos_left {
+				_pos_left = x;
+				_furthest_left = self;
+				}
+			else if x>_pos_right {
+				_pos_right = x;
+				_furthest_right = self;
+				}
 			}
 		}
 	
@@ -24,15 +26,20 @@ function find_furthest_walls(){
 	if _furthest_right != -1 {
 		global.right_wall = _furthest_right;
 		}
-	global.control_radius_left = min(_furthest_left.x + 160,global.base.x+sprite_get_width(spr_castle2)/2-64);
-	global.control_radius_right = max(_furthest_right.x-128,global.base.x+sprite_get_width(spr_castle2)/2+64);
+	global.control_radius_left = min(_furthest_left.x+sprite_get_width(_furthest_left.sprite_index),global.base.x+sprite_get_width(spr_castle2)/2-64);
+	global.control_radius_right = max(_furthest_right.x,                                            global.base.x+sprite_get_width(spr_castle2)/2+64);
 	
 	var _size = ds_list_size(global.peasant_list[jobs.soldier]);
 	for (var i = 0; i< _size; i++) {
 		var _soldier = global.peasant_list[jobs.soldier][|i];
 		with _soldier {
 			if !is_busy {
-				state = move_to_pos;
+				if side == 1 {
+						target_x = global.control_radius_right -64+irandom(48);
+						}
+					else {
+						target_x = global.control_radius_left +64-irandom(48);
+					}
 				}
 			}
 		}

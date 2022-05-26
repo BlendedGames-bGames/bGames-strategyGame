@@ -27,6 +27,7 @@
     {"compositeImage":{"FrameId":{"name":"e80fe73c-a1ff-4eba-909b-1b413efe8276","path":"sprites/spr_water_side_distortion/spr_water_side_distortion.yy",},"LayerId":null,"resourceVersion":"1.0","name":"composite","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
         {"FrameId":{"name":"e80fe73c-a1ff-4eba-909b-1b413efe8276","path":"sprites/spr_water_side_distortion/spr_water_side_distortion.yy",},"LayerId":{"name":"c54c8f8f-0809-4df6-af67-289171adcbb9","path":"sprites/spr_water_side_distortion/spr_water_side_distortion.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
         {"FrameId":{"name":"e80fe73c-a1ff-4eba-909b-1b413efe8276","path":"sprites/spr_water_side_distortion/spr_water_side_distortion.yy",},"LayerId":{"name":"2a9aad61-e045-4b2b-a9bc-905af96fe708","path":"sprites/spr_water_side_distortion/spr_water_side_distortion.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+        {"FrameId":{"name":"e80fe73c-a1ff-4eba-909b-1b413efe8276","path":"sprites/spr_water_side_distortion/spr_water_side_distortion.yy",},"LayerId":{"name":"4e2f975f-35ec-4a95-a5a1-68d75ce7fc2b","path":"sprites/spr_water_side_distortion/spr_water_side_distortion.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
       ],"parent":{"name":"spr_water_side_distortion","path":"sprites/spr_water_side_distortion/spr_water_side_distortion.yy",},"resourceVersion":"1.0","name":"e80fe73c-a1ff-4eba-909b-1b413efe8276","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
@@ -66,6 +67,7 @@
     "resourceType": "GMSequence",
   },
   "layers": [
+    {"visible":false,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"Layer 2","resourceVersion":"1.0","name":"4e2f975f-35ec-4a95-a5a1-68d75ce7fc2b","tags":[],"resourceType":"GMImageLayer",},
     {"visible":false,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"Layer 1","resourceVersion":"1.0","name":"c54c8f8f-0809-4df6-af67-289171adcbb9","tags":[],"resourceType":"GMImageLayer",},
     {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"2a9aad61-e045-4b2b-a9bc-905af96fe708","tags":[],"resourceType":"GMImageLayer",},
   ],

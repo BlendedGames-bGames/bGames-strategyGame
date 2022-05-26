@@ -19,8 +19,6 @@ yscale = 0;
 hp_per_hit = max_hp/40;
 
 
-nearest_wall=obj_building_capitol;
-
 pos = x/64;
 current_wall_pos = pos;
 right_side = (global.base.x < x); //defines whether it's in the righe or left side of the map.
@@ -28,3 +26,4 @@ right_side = (global.base.x < x); //defines whether it's in the righe or left si
 finished_placing_background_walls = false;
 
 can_call_wall_function = true;
+check_wall = true;

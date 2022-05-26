@@ -10,7 +10,7 @@ get_forest_chunks = function() {
 			ds_list_add(forest_chunks,i);
 			}
 		}
-	efficienty = ds_list_size(forest_chunks) / max_forest_chunks;
+	efficiency = ds_list_size(forest_chunks) / max_forest_chunks;
 	}
 
 
@@ -51,6 +51,8 @@ min_pos = max(0,_pos-2);
 max_pos = min(global.world.size,_pos+4);
 
 forest_chunks = ds_list_create();
+
+
 get_forest_chunks();
 
 
@@ -61,6 +63,11 @@ gather = 0;
 cut_zone = noone;
 
 
+need_to_change_lights = true;
+
+lights[0] = instance_create_layer(x+64,y-sprite_height+107,"Buildings", obj_light_source);
+lights[0].radius = 100;
+lights[0].image_blend = make_colour_rgb(255, 255, 155);
 
 	
 	

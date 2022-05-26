@@ -1,32 +1,15 @@
-/// @description 3D camera control & HUD
+/// @description Drawing world
 // You can write your code in this editor
 
 if !pause {
 
-	shader_set(shd_lightmap_cutter);
-	texture_set_stage(u_lightTex, surface_get_texture(surf_lighting));
-	draw_surface_ext(surf_entities,x-global.w/2,global.h,1,-1,0,c_white,1);
-	shader_reset();
-
-	surface_set_target(surf_water);
-	draw_clear_alpha(c_black,0);
-	if surface_exists(obj_ground.surf_parallax) {
-		draw_surface_ext(obj_ground.surf_parallax,0,0,1,.75,0,c_white,1);
-		}
-	shader_set(shd_lightmap_cutter);
-	texture_set_stage(u_lightTex, surface_get_texture(surf_lighting));
-	draw_surface_ext(surf_entities,0,0,1,.75,0,c_white,1);
-	shader_reset();
-	surface_reset_target();
-
-
-	#region drawing water 
-
-	water_shift_R		+= .1 * 2 - 1;
-	water_shift_G		+= .2 * 2 - 1 - camera_acceleration.x ;
-	water_shift_B		+= .2* 0.5 - 0.25 ;
-	var strength_x		= 0.05 * 2;
-	var strength_y		= 0.05 * 2;
+	#region water variables
+	
+	water_shift_R		+= .37 - 1  - (x-xprevious);
+	water_shift_G		+= .42 - 1 -  (x-xprevious);
+	water_shift_B		+= .1 - 0.25 ;
+	var strength_x		= 0.1;
+	var strength_y		= 0.05;
 	var pattern_w		= max(0.001, 0.75) * sprite_get_width(sprite_distort)  * 2;		// mustn't be <= 0
 	var pattern_h		= max(0.001, 0.40) * sprite_get_height(sprite_distort) * 0.25;	// mustn't be <= 0
 
@@ -37,14 +20,50 @@ if !pause {
 	var col_mix_0		= 0.24 - 0.5;
 	var col_mix_1		= 0.71 + 0.5;
 	
-	var brightness		= 0.5 * 2 - 1;
-	var saturation		= 0.25 * 4;
-	var contrast		= 0.25 * 4;
+	var brightness		= -0.1;
+	var saturation		= .75;
+	var contrast		= 1.26;
 	
+	
+	#endregion
 
-	var mat = matrix_build(x-global.w/2, global.ground_level+48,0, -90,0,0, 1, 1, -1);
+	#region shading world
+	surface_set_target(surf_shaded_entities);
+	draw_clear_alpha(c_black,0);
+	shader_set(shd_lightmap_cutter);
+	texture_set_stage(u_lightTex, surface_get_texture(surf_lighting));
+	draw_surface_part(surf_entities,0,64,global.w+1,global.h-64,0,64);
+	shader_reset();
+	surface_reset_target();
+	
+	#endregion
 
-	matrix_set(matrix_world, mat);
+	#region rendering water 
+	
+	surface_set_target(surf_water);
+	draw_clear_alpha(c_black,0);
+	if surface_exists(obj_ground.surf_parallax) {
+		draw_surface_ext(obj_ground.surf_parallax,-128,-64,1,.85,0,c_white,1);
+		}
+	shader_set(shd_draw_bottom_white_line);
+
+
+	//draw_surface_ext(surf_shaded_entities,128,global.h*_scale+64*(2-_scale),1,-_scale,0,c_white,1);
+	
+	draw_surface_ext(surf_shaded_entities,0,global.h*.35+4,1,-.35,0,c_white,1);	
+	
+	
+	shader_reset();
+	gpu_set_blendmode(bm_zero);
+	draw_set_alpha(.25);
+	draw_rectangle_color(0,16,global.w+256,-1,current_color.mid,current_color.mid,c_black,c_black,false);
+	draw_set_alpha(1);
+	gpu_set_blendmode(bm_normal);
+	surface_reset_target();
+	#endregion
+	
+	#region drawing water 
+	surface_set_target(surf_rendered_water);
 	shader_set(shader);
 	shader_set_uniform_f(u_water_shift_RGB,		water_shift_R, water_shift_G, water_shift_B);
 	shader_set_uniform_f(u_distort_strength,	strength_x, strength_y);			// could be turned into a constant
@@ -55,15 +74,25 @@ if !pause {
 	//shader_set_uniform_f(u_blend_mode,			blend_mode);						// for testing only
 	//shader_set_uniform_f(u_show_result,			show_result);						// for debugging only
 	texture_set_stage(u_distort_tex,			distort_tex);
-		
-	draw_surface_part_ext(surf_water,0,-64,global.w,global.h,0,global.h*.8,1,-.80,blend_col,1);
+	//var mat = matrix_build(x-global.w/2, global.ground_level+48,64, -90,0,0, 1, 1, -1);
+	//matrix_set(matrix_world, mat);
+	//draw_surface_part_ext(surf_water,0,-64,global.w+256,global.h,-128,global.h,1,-1,blend_col,1);
+	draw_surface_ext(surf_water,0,global.h,1,-1,0,blend_col,1)
+	
 	shader_reset();
-
+	
+	
+	surface_reset_target();
 	//draw_surface_part_ext(application_surface,0,96*(global.res_h/global.h),global.res_w,global.res_h,0,0,global.w/global.res_w,global.h/global.res_h*.8,c_white,0.6);
 	matrix_set(matrix_world, matrix_build_identity());
 
 	#endregion
 
+	//draw water, ground and units
+	draw_surface_ext(surf_rendered_water,x-global.w/2,global.ground_level+22+global.h,1,-1,0,blend_col,1)
+	
+	draw_surface_ext(surf_shaded_entities,x-global.w/2,0,1,1,0,c_white,1);
+	//draw_surface_part_ext(surf_shaded_entities,0,0,global.w,global.h-64,x-global.w/2,0,1,1,c_white,1);
 	//draw_surface_part_ext(surf_water,0,0,global.w,global.h,x-global.w/2,0,.5,.5,c_white,0.6);
 
 	if current_menu == menu.place_lumberjack_zone {
@@ -71,7 +100,31 @@ if !pause {
 		}
 
 	else if current_submenu == submenu.build_mode {
-		draw_sprite(global.building_data[selected_building].sprite_index,1+!can_build,build_x,global.ground_level);
+		var _color = c_red;
+		if can_build {
+			_color = c_white;
+			}
+		draw_sprite_ext(global.building_data[selected_building].sprite_index,0,build_x,global.ground_level,1,1,0,_color,0.65);
+		
+		if selected_building == buildings.lumberjack_hut {
+			for (var i = 0; i < 6; i++) {
+				var _color2 = c_yellow;
+				if global.world.chunk_type[build_x/64+(i-2)] == 2 {
+					_color2 = c_white;
+					}
+				draw_sprite_ext(spr_build_zone,0,build_x+(i-2)*64,global.ground_level,1,.25,0,_color2,0.75);
+				}
+			}
+		else if selected_building == buildings.windmill {
+			for (var i = 0; i < 6; i++) {
+				var _color2 = c_yellow;
+				if global.world.chunk_type[build_x/64+(i-2)] == 1 and !position_meeting(build_x+(i-2)*64,global.ground_level-8,obj_building_parent) {
+					_color2 = c_white;
+					}
+				draw_sprite_ext(spr_build_zone,0,build_x+(i-2)*64,global.ground_level,1,.25,0,_color2,0.75);
+				}
+			}
+		
 		}
 	
 	}

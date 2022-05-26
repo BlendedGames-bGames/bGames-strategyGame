@@ -19,7 +19,7 @@ global.right_wall = global.base;
 
 find_furthest_walls();
 
-repeat(5) {
+repeat(14) {
 	instance_create_layer(_center+irandom(48)*choose(1,-1),global.ground_level,"Units",obj_peasant);
 	}
 	

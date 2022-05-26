@@ -188,6 +188,11 @@ surf_lighting = -1;
 surf_entities = -1;
 
 surf_water = -1;
+
+surf_shaded_entities = -1;
+
+surf_rendered_water = -1;
+
 #endregion
 
 //pause variables
@@ -299,7 +304,10 @@ dimensions_post_service = "http://164.90.156.141:3002";
 
 #region day night cycle variables
 
-dawn_color = new Color(make_color_rgb(187,163,176),make_color_rgb(216,211,218),make_color_rgb(151,146,176));
+dawn_color = new Color(make_color_rgb(255,165,126),make_color_rgb(211,190,163),make_color_rgb(105,158,170));
+
+//dawn_color = new Color(make_color_rgb(187,163,176),make_color_rgb(216,211,218),make_color_rgb(151,146,176));
+
 day_color  = new Color(make_color_rgb(236,245,231),make_color_rgb(107,179,218),make_color_rgb(83,141,192));
 dusk_color = new Color(make_color_rgb(255,108,0),  make_color_rgb(178,155,137),make_color_rgb(114,122,145));
 night_color = new Color(make_color_rgb(87,102,118),  make_color_rgb(37,44,51),   make_color_rgb(13,14,38));
@@ -344,11 +352,20 @@ submenu_build_function = function(_mouse_x,_mouse_y) {
 	
 	
 	for (var i = 0; i < global.building_data[selected_building].length; i++) {
-		if place_meeting(build_x+i*64,global.ground_level,obj_building_parent) {
+		if position_meeting(build_x+i*64,global.ground_level-8,obj_building_parent) {
 			can_build = false;
 			break;
 			}
 		}
+	if selected_building == buildings.mining_camp {
+		for (var i = 0; i < global.building_data[selected_building].length; i++) {
+			if !position_meeting(build_x+i*64,global.ground_level-8,obj_quarry) {
+				can_build = false;
+				break;
+				}
+			}
+		}
+		
 	}
 	
 submenu_lumberjack_zone_function = function(_mouse_x,_mouse_y) {
@@ -385,8 +402,6 @@ click_pause = function(_mouse_x,_mouse_y) {
 		}
 	}
 
-
-
 //day night cycle functions
 
 day_cycle_step = function() {
@@ -418,7 +433,7 @@ day_cycle_step = function() {
 	
 	shadow_color = merge_color(c_white,make_color_rgb(35,12,26),dawn_factor*.5);
 	shadow_color = merge_color(shadow_color,dusk_color.mid,dusk_factor);
-	shadow_color = merge_color(shadow_color,make_color_rgb(22,27,31),night_factor);
+	shadow_color = merge_color(shadow_color,make_color_rgb(43,53,61),night_factor);
 	
 	}
 
@@ -443,6 +458,9 @@ main_options_step = function(_mouse_x,_mouse_y,_len) {
 						current_pause_menu = bgames_settings;
 						}
 					break;
+					}
+				case 3: {
+					game_end();
 					}
 				}
 			break;

@@ -14,6 +14,8 @@ if !pause {
 	builder_job_assigner();
 	lumberjack_job_assigner();
 	soldier_job_assigner();
+	farmer_job_assigner();
+	miner_job_assigner();
 	bgames_modifiers();
 	global.time = ((global.time+1) mod global.day_time);
 	day_cycle_step();
@@ -206,6 +208,7 @@ if !pause {
 							current_submenu_function = submenu_build_function;
 							build_x = floor((x)/64)*64;
 							selected_building = sel_index;
+							build_x-=floor(global.building_data[selected_building].length/2)*64;
 							render_submenu = true;
 							_can_move_camera = false;
 							
@@ -392,6 +395,16 @@ if !pause {
 							else if i == jobs.unemployed {
 								_which_free_peasant.spr_walk = spr_peasant_walk;
 								_which_free_peasant.spr_idle = spr_peasant;
+								}
+							else if i == jobs.farmer {
+								_which_free_peasant.spr_walk = spr_farmer_walk;
+								_which_free_peasant.spr_idle = spr_farmer;
+								_which_free_peasant.spr_work = spr_farmer_work;
+								}
+							else if i == jobs.miner {
+								_which_free_peasant.spr_walk = spr_builder_walk;
+								_which_free_peasant.spr_idle = spr_builder;
+								_which_free_peasant.spr_work = spr_builder_work;
 								}
 							
 							render_submenu = true;

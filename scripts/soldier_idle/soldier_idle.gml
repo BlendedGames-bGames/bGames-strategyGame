@@ -22,28 +22,7 @@ function soldier_idle(){
 		}
 	
 	if can_attack {
-		if ((global.time + clock_offset) mod 10) == 0 and !((sprite_index == spr_archer_attack_front or sprite_index == spr_archer_attack_up)){
-			
-			if !instance_exists(target_instance) or abs(target_instance.x-x)>=128{
-				if instance_number(obj_enemy)!=0 {
-					var nearest=collision_line(x-192,y-4,x+192,y-4,obj_enemy,0,true);
-					if nearest!=noone {
-						target_instance=nearest;
-						behind_wall = collision_line(x,y-8,target_instance.x,y-8,obj_building_wall,0,true);
-						behind_wall = (behind_wall!=noone);
-						attack_cooldown = global.soldier_attack_speed;
-						if behind_wall {
-							sprite_index=spr_archer_attack_up;
-							image_index = 0;
-							}
-						else {
-							sprite_index=spr_archer_attack_front;
-							image_index = 0;
-							}
-						}
-					}
-				}
-			}
+		find_target();
 		if instance_exists(target_instance) {
 			image_xscale = sign(attack_x-x+0.001);
 			attack_x = target_instance.x;
@@ -67,7 +46,7 @@ function soldier_idle(){
 				else {
 					speed = 8;
 					var dis = other.attack_x - x;
-					direction = point_direction(x,y-16,other.attack_x,global.ground_level-16) + (0.5*darcsin(gravity*dis/sqr(speed)));
+					direction = point_direction(x,y-16,other.attack_x,global.ground_level-32) + (0.5*darcsin(gravity*dis/sqr(speed)));
 					}
 				}
 			}

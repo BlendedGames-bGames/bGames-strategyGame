@@ -1,7 +1,7 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function move_to_attack(){
-	target_x = global.world.size*64/2;
+
 
 	if sprite_index!=spr_carcass_run {
 			sprite_index=spr_carcass_run;

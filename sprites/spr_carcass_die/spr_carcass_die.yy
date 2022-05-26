@@ -143,7 +143,7 @@
     "backdropXOffset": 0.0,
     "backdropYOffset": 0.0,
     "xorigin": 22,
-    "yorigin": 34,
+    "yorigin": 35,
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_carcass_die","path":"sprites/spr_carcass_die/spr_carcass_die.yy",},

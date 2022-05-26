@@ -1,8 +1,8 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function move_to_pos(){
-	show_debug_message("my target is: "+string(target_x));
-	if target_x!=-1 and (check_state==-1 or (check_state!=-1 and check_state()))  {
+
+	if target_x!=-1 and (check_state==-1 or (check_state!=-1 and check_state())) and (global.time/global.day_time <0.65) {
 		if sprite_index!=spr_walk {
 			sprite_index=spr_walk;
 			image_index = 0;
@@ -17,6 +17,9 @@ function move_to_pos(){
 			}
 		}	
 	else {
+		if job = jobs.soldier {
+			show_debug_message("pa la casa");
+			}
 		cancel_state();
 		}
 	}

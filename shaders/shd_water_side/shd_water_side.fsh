@@ -69,9 +69,9 @@ void main() {
 	// DEBUG:
 	// After testing, remove this and the show_result uniform
 	//----------------------------------------------------------------------------
-	out_col = mix(out_col, distort_sample, show_result);
+	//out_col = mix(out_col, distort_sample, 1.0);
 	
-	
+	out_col = mix(out_col,vec3(1.),clamp(((distort_sample.r+distort_sample.g+distort_sample.b)-0.65)*3.,0.,1.));
 	// OUTPUT:
 	//----------------------------------------------------------------------------
 	gl_FragColor		= vec4(out_col, 1.0);

@@ -4,13 +4,17 @@ var _guiw = display_get_gui_width();
 var _guih = display_get_gui_height();
 draw_set_font(fnt_text); 
 var _bar_width = 48;
+
+//draw_surface_ext(surf_water,0,0,.5,.25,0,c_white,1)
+
 if pause {
 	
 	//draw_sprite_ext(pause_sprite,0,0,0,_guiw/res_w,_guih/res_h,0,c_white,1);
 	
 	draw_set_color(c_black);
 	draw_set_alpha(0.5);
-	draw_rectangle(_guiw/2-3.5*_bar_width,0,_guiw/2+3.5*_bar_width,global.h,0);
+	draw_rectangle(0,64,_guiw,global.h-64,0);
+	//draw_rectangle(_guiw/2-3.5*_bar_width,0,_guiw/2+3.5*_bar_width,global.h,0);
 	draw_set_color(c_white);
 	draw_set_alpha(1);
 	
@@ -264,14 +268,17 @@ else {
 			}
 			else {
 				if current_instance.object_index == obj_building_lumberjack_hut {
-					
 					//chop tress button
 					draw_sprite_ext(spr_hud_bar,0,global.w-33-_bar_width,room_height-80,1,1,0,c_white,1);
 					var _index = 2 + (current_instance.cut_zone!=noone);
 					draw_sprite(spr_hud_skills_icon,_index,global.w-33-_bar_width,room_height-80);
 					
-					draw_text(global.w-33-_bar_width*7+6,room_height-80+28,"Workers: "+string(current_instance.workers)+"/"+string(current_instance.max_workers) + "    Effectivity: "+string(current_instance.efficienty*100)+"%");
+					draw_text(global.w-33-_bar_width*7+6,room_height-80+28,"Workers: "+string(current_instance.workers)+"/"+string(current_instance.max_workers) + "    Effectivity: "+string(current_instance.efficiency*100)+"%");
 					}
+				else if current_instance.object_index == obj_building_windmill or current_instance.object_index == obj_building_mining_camp {
+					draw_text(global.w-33-_bar_width*7+6,room_height-80+28,"Workers: "+string(current_instance.workers)+"/"+string(current_instance.max_workers) + "    Effectivity: "+string(current_instance.efficiency*100)+"%");
+					}
+					
 				}
 			}
 		else if current_menu = menu.place_lumberjack_zone {

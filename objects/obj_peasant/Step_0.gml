@@ -10,3 +10,16 @@ else {
 	state();
 	}
 visible = in_range(x,obj_controller.x-global.w*0.6,obj_controller.x+global.w*0.6);
+
+if hp == 0 {
+	before_switching_jobs(self);
+	instance_destroy();
+	
+	var _pos = ds_list_find_index(global.peasant_list[job],id);
+	
+	ds_list_delete(global.peasant_list[job],_pos);
+	
+	global.pops--;
+	obj_controller.render_resources = true;
+	obj_controller.render_submenu = true;
+	}

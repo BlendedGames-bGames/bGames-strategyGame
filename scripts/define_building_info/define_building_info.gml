@@ -21,10 +21,10 @@ function define_building_info(){
 		food_cost: 0,
 		stone_cost: 0,
 		wood_cost: 10,
-		cost_per_chunk: true,
+		cost_per_chunk: false,
 		sprite_index: spr_miner_site,
-		object: obj_building_wall,
-		length: 1
+		object: obj_building_mining_camp,
+		length: 4
 		};
 	_structures[buildings.windmill]= {
 		name: "Windmill",
@@ -34,9 +34,9 @@ function define_building_info(){
 		stone_cost: 150,
 		wood_cost: 150,
 		cost_per_chunk: true,
-		sprite_index: spr_miner_site,
-		object: obj_building_wall,
-		length: 1
+		sprite_index: spr_windmill,
+		object: obj_building_windmill,
+		length: 2
 		};
 	_structures[buildings.barraks]= {
 		name: "Barracks",
@@ -82,8 +82,8 @@ function define_building_info(){
 		stone_cost: 10,
 		wood_cost: 10,
 		cost_per_chunk: true,
-		sprite_index: spr_miner_site,
-		object: obj_building_wall,
+		sprite_index: spr_watchtower,
+		object: obj_building_watchtower,
 		length: 1
 		};
 	_structures[buildings.wall]= {

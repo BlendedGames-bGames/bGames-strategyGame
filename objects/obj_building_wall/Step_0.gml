@@ -11,6 +11,7 @@ if !built {
 	yscale = hp/max_hp;
 	}
 else {
+	yscale = 1;
 	if can_call_wall_function {
 		
 		find_furthest_walls();
@@ -18,6 +19,14 @@ else {
 		}
 	//Wall construction process. Each time a wall is built, it will build background walls until it finds another wall.
 	if !finished_placing_background_walls {
+		
+		if check_wall {
+			if ((current_wall_pos)!=pos and ( instance_position((current_wall_pos)*64+8,global.ground_level-8,obj_building_wall)) or instance_position((current_wall_pos + (right_side - !right_side) )*64+8,global.ground_level-8,obj_building_capitol) ) {
+				finished_placing_background_walls = true;
+				}
+			check_wall = false;
+			}
+		
 		if (pos==current_wall_pos) {
 			if global.world.wall_sprite[current_wall_pos]==noone {
 				if right_side {
@@ -36,11 +45,9 @@ else {
 			global.world.wall_y[current_wall_pos]+=0.05;
 			}
 		else {
-			var _pos = current_wall_pos;
+			
 			current_wall_pos -= right_side - !right_side;
-			if (_pos)!=pos and instance_position((_pos)*64+8,global.ground_level-8,obj_building_wall) or instance_position((_pos)*64+8,global.ground_level-8,obj_building_capitol) {
-				finished_placing_background_walls = true;
-				}
+			check_wall = true;
 			}
 			
 		}

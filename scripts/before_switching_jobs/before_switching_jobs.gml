@@ -15,6 +15,24 @@ function before_switching_jobs(_which_free_peasant){
 				}
 			}
 		}
+	else if _which_free_peasant.job==jobs.farmer {
+		if _which_free_peasant.target_instance!=noone {
+			_which_free_peasant.target_instance.workers--;
+			if _which_free_peasant.state == work_farm {
+	
+				_which_free_peasant.target_instance.workers_working--;
+				}
+			}
+		}
+	else if _which_free_peasant.job==jobs.miner {
+		if _which_free_peasant.target_instance!=noone {
+			_which_free_peasant.target_instance.workers--;
+			if _which_free_peasant.state == work_mine {
+	
+				_which_free_peasant.target_instance.workers_working--;
+				}
+			}
+		}
 	else if _which_free_peasant.job==jobs.soldier {
 		if _which_free_peasant.side == 0 {
 

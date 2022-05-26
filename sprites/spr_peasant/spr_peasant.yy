@@ -134,7 +134,7 @@
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
     "tracks": [
       {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
-            {"id":"a7cc4ebe-02ac-43eb-a48f-4c4b7c5b7eff","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"1f22d9bc-14fe-4177-88a5-855b0c125aa9","path":"sprites/spr_peasant/spr_peasant.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"a1b73c04-004a-472f-9f0f-194cf231ae02","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"1f22d9bc-14fe-4177-88a5-855b0c125aa9","path":"sprites/spr_peasant/spr_peasant.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
           ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack","modifiers":[],},
     ],
     "visibleRange": null,
@@ -153,7 +153,7 @@
     "eventStubScript": null,
     "parent": {"name":"spr_peasant","path":"sprites/spr_peasant/spr_peasant.yy",},
     "resourceVersion": "1.4",
-    "name": "",
+    "name": "spr_peasant",
     "tags": [],
     "resourceType": "GMSequence",
   },

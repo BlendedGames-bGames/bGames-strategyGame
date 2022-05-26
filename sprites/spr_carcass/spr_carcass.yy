@@ -218,7 +218,7 @@
     "backdropXOffset": 0.0,
     "backdropYOffset": 0.0,
     "xorigin": 20,
-    "yorigin": 33,
+    "yorigin": 34,
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_carcass","path":"sprites/spr_carcass/spr_carcass.yy",},

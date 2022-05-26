@@ -35,6 +35,9 @@ function tree_handle(){
 					with obj_building_lumberjack_hut {
 						get_forest_chunks();
 						}
+					with obj_building_windmill {
+						rebuild_farm_chunks();
+						}
 					
 					}
 				}

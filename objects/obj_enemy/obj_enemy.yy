@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "spr_carcass_run",
-    "path": "sprites/spr_carcass_run/spr_carcass_run.yy",
+    "name": "spr_carcass_spawn",
+    "path": "sprites/spr_carcass_spawn/spr_carcass_spawn.yy",
   },
   "solid": false,
   "visible": true,

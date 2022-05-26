@@ -16,3 +16,6 @@ surface_free(surf_resources);
 surface_free(surf_pause);
 surface_free(surf_lighting);
 surface_free(surf_water);
+surface_free(surf_entities);
+surface_free(surf_shaded_entities);
+surface_free(surf_rendered_water);

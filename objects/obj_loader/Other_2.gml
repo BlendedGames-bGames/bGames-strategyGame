@@ -13,4 +13,4 @@ room_goto_next();
 
 global.resource_font = font_add_sprite_ext(spr_resource_font,"ABCDE1234567890+/",1,1);
 
-global.day_time =5*60*60//minutos*segundos*ticks;
+global.day_time = 6*60*60//minutos*segundos*ticks;

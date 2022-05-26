@@ -1,7 +1,6 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function wander(){
-	var _base = global.base;
 	if in_range(x,global.control_radius_left,global.control_radius_right) {
 		if timer == 0 {
 			if target_x==-1 {
@@ -25,7 +24,7 @@ function wander(){
 			image_index = 0;
 			}
 		image_xscale = sign(global.world.size/2*64-x+0.001);
-		x+=image_xscale*global.peasant_walk_speed;
+		x+=image_xscale*global.peasant_run_speed;
 		if timer!=0 {
 			timer=0;
 			}

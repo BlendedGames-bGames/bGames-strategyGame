@@ -16,7 +16,9 @@ void main()
 	
 	vec2 dis = pos - u_vLightCoord;
 	
-	float strength = 1. /(sqrt(dis.x*dis.x + dis.y*dis.y + u_fLightRadius*u_fLightRadius)-u_fLightRadius);
+	//float strength = 1. /(sqrt(dis.x*dis.x + dis.y*dis.y + u_fLightRadius*u_fLightRadius)-u_fLightRadius);
 
-	gl_FragColor = v_vColour*vec4(vec3(strength),1.0);
+	float strength = 1. /(sqrt(1.-exp(-length(dis)/u_fLightRadius))) - 1.15;
+	
+	gl_FragColor = v_vColour*vec4(vec3(1.0),strength);
 }
