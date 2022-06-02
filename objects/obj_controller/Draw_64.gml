@@ -2,7 +2,7 @@
 
 var _guiw = display_get_gui_width();
 var _guih = display_get_gui_height();
-draw_set_font(fnt_text); 
+draw_set_font(fnt_small); 
 var _bar_width = 48;
 
 //draw_surface_ext(surf_water,0,0,.5,.25,0,c_white,1)
@@ -142,13 +142,13 @@ else {
 		draw_set_font(global.resource_font);
 		draw_set_halign(fa_left);
 		draw_set_valign(fa_top);
-		draw_text(_guiw/2 - 96 * 2.5 + 16 , 18,"A"+string(global.gold)+"+"+string(global.gold_weekly));
-		draw_text(_guiw/2 - 96 * 1.5 + 16 , 18,"B"+string(global.wood)+"+"+string(global.wood_weekly));
-		draw_text(_guiw/2 - 96 * .5 + 16 , 18, "C"+string(global.stone)+"+"+string(global.stone_weekly));
-		draw_text(_guiw/2 + 96 * .5 + 16 , 18,"D"+string(global.food)+"+"+string(global.food_weekly));
-		draw_text(_guiw/2 + 96 * 1.5 + 16 , 18,"E"+string(global.pops)+"/"+string(global.pop_cap));
+		//draw_text(_guiw/2 - 96 * 2.5 + 16 , 18,"A"+string(global.gold)+"+"+string(global.gold_weekly));
+		draw_text(_guiw/2 - 96 * 2 + 16 , 18,"B"+string(global.wood)+"+"+string(global.wood_weekly));
+		draw_text(_guiw/2 - 96 * 1 + 16 , 18, "C"+string(global.stone)+"+"+string(global.stone_weekly));
+		draw_text(_guiw/2 + 96 * 0 + 16 , 18,"D"+string(global.food)+"+"+string(global.food_weekly));
+		draw_text(_guiw/2 + 96 * 1 + 16 , 18,"E"+string(global.pops)+"/"+string(global.pop_cap));
 		render_resources = false;
-		draw_set_font(fnt_text); 
+		draw_set_font(fnt_small); 
 		surface_reset_target();
 		}
 	
@@ -165,17 +165,17 @@ else {
 		//draw_sprite_ext(spr_hud_bar,0,_guiw/2-33,room_height-80,66/_bar_width,1,0,c_white,1);
 		draw_sprite(spr_hud_center,1,0,room_height-80);
 		draw_set_halign(fa_center);
-		draw_sprite_ext(spr_hud_bar,current_menu==menu.job,32,room_height-80,72/_bar_width,1,0,c_white,1);
-		draw_sprite_ext(spr_hud_icon,0,32+36,room_height-80+12,1,1,0,c_white,1);
-		draw_text(32+36,room_height-80+24,"Jobs");
+		draw_sprite_ext(spr_hud_bar,current_menu==menu.job,32,room_height-80,64/_bar_width,1,0,c_white,1);
+		draw_sprite_ext(spr_hud_icon,0,32+32,room_height-80+12,1,1,0,c_white,1);
+		draw_text(32+32,room_height-80+24,"Jobs");
 
-		draw_sprite_ext(spr_hud_bar,current_menu==menu.build,32+72,room_height-80,72/_bar_width,1,0,c_white,1);
-		draw_sprite_ext(spr_hud_icon,7,32+72+36,room_height-80+12,1,1,0,c_white,1);
-		draw_text(32+72+36,room_height-80+24,"Build");
+		draw_sprite_ext(spr_hud_bar,current_menu==menu.build,32+64,room_height-80,64/_bar_width,1,0,c_white,1);
+		draw_sprite_ext(spr_hud_icon,7,32+64+32,room_height-80+12,1,1,0,c_white,1);
+		draw_text(32+64+32,room_height-80+24,"Build");
 
-		draw_sprite_ext(spr_hud_bar,current_menu==menu.combat,32+72*2,room_height-80,72/_bar_width,1,0,c_white,1);
-		draw_sprite_ext(spr_hud_icon,6,32+72*2+36,room_height-80+12,1,1,0,c_white,1);
-		draw_text(32+72*2+36,room_height-80+24,"Combat");
+		draw_sprite_ext(spr_hud_bar,current_menu==menu.demolish,32+64*2,room_height-80,64/_bar_width,1,0,c_white,1);
+		draw_sprite_ext(spr_hud_icon,6,32+64*2+32,room_height-80+12,1,1,0,c_white,1);
+		draw_text(32+64*2+32,room_height-80+24,"Demolish");
 		draw_set_halign(fa_left);
 
 		surface_reset_target();
@@ -207,12 +207,34 @@ else {
 		else if current_menu == menu.build {
 			draw_sprite(spr_hud_center,1,global.w,room_height-80);
 			if current_submenu==submenu.none {
-				for (var k = 0; k < 8; k++) {
-					draw_sprite_ext(spr_hud_bar,0,global.w-33-_bar_width*(k+1),room_height-80,1,1,0,c_white,1);
-					draw_sprite_ext(spr_hud_building_icon,k,global.w-33-_bar_width*(k+1),room_height-80,1,1,0,c_white,1);
-					}
+				draw_set_halign(fa_center);
+				draw_standard_button_ext(spr_hud_icon,18,"Production\nBuildings",global.w-33-64,room_height-80,64/48,1);
+				draw_standard_button_ext(spr_hud_icon,7,"Civillian\nBuildings",global.w-33-64*2,room_height-80,64/48,1);
+				draw_standard_button_ext(spr_hud_icon,1,"Military\nBuildings",global.w-33-64*3,room_height-80,64/48,1)
+				
 				}
-			else {
+			else if current_submenu==submenu.resource_buildings {
+				draw_set_halign(fa_center);
+				draw_standard_button(spr_hud_icon,8,"Cancel",global.w-33-_bar_width,room_height-80);
+				draw_set_halign(fa_left);
+				draw_building_buttons(resource_buildings);
+				
+				}
+			else if current_submenu==submenu.civilian_buildings {
+				draw_set_halign(fa_center);
+				draw_standard_button(spr_hud_icon,8,"Cancel",global.w-33-_bar_width,room_height-80);
+				draw_set_halign(fa_left);
+				draw_building_buttons(civilian_buildings);
+				
+				}
+			else if current_submenu==submenu.defensive_buildings {
+				draw_set_halign(fa_center);
+				draw_standard_button(spr_hud_icon,8,"Cancel",global.w-33-_bar_width,room_height-80);
+				draw_set_halign(fa_left);
+				draw_building_buttons(defensive_buildings);
+				
+				}
+			else if current_submenu==submenu.build_mode {
 				draw_sprite_ext(spr_hud_bar,0,global.w-33-_bar_width*7,room_height-80,5,1,0,c_white,1);
 				draw_set_halign(fa_center);
 				draw_standard_button(spr_hud_icon,8,"Cancel",global.w-33-_bar_width,room_height-80);
@@ -236,19 +258,19 @@ else {
 					draw_text(global.w-33-_bar_width*7+8+_pos+16,room_height-72+22+20,string(_struct.stone_cost));
 					_pos+=48;
 					}
-				if _struct.gold_cost>0 {
-					draw_sprite(spr_resource_font,0,global.w-33-_bar_width*7+8+_pos,room_height-72+22);
-					draw_text(global.w-33-_bar_width*7+8+_pos+16,room_height-72+22+20,string(_struct.gold_cost));
-					_pos+=48;
-					}
+				//if _struct.gold_cost>0 {
+				//	draw_sprite(spr_resource_font,0,global.w-33-_bar_width*7+8+_pos,room_height-72+22);
+				//	draw_text(global.w-33-_bar_width*7+8+_pos+16,room_height-72+22+20,string(_struct.gold_cost));
+				//	_pos+=48;
+				//	}
 				draw_set_valign(fa_top);
-				draw_set_font(fnt_text);
+				draw_set_font(fnt_small);
 				
 				}
 			}
 		else if current_menu == menu.structure and instance_exists(current_instance) {
 			draw_sprite(spr_hud_center,1,global.w,room_height-80);
-			draw_sprite_ext(spr_hud_bar,0,global.w-33-_bar_width*7,room_height-80,7,1,0,c_white,1);
+			draw_sprite_ext(spr_hud_bar,0,global.w-33-_bar_width*5,room_height-80,5,1,0,c_white,1);
 			draw_set_halign(fa_left);
 			var _title = global.building_data[current_instance.building_id].name;
 		
@@ -259,27 +281,45 @@ else {
 			else {
 				_content+=(string(current_instance.hp)+"/"+string(current_instance.max_hp));
 				}
-			draw_text(global.w-33-_bar_width*7+6,room_height-80+3,_title+" ("+_content+")");
+			draw_text(global.w-33-_bar_width*5+6,room_height-80+3,_title+" ("+_content+")");
 			
 			if !current_instance.built {
 				draw_set_halign(fa_center);
-				draw_standard_button(spr_hud_icon,8,"Cancel",global.w-33-_bar_width,room_height-80);
+				draw_standard_button(spr_hud_icon,8,"Destroy",global.w-33-_bar_width,room_height-80);
 				draw_set_halign(fa_left);
-			}
-			else {
+				}
+			if current_instance.built {
 				if current_instance.object_index == obj_building_lumberjack_hut {
 					//chop tress button
-					draw_sprite_ext(spr_hud_bar,0,global.w-33-_bar_width,room_height-80,1,1,0,c_white,1);
-					var _index = 2 + (current_instance.cut_zone!=noone);
-					draw_sprite(spr_hud_skills_icon,_index,global.w-33-_bar_width,room_height-80);
-					
-					draw_text(global.w-33-_bar_width*7+6,room_height-80+28,"Workers: "+string(current_instance.workers)+"/"+string(current_instance.max_workers) + "    Effectivity: "+string(current_instance.efficiency*100)+"%");
+					//draw_sprite_ext(spr_hud_bar,0,global.w-33-_bar_width*2,room_height-80,1,1,0,c_white,1);
+					var _exists =  (current_instance.cut_zone!=noone);
+					var _index = 14 + _exists;
+					var _text = "Cancel\nZone";
+					if !_exists {
+						_text = "Set\nZone";
+						}
+					//draw_sprite(spr_hud_skills_icon,_index,global.w-33-_bar_width*2,room_height-80);
+					draw_set_halign(fa_center);
+					draw_standard_button(spr_hud_icon,_index,_text,global.w-33-_bar_width,room_height-80);
+					draw_set_halign(fa_left);
+					draw_text(global.w-33-_bar_width*5+6,room_height-80+28,"Workers: "+string(current_instance.workers)+"/"+string(current_instance.max_workers) + "    Effectivity: "+string(current_instance.efficiency*100)+"%");
 					}
 				else if current_instance.object_index == obj_building_windmill or current_instance.object_index == obj_building_mining_camp {
-					draw_text(global.w-33-_bar_width*7+6,room_height-80+28,"Workers: "+string(current_instance.workers)+"/"+string(current_instance.max_workers) + "    Effectivity: "+string(current_instance.efficiency*100)+"%");
+					draw_text(global.w-33-_bar_width*5+6,room_height-80+28,"Workers: "+string(current_instance.workers)+"/"+string(current_instance.max_workers) + "    Effectivity: "+string(current_instance.efficiency*100)+"%");
 					}
-					
-				}
+				else if current_instance.object_index == obj_building_watchtower {
+					draw_set_halign(fa_center);
+					draw_standard_button(spr_hud_icon,12+current_instance.open,!current_instance.open ? "Open" : "Close",global.w-33-_bar_width,room_height-80);
+					draw_set_halign(fa_left);
+					draw_text(global.w-33-_bar_width*5+6,room_height-80+28,"Archers: "+string(current_instance.slots)+"/"+string(current_instance.max_slots));
+					}
+				else if current_instance.object_index == obj_building_capitol {
+					draw_set_halign(fa_center);
+					draw_standard_button_ext(spr_hud_icon,17,"Create\nCitizen",global.w-33-_bar_width*1.25,room_height-80,1.25,1);
+					draw_set_halign(fa_left);
+					}
+				}	
+				
 			}
 		else if current_menu = menu.place_lumberjack_zone {
 			draw_sprite(spr_hud_center,1,global.w,room_height-80);
@@ -295,6 +335,20 @@ else {
 			draw_set_halign(fa_left);
 			
 			}
+		else if current_menu = menu.demolish {
+			draw_sprite(spr_hud_center,1,global.w,room_height-80);
+			draw_sprite_ext(spr_hud_bar,0,global.w-33-_bar_width*5,room_height-80,5,1,0,c_white,1);
+			if instance_exists(current_instance) and current_instance.object_index != obj_building_capitol{
+				draw_set_halign(fa_center);
+				draw_standard_button(spr_hud_icon,8,"Cancel",global.w-33-_bar_width,room_height-80);
+				draw_standard_button(spr_hud_icon,9,"Destroy",global.w-33-_bar_width*2,room_height-80);
+				draw_set_halign(fa_left);
+				}
+			else {
+				draw_text(global.w-33-_bar_width*5+6,room_height-80+3,"Select the building\nto be demolished.");
+				}
+			
+			} 
 		surface_reset_target()
 	
 		render_submenu = false;

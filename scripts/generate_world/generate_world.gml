@@ -10,7 +10,7 @@ function generate_world(_size){
 	_sprite_width = sprite_get_width(spr_mountain);
 	_world.background = {
 		sprite_size : [_sprite_width,_sprite_width*.9,_sprite_width*0.8,_sprite_width*0.7],
-		mountain_repeats: [4,7,10,16]
+		mountain_repeats: [3,4,7,8]
 		}
 	
 	//set up ground
@@ -50,7 +50,7 @@ function generate_world(_size){
 	
 	//generate random stone 
 	
-	var _deposits =  _size/42;
+	var _deposits =  floor(_size/42);
 	var _start = _size/2;
 	var _pos_bonus = 0;
 	var _can_place = true;

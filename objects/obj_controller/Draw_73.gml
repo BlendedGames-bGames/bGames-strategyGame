@@ -104,7 +104,7 @@ if !pause {
 		if can_build {
 			_color = c_white;
 			}
-		draw_sprite_ext(global.building_data[selected_building].sprite_index,0,build_x,global.ground_level,1,1,0,_color,0.65);
+		draw_sprite_ext(global.building_data[selected_building].sprite_index,0,build_x,global.ground_level,1,1,0,_color,global.job_endtime);
 		
 		if selected_building == buildings.lumberjack_hut {
 			for (var i = 0; i < 6; i++) {

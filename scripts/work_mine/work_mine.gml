@@ -7,8 +7,9 @@ function work_mine(){
 			}
 		target_instance = noone;
 		state = wander;
+		exit;
 		}
-	var _can_work = (global.time/global.day_time <0.65);
+	var _can_work = (global.time/global.day_time <global.job_endtime);
 	_can_work = _can_work and abs(x-(target_instance.x+64))<200;
 	if _can_work {
 		if timer == 0 {
@@ -33,6 +34,7 @@ function work_mine(){
 				effect_done = false;
 				}
 			else if round(image_index) == 6 and !effect_done {
+				audio_play_sound_at(snd_mining,x,y,0,24,24,1,0,8);
 				effect_done = true; 
 				}
 		

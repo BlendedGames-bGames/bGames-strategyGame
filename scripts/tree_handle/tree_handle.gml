@@ -16,9 +16,15 @@ function tree_handle(){
 					_trees_being_animated++;
 					
 					if _tree.hp == 0 {
-						global.world.forest_tree[_pos][j] = -1;
+						
 						global.wood+=50;
 						obj_controller.render_resources = true;
+						with instance_create_layer(_pos*64 + _tree.x,global.ground_level,"Buildings",obj_falling_tree) {
+							image_angle_dir = sign(_tree.image_angle);
+							image_index = _tree.image_index;
+							image_xscale = _tree.image_xscale;
+							}
+						global.world.forest_tree[_pos][j] = -1;
 						}
 					else {
 						_tree.image_angle -= sign(_tree.image_angle)*0.5;

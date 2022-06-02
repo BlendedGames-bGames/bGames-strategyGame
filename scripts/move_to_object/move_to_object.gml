@@ -2,7 +2,7 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function move_to_object(){
 
-	if instance_exists(target_instance) and (check_state==-1 or (check_state!=-1 and check_state())) and (global.time/global.day_time <0.65)  {
+	if instance_exists(target_instance) and (check_state==-1 or (check_state!=-1 and check_state())) and (global.time/global.day_time <global.job_endtime)  {
 		if sprite_index!=spr_walk {
 			sprite_index=spr_walk;
 			image_index = 0;
@@ -14,7 +14,7 @@ function move_to_object(){
 			sprite_index = spr_idle;
 			image_index=0;
 			timer = 0;
-			target_x = -1;
+			//<<<target_x = -1;
 			if on_finish_state!=-1 on_finish_state();
 			state = next_state;
 

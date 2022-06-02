@@ -1,7 +1,7 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function miner_job_assigner(){
-	if (global.time/global.day_time <0.65) {
+	if (global.time/global.day_time <global.job_endtime) {
 		var _miners = ds_list_size(global.peasant_list[jobs.miner]);
 		with obj_building_mining_camp {
 

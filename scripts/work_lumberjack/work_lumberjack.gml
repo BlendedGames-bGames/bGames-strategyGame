@@ -7,9 +7,11 @@ function work_lumberjack(){
 			}
 		target_instance = noone;
 		state = wander;
+		exit;
 		}
+	
 	var _can_work = !ds_list_empty(target_instance.forest_chunks);
-	_can_work = _can_work and (global.time/global.day_time <0.65);
+	_can_work = _can_work and (global.time/global.day_time <global.job_endtime);
 	_can_work = _can_work and abs(x-(target_instance.x+64))<200;
 	if _can_work {
 		if timer == 0 {

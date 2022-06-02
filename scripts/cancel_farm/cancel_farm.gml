@@ -4,5 +4,6 @@ function cancel_farm(){
 	with target_instance {
 		workers--;
 		}
+	
 	generic_cancel();
 }

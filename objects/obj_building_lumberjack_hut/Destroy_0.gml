@@ -8,3 +8,7 @@ for (var i = 0 ; i<array_length(lights); i++) {
 	instance_destroy(lights[i]);
 
 	}
+
+if instance_exists(cut_zone) {
+	instance_destroy(cut_zone);
+	}

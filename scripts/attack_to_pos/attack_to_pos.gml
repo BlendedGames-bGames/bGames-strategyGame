@@ -2,7 +2,7 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function attack_to_pos(){
 
-	find_target();
+	find_target(160);
 	if (sprite_index == spr_archer_attack_front or sprite_index == spr_archer_attack_up) {
 		state = soldier_idle;
 		}

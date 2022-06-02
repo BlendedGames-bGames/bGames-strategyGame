@@ -4,8 +4,9 @@ var _mouse_x = device_mouse_x_to_gui(0);
 var _mouse_y = device_mouse_y_to_gui(0);
 
 if !pause {
-
+	audio_listener_position(x,y,0);
 	global.gather_timer = max(global.gather_timer-1,0);
+	
 	if global.gather_timer == 0 {
 		global.gather_timer = room_speed*3;
 		collect_resources();
@@ -17,7 +18,13 @@ if !pause {
 	farmer_job_assigner();
 	miner_job_assigner();
 	bgames_modifiers();
+	if global.time==0 {
+		global.day++;
+		var _snd = audio_play_sound(choose(snd_dawn1,snd_dawn2,snd_dawn3),9,false);
+		audio_sound_gain(_snd,.55,0);
+		}
 	global.time = ((global.time+1) mod global.day_time);
+	
 	day_cycle_step();
 	
 		
@@ -53,7 +60,7 @@ if !pause {
 		if _mouse_y>=global.ground_level+32 {
 			#region menu select
 			for (var i = 0; i<3; i++) {
-				if point_in_rectangle(_mouse_x,_mouse_y,32+72*i,room_height-80,32+72*(i+1),room_height-80+48) {
+				if point_in_rectangle(_mouse_x,_mouse_y,32+64*i,room_height-80,32+64*(i+1),room_height-80+48) {
 					sel_menu = i;
 					sel_choose_a_menu = true;
 					render_menu = true;
@@ -66,15 +73,62 @@ if !pause {
 			#region build menu
 			if current_menu == menu.build { 
 				if current_submenu == submenu.none { 
-					for (var i = 0; i<8; i++) {
-						if point_in_rectangle(_mouse_x,_mouse_y,global.w-33-48*(i+1),room_height-80,global.w-33-48*(i),room_height-80+48) {
-							sel_menu = current_menu;
-							sel_submenu = current_submenu;
-							sel_index = i;
-							render_submenu = true;
-							_can_move_camera = false;
-							break;
-							}
+					if point_in_button(_mouse_x,_mouse_y,global.w-33-64,room_height-80,64/48,1) {
+						sel_menu = current_menu;
+						sel_submenu = current_submenu;
+						sel_index = 0;
+						render_submenu = true;
+						_can_move_camera = false;
+						}
+					else if point_in_button(_mouse_x,_mouse_y,global.w-33-64*2,room_height-80,64/48,1) {
+						sel_menu = current_menu;
+						sel_submenu = current_submenu;
+						sel_index = 1;
+						render_submenu = true;
+						_can_move_camera = false;
+						}
+					else if point_in_button(_mouse_x,_mouse_y,global.w-33-64*3,room_height-80,64/48,1) {
+						sel_menu = current_menu;
+						sel_submenu = current_submenu;
+						sel_index = 2;
+						render_submenu = true;
+						_can_move_camera = false;
+						}
+					}
+				else if current_submenu == submenu.resource_buildings {
+					if point_in_button(_mouse_x,_mouse_y,global.w-33-48,room_height-80,1,1) {
+						sel_menu = current_menu;
+						sel_submenu = current_submenu;
+						sel_index = 0;
+						render_submenu = true;
+						_can_move_camera = false;
+						}
+					else {
+						_can_move_camera = step_building_options(resource_buildings,_mouse_x,_mouse_y);
+						}
+					}
+				else if current_submenu == submenu.civilian_buildings {
+					if point_in_button(_mouse_x,_mouse_y,global.w-33-48,room_height-80,1,1) {
+						sel_menu = current_menu;
+						sel_submenu = current_submenu;
+						sel_index = 0;
+						render_submenu = true;
+						_can_move_camera = false;
+						}
+					else {
+						_can_move_camera = step_building_options(civilian_buildings,_mouse_x,_mouse_y);
+						}
+					}
+				else if current_submenu == submenu.defensive_buildings {
+					if point_in_button(_mouse_x,_mouse_y,global.w-33-48,room_height-80,1,1) {
+						sel_menu = current_menu;
+						sel_submenu = current_submenu;
+						sel_index = 0;
+						render_submenu = true;
+						_can_move_camera = false;
+						}
+					else {
+						_can_move_camera = step_building_options(defensive_buildings,_mouse_x,_mouse_y);
 						}
 					}
 				else if current_submenu == submenu.build_mode {
@@ -89,7 +143,7 @@ if !pause {
 						sel_menu = current_menu;
 						sel_submenu = current_submenu;
 						sel_index = 1;
-
+						
 						render_submenu = true;
 						_can_move_camera = false;
 						}
@@ -97,7 +151,7 @@ if !pause {
 				}
 			#endregion
 			#region structure menu
-			else if current_menu = menu.structure {
+			else if current_menu == menu.structure {
 				if instance_exists(current_instance) {
 					if !current_instance.built {
 						if point_in_button(_mouse_x,_mouse_y,global.w-33-48,room_height-80,1,1) {
@@ -117,6 +171,36 @@ if !pause {
 							render_submenu = true;
 							_can_move_camera = false;
 							}
+						}
+					else if current_instance.object_index == obj_building_watchtower {
+						//chop trees button 
+						if point_in_button(_mouse_x,_mouse_y,global.w-33-48,room_height-80,1,1) {
+							sel_menu = current_menu;
+							sel_submenu = current_submenu;
+							sel_index = 0;
+							render_submenu = true;
+							_can_move_camera = false;
+							}
+						}
+					}
+				}
+			#endregion
+			#region demolish
+			else if current_menu == menu.demolish {
+				if instance_exists(current_instance) and current_instance.object_index != obj_building_capitol {
+					if point_in_button(_mouse_x,_mouse_y,global.w-33-48,room_height-80,1,1) {
+						sel_menu = current_menu;
+						sel_submenu = current_submenu;
+						sel_index = 0;
+						render_submenu = true;
+						_can_move_camera = false;
+						}
+					else if point_in_button(_mouse_x,_mouse_y,global.w-33-48*2,room_height-80,1,1) {
+						sel_menu = current_menu;
+						sel_submenu = current_submenu;
+						sel_index = 1;
+						render_submenu = true;
+						_can_move_camera = false;
 						}
 					}
 				}
@@ -204,14 +288,37 @@ if !pause {
 					#region build menu
 					if sel_menu == menu.build { 
 						if sel_submenu == submenu.none { 
-							current_submenu = submenu.build_mode;
-							current_submenu_function = submenu_build_function;
-							build_x = floor((x)/64)*64;
-							selected_building = sel_index;
-							build_x-=floor(global.building_data[selected_building].length/2)*64;
-							render_submenu = true;
-							_can_move_camera = false;
-							
+							if sel_index == 0 {
+								current_submenu = submenu.resource_buildings;
+								render_submenu = true;
+								_can_move_camera = false;
+								}
+							else if sel_index == 1 {
+								current_submenu = submenu.civilian_buildings;
+								render_submenu = true;
+								_can_move_camera = false;
+								}
+							else if sel_index == 2 {
+								current_submenu = submenu.defensive_buildings;
+								render_submenu = true;
+								_can_move_camera = false;
+								}
+							}
+						else if sel_submenu == submenu.resource_buildings or sel_submenu == submenu.defensive_buildings  or sel_submenu == submenu.civilian_buildings {
+							if sel_index == 0 {
+								current_submenu = submenu.none;
+								render_submenu = true;
+								_can_move_camera = false;
+								}
+							else {
+								current_submenu = submenu.build_mode;
+								current_submenu_function = submenu_build_function;
+								build_x = floor((x)/64)*64;
+								selected_building = sel_index-1;
+								build_x-=floor(global.building_data[selected_building].length/2)*64;
+								render_submenu = true;
+								_can_move_camera = false;
+								}
 							}
 						else if sel_submenu == submenu.build_mode {
 							if sel_index == 0 {
@@ -223,6 +330,9 @@ if !pause {
 								var _new_build_site = instance_create_layer(build_x,global.ground_level,"Buildings",global.building_data[selected_building].object);
 								current_submenu = submenu.none;
 								render_submenu = true;
+								var _struct = global.building_data[selected_building];
+								global.wood-=_struct.wood_cost;
+								global.stone-=_struct.stone_cost;
 								_can_move_camera = false;
 								}
 							}
@@ -233,9 +343,14 @@ if !pause {
 					
 						if !current_instance.built {
 							if sel_index == 0 {
-								
 								var _building = current_instance;
-								show_debug_message(_building);
+								if !_building.built {
+									var _id = _building.building_id;
+									var _struct = global.building_data[_id];
+									global.wood+=_struct.wood_cost;
+									global.stone+=_struct.stone_cost;
+									}
+								
 								current_instance = noone;
 								with _building {
 									instance_destroy();
@@ -244,20 +359,31 @@ if !pause {
 								render_submenu = true;
 								}
 							}
-						else if current_instance.object_index == obj_building_lumberjack_hut {
-							//chop trees button 
-							if sel_index == 0 {
-								if current_instance.cut_zone==noone {
-									current_menu = menu.place_lumberjack_zone;
-									render_submenu = true;
-									woodcutting_area.x = floor((x)/64)*64;
-									woodcutting_area.image_xscale = 1;
-									current_submenu_function = submenu_lumberjack_zone_function;
+						else if current_instance.built {
+							if current_instance.object_index == obj_building_lumberjack_hut {
+								//chop trees button 
+								if sel_index == 0 {
+									if current_instance.cut_zone==noone {
+										current_menu = menu.place_lumberjack_zone;
+										render_submenu = true;
+										woodcutting_area.x = floor((x)/64)*64;
+										woodcutting_area.image_xscale = 1;
+										current_submenu_function = submenu_lumberjack_zone_function;
+										}
+									else {
+										instance_destroy(current_instance.cut_zone);
+										current_instance.cut_zone = noone;
+										render_submenu = true;
+										}
 									}
-								else {
-									instance_destroy(current_instance.cut_zone);
-									current_instance.cut_zone = noone;
+								}
+							else if current_instance.object_index = obj_building_watchtower {
+								if sel_index == 0 {
 									render_submenu = true;
+									current_instance.open=!current_instance.open;
+									if !current_instance.open {
+										current_instance.slots = 0;
+										}
 									}
 								}
 							}
@@ -287,8 +413,37 @@ if !pause {
 							woodcutting_area.image_xscale = max(woodcutting_area.image_xscale-1,1);
 							}
 						}
+						#endregion	
+					#region demolish
+					else if sel_menu == menu.demolish {
+						if instance_exists(current_instance) {
+							if sel_index == 0 {
+								current_instance = noone;
+								render_submenu = true;
+								_can_move_camera = false;
+								}
+							else if sel_index == 1 {
+								var _building = current_instance;
+								show_debug_message(_building);
+								current_instance = noone;
+								if !_building.built {
+									var _id = _building.building_id;
+									var _struct = global.building_data[_id];
+									global.wood+=_struct.wood_cost;
+									global.stone+=_struct.stone_cost;
+									}
+								with _building {
+									instance_destroy();
+									}
+								current_menu = menu.none;
+								render_submenu = true;
+								}
+							}
+						}
+					#endregion
 					}
-					#endregion	
+					
+					
 				#endregion			
 				}
 			else {
@@ -308,6 +463,7 @@ if !pause {
 			}
 		
 		mouse_hold_time = 0;
+		#region Selecting a building
 		if touched_an_instance and abs(initial_x-x)<16 and position_meeting(x-global.w/2+_mouse_x,_mouse_y,obj_building_parent) {
 			if current_menu = menu.structure {
 				with current_instance {
@@ -318,17 +474,21 @@ if !pause {
 				current_instance = noone;
 				}
 			current_instance = instance_position(x-global.w/2+_mouse_x,_mouse_y,obj_building_parent);
-			with current_instance {
-				if on_selected!=-1 {
-					on_selected();
+			if current_menu != menu.demolish {
+				with current_instance {
+					if on_selected!=-1 {
+						on_selected();
+						}
 					}
+				current_menu = menu.structure;
 				}
-			current_menu = menu.structure;
 			render_menu = true;
 			render_submenu = true;
 			_can_move_camera = false;
 			}
 		touched_an_instance = false;
+		#endregion
+		
 		if mouse_mode == mouse.moving_camera {
 			mouse_mode = mouse.idle;
 			}
@@ -496,10 +656,10 @@ else {
 							var _str = "id_player="+string(bgames_user.id)+
 							           "&id_attributes="+string(bgames_attributes[i].id_attributes)+
 									   "&new_data="+string( bgames_prices[bgames_bonus[bgames_selected_item][shop.times_bought]]);
-							
-							get = http_post_string(dimensions_post_service+"/spend_attribute/",_str);
+							request_time = get_timer();
 							request_type = request.consume;
 							bgames_settings_request_timer = bgames_settings_request_wait;
+							get = http_post_string(dimensions_post_service+"/spend_attribute/",_str);
 							
 							}
 						break;
@@ -516,11 +676,10 @@ else {
 						if bgames_bonus[i][shop.times_bought]<bgames_bonus[i][shop.max_stock] {
 							current_pause_menu = bgames_payment_method;
 							bgames_selected_item = i;
-							
-							get = http_get(dimensions_get_service+"/player_all_attributes/"+string(bgames_user.id));	
+							request_time = get_timer();
 							request_type = request.attributes;
 							bgames_settings_request_timer = bgames_settings_request_wait;
-							
+							get = http_get(dimensions_get_service+"/player_all_attributes/"+string(bgames_user.id));
 							}
 						break;
 						}

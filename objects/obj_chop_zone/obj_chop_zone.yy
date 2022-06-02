@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "spr_build_zone",
-    "path": "sprites/spr_build_zone/spr_build_zone.yy",
+    "name": "spr_chop_zone",
+    "path": "sprites/spr_chop_zone/spr_chop_zone.yy",
   },
   "solid": false,
   "visible": true,

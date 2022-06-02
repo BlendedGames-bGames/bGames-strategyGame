@@ -4,3 +4,4 @@
 alarm[0]=room_speed*3;
 
 can_hit = true;
+

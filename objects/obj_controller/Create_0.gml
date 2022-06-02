@@ -11,7 +11,7 @@ enum mouse {
 enum menu {
 	job,
 	build,
-	combat,
+	demolish,
 	structure,
 	place_lumberjack_zone,
 	none
@@ -20,16 +20,19 @@ enum menu {
 enum submenu {
 	none,
 	moving_peasant,
-	build_mode
+	build_mode,
+	defensive_buildings,
+	civilian_buildings,
+	resource_buildings
 	}
 
 enum jobs {
 	unemployed,
+	soldier,
 	builder,
 	lumberjack,
 	miner,
 	farmer,
-	soldier,
 	soldier_left,
 	soldier_right
 	}	
@@ -63,6 +66,9 @@ enum request {
 	consume
 	}	
 	
+//debug variables
+request_time = 0;
+	
 //Camera variables
 camera = view_camera[0];
 cam_dist = -192;
@@ -80,7 +86,6 @@ mouse_hold_time = 0;
 prev_mouse_pos = new Vector(0,0);
 camera_acceleration = new Vector(0,0);
 mouse_mode = mouse.idle;
-
 
 show_min_button = false;
 show_max_button = false;
@@ -133,7 +138,13 @@ can_build = true;
 moving_building = false;
 mouse_x_old = 0;
 initial_x = 0;
+audio_falloff_set_model(audio_falloff_exponent_distance);
+audio_listener_position(x,y,0);
+audio_listener_orientation(0,1,0,0,0,1);
 
+resource_buildings = [buildings.lumberjack_hut,buildings.mining_camp,buildings.windmill];
+civilian_buildings = [buildings.house,buildings.lab];
+defensive_buildings = [buildings.barraks,buildings.tower,buildings.wall];
 //wood cut variables
 
 woodcutting_area = {
@@ -150,23 +161,10 @@ global.right_wall = noone;
 
 //in-game variables
 
-global.time = 0;
-global.old_time = 0;
-global.gather_timer = 0;
-
-global.peasant_list[jobs.unemployed] = ds_list_create();
-global.peasant_list[jobs.builder] = ds_list_create();
-global.peasant_list[jobs.miner] = ds_list_create();
-global.peasant_list[jobs.lumberjack] = ds_list_create();
-global.peasant_list[jobs.farmer] = ds_list_create();
-global.peasant_list[jobs.soldier] = ds_list_create();
-
-global.peasant_list[jobs.soldier_left] = ds_list_create();
-global.peasant_list[jobs.soldier_right] = ds_list_create();
-
 initialize_global_modifiers();
 
 instance_create_layer(0,0,"Ground",obj_ground);
+instance_create_layer(0,0,"Ground",obj_creature_spawner);
 show_debug_overlay(1);
 
 #region surface definition
@@ -433,7 +431,7 @@ day_cycle_step = function() {
 	
 	shadow_color = merge_color(c_white,make_color_rgb(35,12,26),dawn_factor*.5);
 	shadow_color = merge_color(shadow_color,dusk_color.mid,dusk_factor);
-	shadow_color = merge_color(shadow_color,make_color_rgb(43,53,61),night_factor);
+	shadow_color = merge_color(shadow_color,make_color_rgb(60,70,61),night_factor);
 	
 	}
 
@@ -497,10 +495,12 @@ bgames_login_step = function(_mouse_x,_mouse_y) {
 	var _yy = global.h/2-56*1.5;
 			
 	if point_in_button(_mouse_x,_mouse_y,global.w/2-3*48,_yy+96,2.5,.75) {//if mouse in login button
-		get = http_get(user_management_service+"/player/"+bgames_user.user+"/"+bgames_user.password);	
+		request_time = get_timer();
 		request_type = request.login;
 		bgames_settings_request_timer = bgames_settings_request_wait;
 		input = false;
+		get = http_get(user_management_service+"/player/"+bgames_user.user+"/"+bgames_user.password);	
+		
 		}
 	else if point_in_button(_mouse_x,_mouse_y,global.w/2+24,_yy+96,2.5,.75) { //if mouse in go back button
 		current_pause_menu = main_options;

@@ -1,6 +1,6 @@
 {
   "conversionMode": 0,
-  "compression": 0,
+  "compression": 2,
   "volume": 1.0,
   "preload": false,
   "bitRate": 192,
@@ -8,8 +8,8 @@
   "type": 1,
   "bitDepth": 1,
   "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "name": "SFX",
+    "path": "audiogroups/SFX",
   },
   "soundFile": "snd_forest",
   "duration": 83.58225,

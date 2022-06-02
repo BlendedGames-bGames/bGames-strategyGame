@@ -40,8 +40,10 @@ side = 1;
 can_attack = true;
 attack_cooldown = 0;
 clock_offset = irandom(9);
+attack_instance = false;
 attack_x = 0;
 behind_wall = 0;
+tower_pos = 0;
 
 time_before_going_back_to_pos = 0;
 
@@ -55,4 +57,3 @@ spr_work = spr_builder_work;
 ds_list_add(global.peasant_list[jobs.unemployed],id);
 global.pops++;
 
-y_rand = irandom(32);

@@ -1,12 +1,13 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function clear_forest(){
-	if !instance_exists(target_instance) or (global.time/global.day_time >=0.65)  {
-		target_instance.workers_working++;
+	if !instance_exists(target_instance) or (global.time/global.day_time >=global.job_endtime)  {
+
 		state = work_lumberjack;
-		//with target_instance {
-		//	workers--;
-		//	}
+		exit;
+		with target_instance {
+			workers_working++;
+			}
 		//target_instance = noone;
 		//state = wander;
 		}

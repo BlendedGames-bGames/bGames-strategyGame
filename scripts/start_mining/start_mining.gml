@@ -2,4 +2,5 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function start_mining(){
 	target_instance.workers_working++;
+	target_x = -1;
 }

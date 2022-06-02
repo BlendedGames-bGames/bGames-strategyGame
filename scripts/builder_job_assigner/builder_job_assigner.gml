@@ -1,7 +1,7 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function builder_job_assigner(){
-	if (global.time/global.day_time <0.65) {
+	if (global.time/global.day_time <global.job_endtime) {
 		var _builders = ds_list_size(global.peasant_list[jobs.builder]);
 		with obj_building_parent {
 
@@ -21,7 +21,7 @@ function builder_job_assigner(){
 					_free_builder.check_state = check_build;
 					_free_builder.next_state = build;
 					_free_builder.cancel_state = build_cancelled;
-					_free_builder.on_finish_state = -1;
+					_free_builder.on_finish_state = start_build;
 					_free_builder.target_instance = id;
 					_free_builder.is_busy = true;
 					builders++;

@@ -1,8 +1,10 @@
 /// @description Insert description here
 // You can write your code in this editor
 if bgames_settings_request_timer>0 {
-	show_debug_message(json_encode(async_load));
 	if ds_map_find_value(async_load, "id") == get {
+		var _end_time = get_timer();
+		show_debug_message("time: "+string((_end_time-request_time)/1000)+"ms");
+		
 		if request_type = request.login {
 			if ds_map_find_value(async_load, "status") == 0 {
 				var _result = ds_map_find_value(async_load, "result");

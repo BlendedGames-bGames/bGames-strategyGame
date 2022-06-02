@@ -1,7 +1,7 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function build(){
-	if !instance_exists(target_instance) or !check_build() or (global.time/global.day_time >=0.65) {
+	if !instance_exists(target_instance) or !check_build() or (global.time/global.day_time >=global.job_endtime) {
 		with target_instance {
 			builders--;
 			}
@@ -30,6 +30,7 @@ function build(){
 			effect_done = false;
 			}
 		if round(image_index) == 6 and !effect_done {
+			audio_play_sound_at(snd_builder_hit,x,y,0,24,24,1,0,8);
 			target_instance.hp+=target_instance.hp_per_hit*(1+global.build_speed_percent_bonus);
 			effect_done = true;
 			}

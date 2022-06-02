@@ -2,7 +2,7 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function soldier_job_assigner(){
 	var _soldiers = ds_list_size(global.peasant_list[jobs.soldier]);
-	if (global.time/global.day_time <0.65) {
+	if (global.time/global.day_time <global.job_endtime) {
 		for (var i = 0; i<2 ;i++) {
 			exploration_cooldown[i] = max(exploration_cooldown[i]-1,0);
 			if exploration_active[i] {
@@ -24,11 +24,15 @@ function soldier_job_assigner(){
 				if units_going_to_explore[i] < 2 {
 					var _free_soldier = noone;
 					var _min_distance = 999999;
+					var _pos = min_camera_chunk*64;
+					if i == explore.right_side {
+						_pos = max_camera_chunk*64;
+						}
 					for (var j = 0; j<_soldiers;j++) {
 						var _soldier = global.peasant_list[jobs.soldier][|j];
-						if !_soldier.is_busy and abs(x-_soldier.x)<_min_distance {
+						if !_soldier.is_busy and abs(_pos-_soldier.x)<_min_distance {
 							_free_soldier = _soldier;
-							_min_distance = abs(x-_soldier.x);
+							_min_distance = abs(_pos-_soldier.x);
 							}
 						}
 					if _free_soldier != noone {
@@ -54,6 +58,45 @@ function soldier_job_assigner(){
 				}
 			}
 		}
+	
+	with obj_building_watchtower {
+		if open {
+			if slots<max_slots {
+				var _soldier_list = global.peasant_list[jobs.soldier_left];
+				if right_side {
+					_soldier_list = global.peasant_list[jobs.soldier_right];
+					}
+				var _size = ds_list_size(_soldier_list);
+				for (var j = 0; j<_size;j++) {
+					
+					var _free_soldier = noone;
+					var _min_distance = 999999;
+					
+					var _soldier = _soldier_list[|j];
+					if !_soldier.is_busy and abs(x-_soldier.x)<_min_distance {
+						_free_soldier = _soldier;
+						_min_distance = abs(x-_soldier.x);
+						}
+					if _free_soldier!=noone {
+						slots++;
+						_free_soldier.tower_pos = slots;
+						_free_soldier.is_busy = true;
+						_free_soldier.check_state = check_tower;
+						_free_soldier.state = move_to_object;
+						_free_soldier.target_instance = id;
+						_free_soldier.next_state = climb_tower;
+						_free_soldier.on_finish_state = -1;
+						_free_soldier.cancel_state = cancel_tower;
+						_free_soldier.is_busy = true;
+						}
+					if slots==max_slots { 
+						break;
+						}
+					}
+				}
+			}
+		}
+	
 	for (var i = 0; i<_soldiers;i++) {
 		var _soldier = global.peasant_list[jobs.soldier][|i];
 		if _soldier.state == wander {

@@ -13,7 +13,7 @@ visible = in_range(x,obj_controller.x-global.w*0.6,obj_controller.x+global.w*0.6
 
 if hp == 0 {
 	before_switching_jobs(self);
-	instance_destroy();
+	
 	
 	var _pos = ds_list_find_index(global.peasant_list[job],id);
 	
@@ -22,4 +22,5 @@ if hp == 0 {
 	global.pops--;
 	obj_controller.render_resources = true;
 	obj_controller.render_submenu = true;
+	instance_destroy();
 	}
