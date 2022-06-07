@@ -34,7 +34,7 @@ function work_mine(){
 				effect_done = false;
 				}
 			else if round(image_index) == 6 and !effect_done {
-				audio_play_sound_at(snd_mining,x,y,0,24,24,1,0,8);
+				audio_play_sound_at(snd_mining,x,y,0,16,24,1,0,8);
 				effect_done = true; 
 				}
 		

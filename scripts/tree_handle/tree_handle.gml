@@ -15,7 +15,7 @@ function tree_handle(){
 				if _tree!=-1 and _tree.image_angle!=0 {
 					_trees_being_animated++;
 					
-					if _tree.hp == 0 {
+					if _tree.hp <= 0 {
 						
 						global.wood+=50;
 						obj_controller.render_resources = true;

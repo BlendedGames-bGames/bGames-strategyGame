@@ -77,7 +77,6 @@ function generate_world(_size){
 			}
 		
 		
-		show_debug_message("placing rock?: "+string(_can_place)+", side is now "+string(_side)+", pos_bonus is "+string(_deposit_start)+", deposits left: "+string(_deposits));
 		
 		}
 	

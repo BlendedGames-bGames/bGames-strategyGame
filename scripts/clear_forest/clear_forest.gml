@@ -62,6 +62,7 @@ function clear_forest(){
 			}
 		else if round(image_index) == 6 and !effect_done {
 			//global.wood+=global.daily_wood_gather_base;
+			audio_play_sound_at(snd_wood_chop,x,y,0,24,24,1,0,8);
 			current_tree.image_angle=-3*(image_xscale);
 			current_tree.hp-=1;
 			if global.world.forest_needs_to_be_animated[current_chunk] = false {

@@ -44,7 +44,6 @@ function climb_tower(){
 			}
 		}	
 	else {
-		y = global.ground_level;
 		cancel_tower();
 		}
 }

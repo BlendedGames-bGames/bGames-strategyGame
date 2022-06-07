@@ -17,6 +17,7 @@ function soldier_job_assigner(){
 						}
 					exploration_progress[i] = 0;
 					exploration_cooldown[i] = exploration_wait_value;
+					exploration_successes[i]++;
 					//units_going_to_explore[i] = 0;
 					//units_exploring[i] = 0;
 					break;

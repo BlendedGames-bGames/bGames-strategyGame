@@ -44,6 +44,7 @@ function work_lumberjack(){
 				effect_done = false;
 				}
 			else if round(image_index) == 6 and !effect_done {
+				audio_play_sound_at(snd_wood_chop,x,y,0,24,24,1,0,8);
 				//global.wood+=global.daily_wood_gather_base;
 				current_tree.image_angle=-3*(image_xscale);
 				if global.world.forest_needs_to_be_animated[current_chunk] = false {

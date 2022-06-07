@@ -39,6 +39,7 @@ function work_farm(){
 				}
 			else if round(image_index) == 6 and !effect_done {
 				//global.wood+=global.daily_wood_gather_base;
+				audio_play_sound_at(snd_dig,x,y,0,16,24,1,0,8);
 				target_instance.work_ground(current_chunk);
 				effect_done = true; 
 				}

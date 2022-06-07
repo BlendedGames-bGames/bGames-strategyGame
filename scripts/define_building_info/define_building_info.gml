@@ -32,7 +32,7 @@ function define_building_info(){
 		gold_cost: 0,
 		food_cost: 0,
 		stone_cost: 150,
-		wood_cost: 150,
+		wood_cost: 100,
 		cost_per_chunk: true,
 		sprite_index: spr_windmill,
 		object: obj_building_windmill,

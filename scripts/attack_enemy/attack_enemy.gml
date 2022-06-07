@@ -28,10 +28,11 @@ function attack_enemy(){
 		if instance_exists(target) and abs(x-target.x)<64 {
 			can_attack = true;
 			attack_cooldown = room_speed;
-			vspeed = -2;
-			hspeed = 4 * image_xscale;
-			y-=0.1; //the y gets changed a bit so the hspeed doesn't get affected by the line 15
-			
+			if (target.object_index == obj_building_capitol and !place_meeting(x,y,target)) or target.object_index != obj_building_capitol {
+				vspeed = -2;
+				hspeed = 4 * image_xscale;
+				y-=0.1; //the y gets changed a bit so the hspeed doesn't get affected by the line 15
+				}
 			}
 		else {
 			state = move_to_attack;

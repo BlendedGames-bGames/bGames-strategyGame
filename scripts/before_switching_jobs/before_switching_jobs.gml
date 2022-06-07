@@ -50,5 +50,10 @@ function before_switching_jobs(_which_free_peasant){
 		else if _which_free_peasant.state==move_to_pos and _which_free_peasant.next_state == explore_new_land {
 			units_going_to_explore[_which_free_peasant.target_side]--;
 			}
+		else if _which_free_peasant.state==climb_tower {
+			with _which_free_peasant {
+				cancel_tower();
+				}
+			}
 		}
 }

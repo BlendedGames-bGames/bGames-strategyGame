@@ -12,7 +12,7 @@
     "path": "audiogroups/SFX",
   },
   "soundFile": "snd_mining.wav",
-  "duration": 0.382789,
+  "duration": 0.75,
   "parent": {
     "name": "resources",
     "path": "folders/Sounds/resources.yy",

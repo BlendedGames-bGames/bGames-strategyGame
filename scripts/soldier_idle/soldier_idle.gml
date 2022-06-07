@@ -15,7 +15,7 @@ function soldier_idle(){
 	if attack_cooldown == 0 {
 		attack_instance = noone;
 		can_attack = true;
-		if time_before_going_back_to_pos==0 and abs(x-target_x)>global.peasant_run_speed*2 {
+		if time_before_going_back_to_pos==0 and abs(x-target_x)>global.peasant_run_speed*2 and sprite_index == spr_archer {
 				state = move_to_pos;
 			}	
 		}
@@ -33,7 +33,6 @@ function soldier_idle(){
 			var _travel_time = room_speed * 1;
 			var _aim_x=attack_x+irandom(16)*choose(1,-1)*_factor; //the further, the bigger the missing chance
 			var yy=global.ground_level+16;
-			
 			audio_play_sound_at(choose(snd_arrow_shoot1,snd_arrow_shoot2,snd_arrow_shoot3,snd_arrow_shoot4,snd_arrow_shoot5),x,y,0,64,64,1,0,8);
 			with instance_create_layer(x,y-16,"Units_No_Light",obj_arrow) {
 				gravity = 0.25;

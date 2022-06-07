@@ -5,34 +5,34 @@ function get_enemies_amount(day){
 	
 	switch (day) {
 		case 1:
-			_val = 4;
+			_val = 1;
 			break;
 		case 2:
-			_val = 6;
+			_val = 2;
 			break;
 		case 3:
-			_val = 10;
+			_val = 4;
 			break;
 		case 4:
-			_val = 16;
+			_val = 6;
 			break;
 		case 5: 
-			_val = 26;
+			_val = 12;
 			break;
 		case 6:
-			_val = 18;
+			_val = 10;
 			break;
 		case 7:
-			_val = 26;
+			_val = 14;
 			break;
 		case 8:
-			_val = 30;
+			_val = 20;
 			break;
 		case 9:
-			_val = 42;
+			_val = 28;
 			break;
 		case 10: 
-			_val = 60;
+			_val = 40;
 			break;
 		default:
 			_val = day * 5 + 4;

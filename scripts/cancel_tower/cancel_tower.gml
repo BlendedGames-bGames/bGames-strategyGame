@@ -8,4 +8,5 @@ function cancel_tower(){
 	next_state = soldier_idle;
 	cancel_state = generic_cancel;
 	on_finish_state = -1;
+	y = global.ground_level;
 }

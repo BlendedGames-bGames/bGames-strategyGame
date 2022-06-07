@@ -108,7 +108,7 @@ if !pause {
 		
 		if selected_building == buildings.lumberjack_hut {
 			for (var i = 0; i < 6; i++) {
-				var _color2 = c_yellow;
+				var _color2 = c_red;
 				if global.world.chunk_type[build_x/64+(i-2)] == 2 {
 					_color2 = c_white;
 					}
@@ -117,7 +117,7 @@ if !pause {
 			}
 		else if selected_building == buildings.windmill {
 			for (var i = 0; i < 6; i++) {
-				var _color2 = c_yellow;
+				var _color2 = c_red;
 				if global.world.chunk_type[build_x/64+(i-2)] == 1 and !position_meeting(build_x+(i-2)*64,global.ground_level-8,obj_building_parent) {
 					_color2 = c_white;
 					}

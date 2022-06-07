@@ -5,7 +5,10 @@
   },
   "solid": false,
   "visible": true,
-  "spriteMaskId": null,
+  "spriteMaskId": {
+    "name": "spr_carcass",
+    "path": "sprites/spr_carcass/spr_carcass.yy",
+  },
   "persistent": false,
   "parentObjectId": null,
   "physicsObject": false,

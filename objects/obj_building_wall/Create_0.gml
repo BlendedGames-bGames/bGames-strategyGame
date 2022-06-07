@@ -27,3 +27,5 @@ finished_placing_background_walls = false;
 
 can_call_wall_function = true;
 check_wall = true;
+
+is_in_invalid_place = false;

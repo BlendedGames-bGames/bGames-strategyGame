@@ -22,3 +22,18 @@ if global.time = 0 or global.time==floor((global.day_time)*.75) {
 	need_to_change_lights = true;
 	}
 
+if spawn_orders>0 {
+	with obj_controller {
+		if (current_instance == other.id) {
+			render_submenu = true;
+			}
+		}
+	unit_creation_cooldown = min(unit_creation_cooldown+1,unit_creation_cooldown_max);
+	
+	if unit_creation_cooldown == unit_creation_cooldown_max {
+		unit_creation_cooldown = 0;
+		spawn_orders--;
+		
+		instance_create_layer(x+sprite_width/2,global.ground_level,"Units",obj_peasant);
+		}
+	}

@@ -37,4 +37,5 @@ if global.time = 0 or global.time==floor((global.day_time)*.75) {
 
 //visible = in_range(x,obj_controller.x-global.w/2-64*2,obj_controller.x+global.w/2+64*4);
 
-
+workers_working = max(0,workers_working);
+workers = max(0,workers);

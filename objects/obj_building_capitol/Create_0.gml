@@ -50,3 +50,10 @@ lights[7].image_blend = make_colour_rgb(255, 255, 155);
 
 need_to_change_lights = true;
 
+spawn_orders = 0;
+
+unit_creation_cooldown = 0;
+unit_creation_cooldown_max = room_speed * 10;
+unit_cost = 25;
+unit_cost_increase = 5;
+

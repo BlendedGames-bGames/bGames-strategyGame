@@ -40,4 +40,5 @@ if global.time = 0 or global.time==floor((global.day_time)*.75) {
 	need_to_change_lights = true;
 	}
 
-
+workers_working = max(0,workers_working);
+workers = max(0,workers);

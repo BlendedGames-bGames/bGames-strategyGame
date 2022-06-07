@@ -22,11 +22,31 @@ if !pause {
 		global.day++;
 		var _snd = audio_play_sound(choose(snd_dawn1,snd_dawn2,snd_dawn3),9,false);
 		audio_sound_gain(_snd,.55,0);
+		audio_sound_gain(ambient_day,1,3000);
+		audio_sound_gain(ambient_night,0,3000);
+		need_to_change_ambient_sound = true;
+		with obj_peasant {
+			hp = hp_max;
+			}
 		}
-	global.time = ((global.time+1) mod global.day_time);
+	else if (global.time/global.day_time)>0.75 {
+		if need_to_change_ambient_sound {
+			audio_sound_gain(ambient_day,0,6000);
+			audio_sound_gain(ambient_night,.65,6000);
+			need_to_change_ambient_sound = false;
+			}
+		}
+	var _plus = ((global.time/global.day_time)>0.75) * !(instance_exists(obj_enemy));
+	global.time+=1+_plus;
+	
+
+	if global.time>global.day_time {
+		global.time = 0;
+		}
 	
 	day_cycle_step();
 	
+	minimap_step();
 		
 	var _can_move_camera = true;
 	mouse_hold_time += mouse_hold;
@@ -42,12 +62,17 @@ if !pause {
 				touched_an_instance = true;
 				}
 			//moving the camera
-			if _can_move_camera and _mouse_y<global.ground_level+32 {
-		
-				mouse_mode = mouse.moving_camera;
-				prev_mouse_pos.x = _mouse_x;
-				initial_x = x;
+			if _can_move_camera {
+				if _mouse_y<global.ground_level+32 {
+					mouse_mode = mouse.moving_camera;
+					prev_mouse_pos.x = _mouse_x;
+					initial_x = x;
+					}
+				else if point_in_rectangle(_mouse_x,_mouse_y,minimap.view_x,global.h-24,minimap.view_x+minimap.view_xscale*16,global.h-8) {
+					mouse_mode = mouse.moving_minimap;
+					}
 				}
+			
 			}
 		
 		//selection variables reset
@@ -180,6 +205,17 @@ if !pause {
 							sel_index = 0;
 							render_submenu = true;
 							_can_move_camera = false;
+							}
+						}
+					else if current_instance.object_index == obj_building_capitol {
+						if point_in_button(_mouse_x,_mouse_y,global.w-33-48,room_height-80,1,1) {
+							if global.food>=current_instance.unit_cost and (global.pops+current_instance.spawn_orders<global.pop_cap) {
+								sel_menu = current_menu;
+								sel_submenu = current_submenu;
+								sel_index = 0;
+								render_submenu = true;
+								_can_move_camera = false;
+								}
 							}
 						}
 					}
@@ -340,7 +376,6 @@ if !pause {
 					#endregion
 					#region structure menu 
 					else if sel_menu == menu.structure {
-					
 						if !current_instance.built {
 							if sel_index == 0 {
 								var _building = current_instance;
@@ -384,6 +419,13 @@ if !pause {
 									if !current_instance.open {
 										current_instance.slots = 0;
 										}
+									}
+								}
+							else if current_instance.object_index == obj_building_capitol {
+								if sel_index == 0 {
+									current_instance.spawn_orders++;
+									global.food-=current_instance.unit_cost;
+									current_instance.unit_cost+=current_instance.unit_cost_increase;
 									}
 								}
 							}
@@ -489,7 +531,7 @@ if !pause {
 		touched_an_instance = false;
 		#endregion
 		
-		if mouse_mode == mouse.moving_camera {
+		if mouse_mode == mouse.moving_camera or mouse_mode == mouse.moving_minimap {
 			mouse_mode = mouse.idle;
 			}
 		else {
@@ -583,7 +625,10 @@ if !pause {
 		}
 
 	if current_submenu_function!=-1 current_submenu_function(_mouse_x,_mouse_y);
-
+	
+	if (mouse_mode == mouse.moving_minimap) {
+		x = (_mouse_x-32)*(global.world.size*64)/(global.w-64);
+		}
 	if (mouse_mode == mouse.moving_camera) {
 		camera_acceleration.x = (prev_mouse_pos.x - _mouse_x);
 		}
@@ -643,6 +688,9 @@ else {
 				}
 			else if current_pause_menu == bgames_settings {
 				bgames_settings_step(_mouse_x,_mouse_y,_len);
+				}
+			else if current_pause_menu == tutorial_intro {
+				tutorial_intro_step(_mouse_x,_mouse_y,_len);
 				}
 			//else if current_pause_menu == bgames_get_points {
 			//	bgames_get_points_step(_mouse_x,_mouse_y,_len);

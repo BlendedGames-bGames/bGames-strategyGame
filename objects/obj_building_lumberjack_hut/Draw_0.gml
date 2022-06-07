@@ -5,4 +5,4 @@ if !built {
 	draw_sprite_ext(spr_building_site,0,x,y,sprite_width/128,1,0,c_white,1);
 }
 
-
+draw_text(x,y-64,efficiency);

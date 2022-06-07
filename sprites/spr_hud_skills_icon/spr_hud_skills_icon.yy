@@ -7,10 +7,10 @@
   "edgeFiltering": false,
   "collisionTolerance": 0,
   "swfPrecision": 2.525,
-  "bbox_left": 0,
-  "bbox_right": 42,
-  "bbox_top": 0,
-  "bbox_bottom": 44,
+  "bbox_left": 1,
+  "bbox_right": 46,
+  "bbox_top": 2,
+  "bbox_bottom": 45,
   "HTile": false,
   "VTile": false,
   "For3D": false,
@@ -25,25 +25,32 @@
   "gridY": 0,
   "frames": [
     {"compositeImage":{"FrameId":{"name":"6489749d-0dd7-4636-bd05-b89c48d7f6c5","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"6489749d-0dd7-4636-bd05-b89c48d7f6c5","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":{"name":"cfe7ad9b-698b-400b-9b44-3300b34bfd3a","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+        {"FrameId":{"name":"6489749d-0dd7-4636-bd05-b89c48d7f6c5","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":{"name":"e393c02d-fd91-4c6d-b79e-4b8e075aef02","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+        {"FrameId":{"name":"6489749d-0dd7-4636-bd05-b89c48d7f6c5","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":{"name":"66da4111-879b-493d-afaf-86c6816cf17d","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
       ],"parent":{"name":"spr_hud_skills_icon","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"6489749d-0dd7-4636-bd05-b89c48d7f6c5","tags":[],"resourceType":"GMSpriteFrame",},
     {"compositeImage":{"FrameId":{"name":"f73ab07d-1f4a-4059-9ce2-970c04d9f0b2","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"f73ab07d-1f4a-4059-9ce2-970c04d9f0b2","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":{"name":"cfe7ad9b-698b-400b-9b44-3300b34bfd3a","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+        {"FrameId":{"name":"f73ab07d-1f4a-4059-9ce2-970c04d9f0b2","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":{"name":"e393c02d-fd91-4c6d-b79e-4b8e075aef02","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+        {"FrameId":{"name":"f73ab07d-1f4a-4059-9ce2-970c04d9f0b2","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":{"name":"66da4111-879b-493d-afaf-86c6816cf17d","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
       ],"parent":{"name":"spr_hud_skills_icon","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"f73ab07d-1f4a-4059-9ce2-970c04d9f0b2","tags":[],"resourceType":"GMSpriteFrame",},
     {"compositeImage":{"FrameId":{"name":"bd334b4f-3c17-4a9f-8424-cf80f70eac46","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"bd334b4f-3c17-4a9f-8424-cf80f70eac46","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":{"name":"cfe7ad9b-698b-400b-9b44-3300b34bfd3a","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+        {"FrameId":{"name":"bd334b4f-3c17-4a9f-8424-cf80f70eac46","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":{"name":"e393c02d-fd91-4c6d-b79e-4b8e075aef02","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+        {"FrameId":{"name":"bd334b4f-3c17-4a9f-8424-cf80f70eac46","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":{"name":"66da4111-879b-493d-afaf-86c6816cf17d","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
       ],"parent":{"name":"spr_hud_skills_icon","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"bd334b4f-3c17-4a9f-8424-cf80f70eac46","tags":[],"resourceType":"GMSpriteFrame",},
     {"compositeImage":{"FrameId":{"name":"824d2828-b832-42ff-850d-055cb03b42bc","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"824d2828-b832-42ff-850d-055cb03b42bc","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":{"name":"cfe7ad9b-698b-400b-9b44-3300b34bfd3a","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+        {"FrameId":{"name":"824d2828-b832-42ff-850d-055cb03b42bc","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":{"name":"e393c02d-fd91-4c6d-b79e-4b8e075aef02","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+        {"FrameId":{"name":"824d2828-b832-42ff-850d-055cb03b42bc","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":{"name":"66da4111-879b-493d-afaf-86c6816cf17d","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
       ],"parent":{"name":"spr_hud_skills_icon","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"824d2828-b832-42ff-850d-055cb03b42bc","tags":[],"resourceType":"GMSpriteFrame",},
     {"compositeImage":{"FrameId":{"name":"df20fcae-f905-4b2e-8eeb-28e3478811c3","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"df20fcae-f905-4b2e-8eeb-28e3478811c3","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":{"name":"cfe7ad9b-698b-400b-9b44-3300b34bfd3a","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+        {"FrameId":{"name":"df20fcae-f905-4b2e-8eeb-28e3478811c3","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":{"name":"e393c02d-fd91-4c6d-b79e-4b8e075aef02","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+        {"FrameId":{"name":"df20fcae-f905-4b2e-8eeb-28e3478811c3","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":{"name":"66da4111-879b-493d-afaf-86c6816cf17d","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
       ],"parent":{"name":"spr_hud_skills_icon","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"df20fcae-f905-4b2e-8eeb-28e3478811c3","tags":[],"resourceType":"GMSpriteFrame",},
     {"compositeImage":{"FrameId":{"name":"368ae472-da0a-4bf9-875d-9bd5e65de0e0","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"368ae472-da0a-4bf9-875d-9bd5e65de0e0","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":{"name":"cfe7ad9b-698b-400b-9b44-3300b34bfd3a","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+        {"FrameId":{"name":"368ae472-da0a-4bf9-875d-9bd5e65de0e0","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":{"name":"e393c02d-fd91-4c6d-b79e-4b8e075aef02","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+        {"FrameId":{"name":"368ae472-da0a-4bf9-875d-9bd5e65de0e0","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":{"name":"66da4111-879b-493d-afaf-86c6816cf17d","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
       ],"parent":{"name":"spr_hud_skills_icon","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"368ae472-da0a-4bf9-875d-9bd5e65de0e0","tags":[],"resourceType":"GMSpriteFrame",},
     {"compositeImage":{"FrameId":{"name":"cc8d5d18-18fa-41eb-a6a2-9b645d3b7fb1","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"cc8d5d18-18fa-41eb-a6a2-9b645d3b7fb1","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":{"name":"cfe7ad9b-698b-400b-9b44-3300b34bfd3a","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+        {"FrameId":{"name":"cc8d5d18-18fa-41eb-a6a2-9b645d3b7fb1","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":{"name":"e393c02d-fd91-4c6d-b79e-4b8e075aef02","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+        {"FrameId":{"name":"cc8d5d18-18fa-41eb-a6a2-9b645d3b7fb1","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"LayerId":{"name":"66da4111-879b-493d-afaf-86c6816cf17d","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
       ],"parent":{"name":"spr_hud_skills_icon","path":"sprites/spr_hud_skills_icon/spr_hud_skills_icon.yy",},"resourceVersion":"1.0","name":"cc8d5d18-18fa-41eb-a6a2-9b645d3b7fb1","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
@@ -89,7 +96,8 @@
     "resourceType": "GMSequence",
   },
   "layers": [
-    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"cfe7ad9b-698b-400b-9b44-3300b34bfd3a","tags":[],"resourceType":"GMImageLayer",},
+    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"Layer 1","resourceVersion":"1.0","name":"66da4111-879b-493d-afaf-86c6816cf17d","tags":[],"resourceType":"GMImageLayer",},
+    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"e393c02d-fd91-4c6d-b79e-4b8e075aef02","tags":[],"resourceType":"GMImageLayer",},
   ],
   "nineSlice": null,
   "parent": {

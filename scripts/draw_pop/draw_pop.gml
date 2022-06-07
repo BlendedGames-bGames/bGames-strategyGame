@@ -4,7 +4,7 @@ function draw_pop(_pop_list, _x, _y, _width, _height){
 	var _size = ds_list_size(_pop_list);
 	var _row_length = floor((_width - 5) / 8);
 	
-	var _draw_numbers = ( (_height - 14) < 8 * floor(_size/_row_length));
+	var _draw_numbers = floor(_size/_row_length)>2;
 	
 	if _draw_numbers {
 		draw_set_halign(fa_right);

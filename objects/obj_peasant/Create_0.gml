@@ -2,7 +2,7 @@
 // You can write your code in this editor
 
 hp = 3;
-
+hp_max = 3;
 job = jobs.unemployed;
 
 //Units are state machines. Each state machine will to his "state" method if "check_state". 

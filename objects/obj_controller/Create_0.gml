@@ -5,7 +5,8 @@
 //Mouse states
 enum mouse {
 	idle,
-	moving_camera
+	moving_camera,
+	moving_minimap
 	}
 	
 enum menu {
@@ -99,6 +100,7 @@ for (var i = 0; i<2; i++) {
 	exploration_active[i] = 0;
 	exploration_progress[i] = 0;
 	exploration_cooldown[i] = 0;
+	exploration_successes[i] = 0;
 	}
 
 exploration_wait_value = room_speed*10;
@@ -114,7 +116,9 @@ current_submenu_function = -1;
 current_instance = noone;
 touched_an_instance = false;
 
-//job-handling variables
+
+
+//job-handling variables   
 selected_job = -1;
 target_job = -1;
 
@@ -161,10 +165,18 @@ global.right_wall = noone;
 
 //in-game variables
 
+ambient_day = audio_play_sound(snd_forest,10,1);
+
+ambient_night = audio_play_sound(snd_night,10,1);
+
+audio_sound_gain(ambient_night,0,0);
+show_debug_message(ambient_night);
+need_to_change_ambient_sound = false;
 initialize_global_modifiers();
 
 instance_create_layer(0,0,"Ground",obj_ground);
 instance_create_layer(0,0,"Ground",obj_creature_spawner);
+instance_create_layer(0,0,"Ground",obj_tutorial);
 show_debug_overlay(1);
 
 #region surface definition
@@ -286,6 +298,9 @@ request_type = -1;
 //	data: 2
 //	}
 
+tutorial_intro[0] = "Accept";
+tutorial_intro[1] = "Cancel";
+
 current_pause_menu = main_options;
 
 
@@ -329,6 +344,30 @@ u_lightTex = shader_get_sampler_index(shd_lightmap_cutter, "u_sLightMap");
 
 #endregion
 
+#region minimap 
+
+//minimap variables
+
+minimap = {
+	width : global.w-64,
+	orig_x: 0,
+	orig_scale: 1,
+	view_xscale : 1,
+	view_x: 0,
+	view_calculated: false,
+	};
+
+minimap_step = function() {
+	if !minimap.view_calculated {
+		minimap.view_xscale = (((global.w/64)/global.world.size)*(global.w-64))/16;
+		minimap.view_calculated = true;
+		}
+	minimap.view_x = 32+(x/(global.world.size*64)*(global.w-64))-minimap.view_xscale*8;
+	minimap.orig_x = 32+(min_camera_chunk/(global.world.size)*(global.w-64))
+	minimap.orig_scale = (((max_camera_chunk-min_camera_chunk)/global.world.size)*(global.w-64))/16;
+	}
+
+#endregion
 
 #region submenu methods. Constant functions used when a submenu or menu is active
 
@@ -391,13 +430,19 @@ submenu_peasant_function = function(_mouse_x,_mouse_y) {
 
 #endregion
 
+
 click_pause = function(_mouse_x,_mouse_y) {
 	if !pause and point_in_rectangle(_mouse_x,_mouse_y,24,24,72,72) {
-		instance_deactivate_all(1);
-		pause_sprite = sprite_create_from_surface(application_surface,0,0,res_w,res_h,0,0,0,0);
-		pause = true;
+		pause_game();		
 		exit;
 		}
+	}
+
+pause_game = function() {
+	instance_deactivate_all(1);
+	pause_sprite = sprite_create_from_surface(application_surface,0,0,res_w,res_h,0,0,0,0);
+	pause = true;
+	current_pause_menu = main_options;
 	}
 
 //day night cycle functions
@@ -526,7 +571,23 @@ bgames_login_step = function(_mouse_x,_mouse_y) {
 		keyboard_virtual_hide(); 
 		}
 	}
-	
+
+tutorial_intro_step = function(_mouse_x,_mouse_y) {
+	var _yy = global.h/2-56*1.5;
+			
+	if point_in_button(_mouse_x,_mouse_y,global.w/2-3*48,_yy+96,2.5,.75) {//if mouse in login button
+		pause = false;
+		instance_activate_all();
+		global.can_help = 1;
+		}
+	else if point_in_button(_mouse_x,_mouse_y,global.w/2+24,_yy+96,2.5,.75) { //if mouse in go back button
+		pause = false;
+		instance_activate_all();
+		global.can_help = 0;
+		}
+
+	}
+
 function layer_start(){
     if event_type == ev_draw
     {

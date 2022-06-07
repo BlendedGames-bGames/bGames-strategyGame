@@ -21,7 +21,7 @@ function initialize_global_modifiers(){
 	global.gold_weekly = 0;
 	global.stone = 0;
 	global.stone_weekly = 0;
-	global.wood = 300;
+	global.wood = 320;
 	global.wood_weekly = 0;
 	global.food = 0;
 	global.food_weekly = 0;
