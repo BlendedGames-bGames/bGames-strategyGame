@@ -20,7 +20,7 @@
   "option_android_orient_landscape": true,
   "option_android_orient_landscape_flipped": true,
   "option_android_gamepad_support": true,
-  "option_android_lint": false,
+  "option_android_lint": true,
   "option_android_install_location": 0,
   "option_android_sleep_margin": 4,
   "option_android_splash_screens_landscape": "${base_options_dir}/android/splash/landscape.png",

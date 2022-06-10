@@ -118,6 +118,21 @@ if pause {
 		
 		draw_set_halign(fa_left);
 		}
+		else if current_pause_menu == lost_menu {
+		_yy = _guih/2-56*1.5;
+		
+		draw_set_halign(fa_center);
+		draw_set_font(fnt_text);
+		draw_text(_guiw/2,_yy,"You lost your Capitol\nDays Played: "+string(global.day));	
+		draw_set_font(fnt_small);
+		draw_sprite_ext(spr_hud_bar,0,_guiw/2-3*_bar_width,_yy+96,2.5,.75,0,c_white,1);
+		draw_text(_guiw/2-2*_bar_width+12,_yy+96+12,lost_menu[0]);	
+			
+		draw_sprite_ext(spr_hud_bar,0,_guiw/2+24,_yy+96,2.5,.75,0,c_white,1);
+		draw_text(_guiw/2+12+1.5*_bar_width,_yy+96+12,lost_menu[1]);	
+		
+		draw_set_halign(fa_left);
+		}
 	draw_set_halign(fa_left);
 	}
 	
@@ -146,7 +161,6 @@ else {
 		surf_lighting = surface_create(global.w,global.h);
 		}	
 	
-	draw_text(32,global.h/2,global.time/global.day_time);
 	
 	//Drawing resources
 	if render_resources {

@@ -20,6 +20,8 @@ function attack_enemy(){
 		image_index = 0;
 		}
 
+	var _touching_capitol = instance_exists(target) and ((target.object_index == obj_building_capitol and !place_meeting(x,y,target)) or target.object_index != obj_building_capitol); 
+	
 	if attack_cooldown == 0 {
 		//if sprite_index!=spr_carcass and sprite_index!=spr_carcass_attack{
 		//	sprite_index=spr_carcass;
@@ -28,11 +30,11 @@ function attack_enemy(){
 		if instance_exists(target) and abs(x-target.x)<64 {
 			can_attack = true;
 			attack_cooldown = room_speed;
-			if (target.object_index == obj_building_capitol and !place_meeting(x,y,target)) or target.object_index != obj_building_capitol {
-				vspeed = -2;
-				hspeed = 4 * image_xscale;
-				y-=0.1; //the y gets changed a bit so the hspeed doesn't get affected by the line 15
-				}
+			
+			if _touching_capitol vspeed = -2;
+			hspeed = 4 * image_xscale;
+			y-=0.1; //the y gets changed a bit so the hspeed doesn't get affected by the line 15
+				
 			}
 		else {
 			state = move_to_attack;
@@ -46,7 +48,12 @@ function attack_enemy(){
 			}
 		
 		if instance_exists(target) and place_meeting(x-24*image_xscale,y,target) {
-			hspeed*=-random_range(0.5,1);
+			if _touching_capitol {
+				hspeed*=-random_range(0.5,1);
+				}
+			else {
+				hspeed = 0;
+				}
 			with target {
 				hp-=1;
 				if object_index == obj_peasant {

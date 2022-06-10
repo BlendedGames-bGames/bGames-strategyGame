@@ -15,7 +15,7 @@ function soldier_idle(){
 	if attack_cooldown == 0 {
 		attack_instance = noone;
 		can_attack = true;
-		if time_before_going_back_to_pos==0 and abs(x-target_x)>global.peasant_run_speed*2 and sprite_index == spr_archer {
+		if time_before_going_back_to_pos==0 and !instance_exists(attack_instance) and abs(x-target_x)>global.peasant_run_speed*2 and sprite_index == spr_archer {
 				state = move_to_pos;
 			}	
 		}

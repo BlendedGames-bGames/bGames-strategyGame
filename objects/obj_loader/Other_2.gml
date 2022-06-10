@@ -29,6 +29,6 @@ audio_group_load(SFX);
 audio_group_load(Music);
 audio_group_set_gain(SFX,global.sfx_volume,0);
 audio_group_set_gain(Music,global.music_volume,0);
-audio_debug(1);
+
 
 alarm[0]=2;

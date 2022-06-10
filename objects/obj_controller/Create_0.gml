@@ -91,6 +91,13 @@ mouse_mode = mouse.idle;
 show_min_button = false;
 show_max_button = false;
 
+//job end sound
+can_call_bell = true;
+bell_times = 0;
+
+bell_cooldown = 0;
+bell_max_cooldown = room_speed*2;
+
 global.ground_level = room_height-112;
 
 //scouting variables
@@ -147,8 +154,8 @@ audio_listener_position(x,y,0);
 audio_listener_orientation(0,1,0,0,0,1);
 
 resource_buildings = [buildings.lumberjack_hut,buildings.mining_camp,buildings.windmill];
-civilian_buildings = [buildings.house,buildings.lab];
-defensive_buildings = [buildings.barraks,buildings.tower,buildings.wall];
+civilian_buildings = [buildings.house];
+defensive_buildings = [buildings.tower,buildings.wall];
 //wood cut variables
 
 woodcutting_area = {
@@ -177,7 +184,7 @@ initialize_global_modifiers();
 instance_create_layer(0,0,"Ground",obj_ground);
 instance_create_layer(0,0,"Ground",obj_creature_spawner);
 instance_create_layer(0,0,"Ground",obj_tutorial);
-show_debug_overlay(1);
+
 
 #region surface definition
 //surfaces are used as an empty canvas. It's the image equivalent of a C pointer.
@@ -211,8 +218,7 @@ pause = false;
 
 main_options[0] = "Continue";
 main_options[1] = "bGames Settings";
-main_options[2] = "Settings";
-main_options[3] = "Quit";
+main_options[2] = "Quit";
 
 #region bgames variables
 
@@ -301,9 +307,10 @@ request_type = -1;
 tutorial_intro[0] = "Accept";
 tutorial_intro[1] = "Cancel";
 
+lost_menu[0] = "Retry";
+lost_menu[1] = "Exit";
+
 current_pause_menu = main_options;
-
-
 
 error_message = {
 	content : "",
@@ -476,8 +483,14 @@ day_cycle_step = function() {
 	
 	shadow_color = merge_color(c_white,make_color_rgb(35,12,26),dawn_factor*.5);
 	shadow_color = merge_color(shadow_color,dusk_color.mid,dusk_factor);
-	shadow_color = merge_color(shadow_color,make_color_rgb(60,70,61),night_factor);
-	
+	shadow_color = merge_color(shadow_color,make_color_rgb(68,87,85),night_factor);
+	//make_color_rgb(60,70,61)
+	}
+
+//Lose function
+lose_event = function() {
+	pause_game();
+	current_pause_menu = lost_menu;
 	}
 
 //pause methods 
@@ -502,7 +515,7 @@ main_options_step = function(_mouse_x,_mouse_y,_len) {
 						}
 					break;
 					}
-				case 3: {
+				case 2: {
 					game_end();
 					}
 				}

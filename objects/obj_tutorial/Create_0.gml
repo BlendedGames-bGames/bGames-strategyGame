@@ -340,7 +340,7 @@ tutorial_draw[8] = function() {
 			draw_sprite_ext(spr_hud_bar,4,global.w-33-64*3,room_height-80,64/48,1,0,c_white,1);
 			}
 		else if obj_controller.current_submenu == submenu.defensive_buildings {
-			draw_sprite_ext(spr_hud_bar,4,global.w-33-48*4,room_height-80,1,1,0,c_white,1);
+			draw_sprite_ext(spr_hud_bar,4,global.w-33-48*3,room_height-80,1,1,0,c_white,1);
 			}
 		}
 	
@@ -370,5 +370,19 @@ tutorial_condition[10] = function() {
 	return (ds_list_size(global.peasant_list[jobs.soldier])>=2);
 	}
 	
-tutorial_draw[10] = basic_draw;
+tutorial_draw[10] = function() {
+	var _yy = -80 + y;
+	draw_set_color(c_black);
+	draw_set_alpha(.5 * image_alpha);
+	draw_rectangle(0,global.h/2-16+_yy,global.w,global.h/2+16+_yy,0);
+	draw_set_alpha(image_alpha);
+	draw_set_color(c_white);
+	draw_set_halign(fa_center);
+	draw_set_valign(fa_middle);
+	draw_text(global.w/2,global.h/2+_yy,tutorial_text[current_tutorial,is_android]);
+	draw_set_halign(fa_left);
+	draw_set_valign(fa_top);
+	draw_set_alpha(1);
+	
+	};
 #endregion

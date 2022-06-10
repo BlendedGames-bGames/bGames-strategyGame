@@ -87,7 +87,7 @@ function generate_world(_size){
 	while (_rivers>0) {
 		
 		var _river_size = irandom_range(3,8);
-		var _river_start = choose(irandom_range(_size/2+2,_size-_river_size), irandom(_size/2-2-_river_size));
+		var _river_start = choose(irandom_range(_size/2+12,_size-_river_size), irandom(_size/2-12-_river_size));
 		while !(in_range(_river_start,0,_size-_river_size)) {
 			_river_size = irandom_range(3,8);
 			_river_start = irandom(_size-_river_size);

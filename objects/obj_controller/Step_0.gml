@@ -18,7 +18,27 @@ if !pause {
 	farmer_job_assigner();
 	miner_job_assigner();
 	bgames_modifiers();
+	
+	var _time_ratio = (global.time/global.day_time);
+	
+	if _time_ratio >= global.job_endtime {
+		if can_call_bell {
+			bell_times = 2;
+			can_call_bell = false;
+			}
+		if bell_times>0 {
+			bell_cooldown=max(0,bell_cooldown-1);
+			if bell_cooldown == 0 {
+				audio_play_sound(snd_job_end,9,0);
+				bell_times--;
+				bell_cooldown = bell_max_cooldown;
+				}
+			}
+		}
+	
+	
 	if global.time==0 {
+		can_call_bell = true;
 		global.day++;
 		var _snd = audio_play_sound(choose(snd_dawn1,snd_dawn2,snd_dawn3),9,false);
 		audio_sound_gain(_snd,.55,0);
@@ -28,6 +48,9 @@ if !pause {
 		with obj_peasant {
 			hp = hp_max;
 			}
+		with obj_enemy {
+			hp = 0;
+			}
 		}
 	else if (global.time/global.day_time)>0.75 {
 		if need_to_change_ambient_sound {
@@ -36,7 +59,7 @@ if !pause {
 			need_to_change_ambient_sound = false;
 			}
 		}
-	var _plus = ((global.time/global.day_time)>0.75) * !(instance_exists(obj_enemy));
+	var _plus = (_time_ratio>0.75) * !(instance_exists(obj_enemy));
 	global.time+=1+_plus;
 	
 
