@@ -8,3 +8,5 @@ with obj_controller {
 		render_submenu = true;
 		}
 	}
+	
+audio_play_sound_at(snd_wall1_destroy,x,y,0,64,24,1,0,8);

@@ -11,14 +11,14 @@
     "name": "SFX",
     "path": "audiogroups/SFX",
   },
-  "soundFile": "snd_enemy_die",
-  "duration": 2.008889,
+  "soundFile": "snd_citizen_hit.wav",
+  "duration": 0.937506,
   "parent": {
     "name": "combat",
     "path": "folders/Sounds/combat.yy",
   },
   "resourceVersion": "1.0",
-  "name": "snd_enemy_die",
+  "name": "snd_citizen_hit",
   "tags": [],
   "resourceType": "GMSound",
 }

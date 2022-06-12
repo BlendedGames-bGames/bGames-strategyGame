@@ -234,7 +234,7 @@
     "spriteId": {"name":"spr_archer_attack_up","path":"sprites/spr_archer_attack_up/spr_archer_attack_up.yy",},
     "timeUnits": 1,
     "playback": 1,
-    "playbackSpeed": 10.0,
+    "playbackSpeed": 16.0,
     "playbackSpeedType": 0,
     "autoRecord": true,
     "volume": 1.0,

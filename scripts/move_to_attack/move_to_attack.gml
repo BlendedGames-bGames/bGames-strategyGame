@@ -21,7 +21,6 @@ function move_to_attack(){
 	//instead of checking everytime if there's a target it tries to find one every 10 ticks.
 	if ((floor(global.time) + clock_offset) mod 10) == 0 { 
 		potential_target=collision_line(x,y-16,x+image_xscale*48,y-16,obj_building_wall,false,true);
-		show_debug_message("target: "+string(potential_target));
 		if potential_target!=noone {
 			state=attack_enemy;
 			target=potential_target;	

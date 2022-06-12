@@ -25,10 +25,6 @@ function climb_tower(){
 		if can_attack {
 			find_target(192);
 			behind_wall = false;
-			if instance_exists(attack_instance) {
-				image_xscale = sign(attack_x-x+0.001);
-				attack_x = attack_instance.x;
-				}
 			if floor(image_index)==9 {
 				can_attack = false;
 				attack_cooldown = global.soldier_attack_speed;

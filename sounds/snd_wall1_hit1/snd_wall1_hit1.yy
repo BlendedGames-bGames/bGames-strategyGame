@@ -15,7 +15,7 @@
   "duration": 0.69449,
   "parent": {
     "name": "wood",
-    "path": "folders/Sounds/wall/wood.yy",
+    "path": "folders/Sounds/combat/wall/wood.yy",
   },
   "resourceVersion": "1.0",
   "name": "snd_wall1_hit1",

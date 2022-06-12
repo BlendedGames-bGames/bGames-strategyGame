@@ -600,6 +600,18 @@ tutorial_intro_step = function(_mouse_x,_mouse_y) {
 		}
 
 	}
+	
+losing_step = function(_mouse_x,_mouse_y) {
+	var _yy = global.h/2-56*1.5;
+			
+	if point_in_button(_mouse_x,_mouse_y,global.w/2-3*48,_yy+96,2.5,.75) {//if mouse in login button
+		game_restart();
+		}
+	else if point_in_button(_mouse_x,_mouse_y,global.w/2+24,_yy+96,2.5,.75) { //if mouse in go back button
+		game_end();
+		}
+
+	}
 
 function layer_start(){
     if event_type == ev_draw

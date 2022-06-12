@@ -14,8 +14,8 @@
   "soundFile": "snd_builder_hit",
   "duration": 0.257021,
   "parent": {
-    "name": "wall",
-    "path": "folders/Sounds/wall.yy",
+    "name": "resources",
+    "path": "folders/Sounds/resources.yy",
   },
   "resourceVersion": "1.0",
   "name": "snd_builder_hit",

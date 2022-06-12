@@ -29,7 +29,7 @@ function attack_enemy(){
 		//	}
 		if instance_exists(target) and abs(x-target.x)<64 {
 			can_attack = true;
-			attack_cooldown = room_speed;
+			attack_cooldown = room_speed*1.5;
 			
 			if _touching_capitol vspeed = -2;
 			hspeed = 4 * image_xscale;
@@ -50,6 +50,7 @@ function attack_enemy(){
 		if instance_exists(target) and place_meeting(x-24*image_xscale,y,target) {
 			if _touching_capitol {
 				hspeed*=-random_range(0.5,1);
+				
 				}
 			else {
 				hspeed = 0;
@@ -62,6 +63,10 @@ function attack_enemy(){
 					hspeed=4*hit_dir;
 					scared_timer=room_speed*2;
 					time_before_going_back_to_pos = room_speed*1;
+					audio_play_sound_at(snd_citizen_hit,x,y,0,32,24,1,0,8);
+					}
+				else {
+					audio_play_sound_at(choose(snd_wall1_hit1,snd_wall1_hit2,snd_wall1_hit3),x,y,0,32,24,1,0,8);
 					}
 				}
 			can_attack = false;

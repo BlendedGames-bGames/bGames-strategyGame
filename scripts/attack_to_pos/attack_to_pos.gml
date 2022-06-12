@@ -1,10 +1,11 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function attack_to_pos(){
-
+	attack_cooldown = max(0,attack_cooldown-1);
 	find_target(160);
 	if (sprite_index == spr_archer_attack_front or sprite_index == spr_archer_attack_up) {
 		state = soldier_idle;
+		exit;
 		}
 	if target_x!=-1 and (check_state==-1 or (check_state!=-1 and check_state()))  {
 		if sprite_index!=spr_walk {
@@ -18,6 +19,10 @@ function attack_to_pos(){
 			//target_x = -1;
 			if on_finish_state!=-1 on_finish_state();
 			state = next_state;
+			if sprite_index!=spr_idle {
+				sprite_index=spr_idle;
+				image_index = 0;
+				}
 			}
 		}	
 	else {

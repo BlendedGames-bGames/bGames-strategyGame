@@ -715,6 +715,9 @@ else {
 			else if current_pause_menu == tutorial_intro {
 				tutorial_intro_step(_mouse_x,_mouse_y,_len);
 				}
+			else if current_pause_menu == lost_menu {
+				losing_step(_mouse_x,_mouse_y,_len);
+				}
 			//else if current_pause_menu == bgames_get_points {
 			//	bgames_get_points_step(_mouse_x,_mouse_y,_len);
 			//	}

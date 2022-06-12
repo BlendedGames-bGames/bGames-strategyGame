@@ -65,6 +65,7 @@ if bgames_settings_request_timer>0 {
 							break;
 						case 2: 
 							//stronger soldiers
+							global.soldier_attack_speed_bonus-=0.10;
 							break;
 						case 3: 
 							//build speed bonus

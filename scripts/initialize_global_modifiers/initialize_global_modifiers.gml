@@ -52,7 +52,7 @@ function initialize_global_modifiers(){
 	global.soldier_attack_damage_bonus = 0;
 	
 	global.soldier_attack_damage_base = 1;
-	global.soldier_attack_speed_base = 30;
+	global.soldier_attack_speed_base = 50;
 	
 	global.soldier_attack_damage = 1;
 	global.soldier_attack_speed = 30;

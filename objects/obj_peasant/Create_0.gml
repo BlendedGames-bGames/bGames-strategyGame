@@ -39,6 +39,7 @@ current_tree_pos = -1;
 side = 1;
 can_attack = true;
 attack_cooldown = 0;
+
 clock_offset = irandom(9);
 attack_instance = false;
 attack_x = 0;

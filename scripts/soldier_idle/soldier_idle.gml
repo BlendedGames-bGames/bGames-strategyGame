@@ -7,25 +7,33 @@ function soldier_idle(){
 	//The soldier will find a target then shoot it.
 	//However finding a target is very expensive when you have a lot of soldier
 	//so, we check every 10 ticks asynchronously (meaning that some soldiers will attack at tick 0, 1, 2...)
-	if (sprite_index!=spr_idle and !((sprite_index == spr_archer_attack_front or sprite_index == spr_archer_attack_up)) )or ((sprite_index == spr_archer_attack_front or sprite_index == spr_archer_attack_up) and image_index>12){
+	if (sprite_index!=spr_idle and image_index>12){
 		sprite_index=spr_idle;
 		image_index = 0;
 		}
 	
-	if attack_cooldown == 0 {
-		attack_instance = noone;
+	if attack_cooldown == 0 and sprite_index == spr_archer {
+		
 		can_attack = true;
-		if time_before_going_back_to_pos==0 and !instance_exists(attack_instance) and abs(x-target_x)>global.peasant_run_speed*2 and sprite_index == spr_archer {
-				state = move_to_pos;
+		
+		if time_before_going_back_to_pos==0 and !instance_exists(attack_instance) and abs(x-target_x)>global.peasant_run_speed*2  {
+				show_debug_message("<<"+string(id)+">>: no target, so I move again.");
+				state = attack_to_pos;
 			}	
+		attack_instance = noone;
 		}
 	
 	if can_attack {
-		find_target(192);
-		if instance_exists(attack_instance) {
-			image_xscale = sign(attack_x-x+0.001);
-			attack_x = attack_instance.x;
+		if attack_instance == noone {
+			find_target(192);
+			show_debug_message("<<"+string(id)+">>: 1 target is "+string(attack_instance));
+			if instance_exists(attack_instance) {
+				image_xscale = sign(attack_x-x+0.001);
+				attack_x = attack_instance.x;
+				show_debug_message("<<"+string(id)+">>: attack_x is "+string(attack_x));
+				}
 			}
+
 		if floor(image_index)==9 {
 			can_attack = false;
 			attack_cooldown = global.soldier_attack_speed;
@@ -46,11 +54,11 @@ function soldier_idle(){
 				else {
 					speed = 8;
 					var dis = other.attack_x - x;
-					direction = point_direction(x,y-16,other.attack_x,global.ground_level-32) + (0.5*darcsin(gravity*dis/sqr(speed)));
+					direction = point_direction(x,y-16,other.attack_x,global.ground_level-32) + (0.5*darcsin(gravity*(dis+0.1)/sqr(speed)));
 					}
 				}
 			}
-		
+			
 		}
 		
 	}
