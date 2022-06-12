@@ -2,7 +2,7 @@
 
 ## What is this project?
 
-This is a strategy game made that consumes player's data from bGames services. By investing points from different dimensions (e.g Physical, Social, Affective or Cognitive), players can get bonuses such as increased town size, faster units or stronger soldiers.
+This is a strategy game made with GameMaker v2022.3.0.497 that consumes player's data from bGames services. By investing points from different dimensions (e.g Physical, Social, Affective or Cognitive), players can get bonuses such as increased town size, faster units or stronger soldiers.
 
 <br>
 
