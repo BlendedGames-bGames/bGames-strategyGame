@@ -107,22 +107,50 @@ if !pause {
 		draw_sprite_ext(global.building_data[selected_building].sprite_index,0,build_x,global.ground_level,1,1,0,_color,global.job_endtime);
 		
 		if selected_building == buildings.lumberjack_hut {
+			var _effectivity = 0;
 			for (var i = 0; i < 6; i++) {
 				var _color2 = c_red;
 				if global.world.chunk_type[build_x/64+(i-2)] == 2 {
 					_color2 = c_white;
+					_effectivity+=1;
 					}
-				draw_sprite_ext(spr_build_zone,0,build_x+(i-2)*64,global.ground_level,1,.25,0,_color2,0.75);
+				draw_sprite_ext(spr_build_zone,0,build_x+(i-2)*64,global.ground_level-32,1,.25,0,_color2,0.75);
 				}
+			var _yy = global.ground_level+24;
+			draw_set_color(c_black);
+			draw_set_alpha(.5 * image_alpha);
+			draw_rectangle(x-global.w/2,-8+_yy,x+global.w/2,8+_yy,0);
+			draw_set_alpha(image_alpha);
+			draw_set_color(c_white);
+			draw_set_halign(fa_center);
+			draw_set_valign(fa_middle);
+			draw_text(x,_yy,"Effectivity: "+string(floor(_effectivity*100/6))+"%");
+			draw_set_halign(fa_left);
+			draw_set_valign(fa_top);
+			draw_set_alpha(1);
 			}
 		else if selected_building == buildings.windmill {
+			var _effectivity = 0;
 			for (var i = 0; i < 6; i++) {
 				var _color2 = c_red;
 				if global.world.chunk_type[build_x/64+(i-2)] == 1 and !position_meeting(build_x+(i-2)*64,global.ground_level-8,obj_building_parent) {
 					_color2 = c_white;
+					_effectivity+=1;
 					}
-				draw_sprite_ext(spr_build_zone,0,build_x+(i-2)*64,global.ground_level,1,.25,0,_color2,0.75);
+				draw_sprite_ext(spr_build_zone,0,build_x+(i-2)*64,global.ground_level-32,1,.25,0,_color2,0.75);
 				}
+			var _yy = global.ground_level+24;
+			draw_set_color(c_black);
+			draw_set_alpha(.5 * image_alpha);
+			draw_rectangle(x-global.w/2,-8+_yy,x+global.w/2,8+_yy,0);
+			draw_set_alpha(image_alpha);
+			draw_set_color(c_white);
+			draw_set_halign(fa_center);
+			draw_set_valign(fa_middle);
+			draw_text(x,_yy,"Effectivity: "+string(floor(_effectivity*100/6))+"%");
+			draw_set_halign(fa_left);
+			draw_set_valign(fa_top);
+			draw_set_alpha(1);
 			}
 		
 		}

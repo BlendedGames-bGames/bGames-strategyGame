@@ -26,5 +26,5 @@ function find_target(_range){
 				}
 			}
 		}
-	show_debug_message("<<"+string(id)+">>: 2 target is "+string(attack_instance));
+	show_debug_message("<<"+string(id)+">>: target is "+string(attack_instance));
 	}

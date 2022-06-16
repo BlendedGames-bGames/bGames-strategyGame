@@ -1,7 +1,7 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function run_scared(){
-	
+	attack_cooldown = max(0,attack_cooldown-1);
 	image_xscale = hit_dir;
 	vspeed=min(vspeed+.5,4);
 	y = min(ystart,y);	

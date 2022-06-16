@@ -146,8 +146,8 @@ tutorial_draw[3] = function() {
 
 
 
-tutorial_text[4,0] = "Build a lumberjack's hut. It should be placed around trees.\nSelect the building from the Build menu.";
-tutorial_text[4,1] = "Build a lumberjack's hut. It should be placed around trees.\nSelect the building from the Build menu.";
+tutorial_text[4,0] = "Build a lumberjack's hut. It must be placed around trees to work.\nSelect the building from the Build menu.";
+tutorial_text[4,1] = "Build a lumberjack's hut. It must be placed around trees to work.\nSelect the building from the Build menu.";
 
 tutorial_condition[4] = function() {
 	return (instance_exists(obj_building_lumberjack_hut));

@@ -14,9 +14,7 @@ if global.can_help!= -1 {
 			audio_play_sound(snd_tut_progress,9,0);
 			y = -32;
 			image_alpha = 0;
-
 			}
-		
 		if !current_tutorial_sucessful {
 			y += (0-y)/8;
 			image_alpha = min(1,image_alpha+.025);

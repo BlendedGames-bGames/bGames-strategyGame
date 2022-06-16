@@ -74,29 +74,35 @@ if !pause {
 	var _can_move_camera = true;
 	mouse_hold_time += mouse_hold;
 
+	if current_submenu_function!=-1 current_submenu_function(_mouse_x,_mouse_y);
+	
+	if moving_building {
+		_can_move_camera = false;
+		}
+	
 	if device_mouse_check_button_pressed(0,mb_left) {
 		
 		//pause 
 		click_pause(_mouse_x,_mouse_y);
 
-		if current_submenu!=submenu.build_mode {
-			//check if selecting a structure
-			if current_menu!=menu.place_lumberjack_zone and position_meeting(x-global.w/2+_mouse_x,_mouse_y,obj_building_parent) {
-				touched_an_instance = true;
-				}
-			//moving the camera
-			if _can_move_camera {
-				if _mouse_y<global.ground_level+32 {
-					mouse_mode = mouse.moving_camera;
-					prev_mouse_pos.x = _mouse_x;
-					initial_x = x;
-					}
-				else if point_in_rectangle(_mouse_x,_mouse_y,minimap.view_x,global.h-24,minimap.view_x+minimap.view_xscale*16,global.h-8) {
-					mouse_mode = mouse.moving_minimap;
-					}
-				}
-			
+		
+		//check if selecting a structure
+		if current_menu!=menu.place_lumberjack_zone and position_meeting(x-global.w/2+_mouse_x,_mouse_y,obj_building_parent) {
+			touched_an_instance = true;
 			}
+		//moving the camera
+		if _can_move_camera {
+			if _mouse_y<global.ground_level+32 {
+				mouse_mode = mouse.moving_camera;
+				prev_mouse_pos.x = _mouse_x;
+				initial_x = x;
+				}
+			else if point_in_rectangle(_mouse_x,_mouse_y,minimap.view_x,global.h-24,minimap.view_x+minimap.view_xscale*16,global.h-8) {
+				mouse_mode = mouse.moving_minimap;
+				}
+			}
+			
+			
 		
 		//selection variables reset
 		sel_menu = -1;
@@ -647,7 +653,7 @@ if !pause {
 		mouse_hold_time = 0;
 		}
 
-	if current_submenu_function!=-1 current_submenu_function(_mouse_x,_mouse_y);
+	
 	
 	if (mouse_mode == mouse.moving_minimap) {
 		x = (_mouse_x-32)*(global.world.size*64)/(global.w-64);

@@ -26,7 +26,6 @@ function soldier_idle(){
 	if can_attack {
 		if attack_instance == noone {
 			find_target(192);
-			show_debug_message("<<"+string(id)+">>: 1 target is "+string(attack_instance));
 			if instance_exists(attack_instance) {
 				image_xscale = sign(attack_x-x+0.001);
 				attack_x = attack_instance.x;
