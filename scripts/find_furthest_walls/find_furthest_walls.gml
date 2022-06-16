@@ -34,6 +34,7 @@ function find_furthest_walls(){
 		var _soldier = global.peasant_list[jobs.soldier][|i];
 		with _soldier {
 			if !is_busy {
+				state = attack_to_pos;
 				if side == 1 {
 						target_x = global.control_radius_right -64+irandom(48);
 						}

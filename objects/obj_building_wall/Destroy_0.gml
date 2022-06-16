@@ -3,7 +3,9 @@
 
 event_inherited();
 
-find_furthest_walls();
+with obj_controller {
+	need_to_find_walls = true;
+	}
 
 if built {
 	instance_create_layer(x,y,"Units",obj_wall_destroyer);

@@ -18,8 +18,14 @@ if !pause {
 	farmer_job_assigner();
 	miner_job_assigner();
 	bgames_modifiers();
-	
+
+	if need_to_find_walls {
+		find_furthest_walls();
+		need_to_find_walls = false;
+		}
+
 	var _time_ratio = (global.time/global.day_time);
+	
 	
 	if _time_ratio >= global.job_endtime {
 		if can_call_bell {
@@ -382,6 +388,7 @@ if !pause {
 								selected_building = sel_index-1;
 								build_x-=floor(global.building_data[selected_building].length/2)*64;
 								render_submenu = true;
+								old_camera_x = x;
 								_can_move_camera = false;
 								}
 							}

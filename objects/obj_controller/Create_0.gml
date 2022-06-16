@@ -150,6 +150,8 @@ moving_building = false;
 mouse_x_old = 0;
 initial_x = 0;
 old_camera_x=0;
+
+need_to_find_walls = false;
 audio_falloff_set_model(audio_falloff_exponent_distance);
 audio_listener_position(x,y,0);
 audio_listener_orientation(0,1,0,0,0,1);
@@ -380,7 +382,7 @@ minimap_step = function() {
 #region submenu methods. Constant functions used when a submenu or menu is active
 
 submenu_build_function = function(_mouse_x,_mouse_y) {
-	if device_mouse_check_button_pressed(0,mb_left) {
+	if device_mouse_check_button_pressed(0,mb_left) and _mouse_y<global.ground_level+32 {
 		mouse_x_old = _mouse_x;
 		old_camera_x = x;
 		if point_in_rectangle(_mouse_x,_mouse_y,build_x-(x-global.w/2),0,build_x-(x-global.w/2)+sprite_get_width(global.building_data[selected_building].sprite_index),global.ground_level+32) {
@@ -395,7 +397,7 @@ submenu_build_function = function(_mouse_x,_mouse_y) {
 		var _mouse_diff = floor((_mouse_x-mouse_x_old)/64)*64;
 		build_x = base_build_x+_mouse_diff;
 		}
-	else if device_mouse_check_button(0,mb_left) {
+	else if camera_acceleration.x!=0 or mouse_mode == mouse.moving_minimap {
 		var _mouse_diff = floor((x-old_camera_x)/64)*64;
 		if _mouse_diff!=0 {
 			old_camera_x+=_mouse_diff;
