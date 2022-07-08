@@ -14,7 +14,7 @@ function move_to_object(){
 			sprite_index = spr_idle;
 			image_index=0;
 			timer = 0;
-			//<<<target_x = -1;
+			//target_x = -1;
 			if on_finish_state!=-1 on_finish_state();
 			state = next_state;
 

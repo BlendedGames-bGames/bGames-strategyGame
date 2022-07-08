@@ -1,7 +1,7 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function climb_tower(){
-	show_debug_message("can I stay in tower? :"+string(target_instance.open));
+	//show_debug_message("can I stay in tower? :"+string(target_instance.open));
 	if instance_exists(target_instance) and target_instance.open {
 		y = global.ground_level - 128 + 63;
 		x = target_instance.x+6+16*tower_pos;

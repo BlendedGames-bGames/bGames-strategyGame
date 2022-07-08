@@ -11,13 +11,19 @@ function soldier_idle(){
 		sprite_index=spr_idle;
 		image_index = 0;
 		}
+		
+	if (sprite_index==spr_archer_walk) {
+		sprite_index=spr_idle;
+		image_index = 0;
+		}
 	
-	if attack_cooldown == 0 and sprite_index == spr_archer {
+	if attack_cooldown == 0 and (sprite_index == spr_archer) {
 		
 		can_attack = true;
 		
 		if time_before_going_back_to_pos==0 and !instance_exists(attack_instance) and abs(x-target_x)>global.peasant_run_speed*2  {
-				show_debug_message("<<"+string(id)+">>: no target, so I move again.");
+				//show_debug_message("<<"+string(id)+">>: no target, so I move again.");
+				show_debug_message(string(id)+": I can move back");
 				state = attack_to_pos;
 			}	
 		attack_instance = noone;
@@ -29,7 +35,7 @@ function soldier_idle(){
 			if instance_exists(attack_instance) {
 				image_xscale = sign(attack_x-x+0.001);
 				attack_x = attack_instance.x;
-				show_debug_message("<<"+string(id)+">>: attack_x is "+string(attack_x));
+				//show_debug_message("<<"+string(id)+">>: attack_x is "+string(attack_x));
 				}
 			}
 

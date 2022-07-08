@@ -2,12 +2,12 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function before_switching_jobs(_which_free_peasant){
 	if _which_free_peasant.job==jobs.builder {
-		if _which_free_peasant.target_instance!=noone {
+		if instance_exists(_which_free_peasant.target_instance) {
 			_which_free_peasant.target_instance.builders--;
 			}
 		}
 	else if _which_free_peasant.job==jobs.lumberjack {
-		if _which_free_peasant.target_instance!=noone {
+		if instance_exists(_which_free_peasant.target_instance) {
 			_which_free_peasant.target_instance.workers--;
 			if _which_free_peasant.state == work_lumberjack {
 	
@@ -16,7 +16,7 @@ function before_switching_jobs(_which_free_peasant){
 			}
 		}
 	else if _which_free_peasant.job==jobs.farmer {
-		if _which_free_peasant.target_instance!=noone {
+		if instance_exists(_which_free_peasant.target_instance) {
 			_which_free_peasant.target_instance.workers--;
 			if _which_free_peasant.state == work_farm {
 	
@@ -25,7 +25,7 @@ function before_switching_jobs(_which_free_peasant){
 			}
 		}
 	else if _which_free_peasant.job==jobs.miner {
-		if _which_free_peasant.target_instance!=noone {
+		if instance_exists(_which_free_peasant.target_instance) {
 			_which_free_peasant.target_instance.workers--;
 			if _which_free_peasant.state == work_mine {
 	
@@ -35,7 +35,6 @@ function before_switching_jobs(_which_free_peasant){
 		}
 	else if _which_free_peasant.job==jobs.soldier {
 		if _which_free_peasant.side == 0 {
-
 			var _pos = ds_list_find_index(global.peasant_list[jobs.soldier_left],_which_free_peasant.id);
 			if _pos!=-1 ds_list_delete(global.peasant_list[jobs.soldier_left],_pos);
 			}
@@ -53,6 +52,9 @@ function before_switching_jobs(_which_free_peasant){
 		else if _which_free_peasant.state==climb_tower {
 			with _which_free_peasant {
 				cancel_tower();
+				}
+			with _which_free_peasant.target_instance {
+				slots--;
 				}
 			}
 		}
