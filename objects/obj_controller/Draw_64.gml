@@ -9,7 +9,7 @@ var _bar_width = 48;
 
 if pause {
 	
-	//draw_sprite_ext(pause_sprite,0,0,0,_guiw/res_w,_guih/res_h,0,c_white,1);
+	draw_sprite_ext(pause_sprite,0,0,0,_guiw/res_w,_guih/res_h,0,c_white,1);
 	
 	draw_set_color(c_black);
 	draw_set_alpha(0.5);

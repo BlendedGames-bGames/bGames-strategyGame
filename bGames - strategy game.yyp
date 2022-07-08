@@ -91,6 +91,7 @@
     {"id":{"name":"obj_building_windmill","path":"objects/obj_building_windmill/obj_building_windmill.yy",},"order":20,},
     {"id":{"name":"spr_wall_border_left","path":"sprites/spr_wall_border_left/spr_wall_border_left.yy",},"order":4,},
     {"id":{"name":"spr_example","path":"sprites/spr_example/spr_example.yy",},"order":0,},
+    {"id":{"name":"obj_stat_reader","path":"objects/obj_stat_reader/obj_stat_reader.yy",},"order":27,},
     {"id":{"name":"spr_hud_icon","path":"sprites/spr_hud_icon/spr_hud_icon.yy",},"order":1,},
     {"id":{"name":"lumberjack_job_assigner","path":"scripts/lumberjack_job_assigner/lumberjack_job_assigner.yy",},"order":3,},
     {"id":{"name":"move_to_object","path":"scripts/move_to_object/move_to_object.yy",},"order":1,},

@@ -1,6 +1,7 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+instance_create_layer(0,0,"Instances",obj_stat_reader);
 
 //Mouse states
 enum mouse {
@@ -515,7 +516,7 @@ main_options_step = function(_mouse_x,_mouse_y,_len) {
 			switch (i) {
 				case 0: {
 					pause = false;
-					
+					sprite_delete(pause_sprite);
 					instance_activate_all();
 					break;
 					}
@@ -601,13 +602,15 @@ bgames_login_step = function(_mouse_x,_mouse_y) {
 tutorial_intro_step = function(_mouse_x,_mouse_y) {
 	var _yy = global.h/2-56*1.5;
 			
-	if point_in_button(_mouse_x,_mouse_y,global.w/2-3*48,_yy+96,2.5,.75) {//if mouse in login button
+	if point_in_button(_mouse_x,_mouse_y,global.w/2-3*48,_yy+96,2.5,.75) {
 		pause = false;
+		sprite_delete(pause_sprite);
 		instance_activate_all();
 		global.can_help = 1;
 		}
-	else if point_in_button(_mouse_x,_mouse_y,global.w/2+24,_yy+96,2.5,.75) { //if mouse in go back button
+	else if point_in_button(_mouse_x,_mouse_y,global.w/2+24,_yy+96,2.5,.75) {
 		pause = false;
+		sprite_delete(pause_sprite);
 		instance_activate_all();
 		global.can_help = 0;
 		}
