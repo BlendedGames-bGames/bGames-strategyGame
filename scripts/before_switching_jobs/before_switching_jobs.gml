@@ -8,28 +8,31 @@ function before_switching_jobs(_which_free_peasant){
 		}
 	else if _which_free_peasant.job==jobs.lumberjack {
 		if instance_exists(_which_free_peasant.target_instance) {
-			_which_free_peasant.target_instance.workers--;
-			if _which_free_peasant.state == work_lumberjack {
-	
-				_which_free_peasant.target_instance.workers_working--;
+			with _which_free_peasant.target_instance {
+				workers--;
+				if _which_free_peasant.state == work_lumberjack {
+					workers_working--;
+					}
 				}
 			}
 		}
 	else if _which_free_peasant.job==jobs.farmer {
 		if instance_exists(_which_free_peasant.target_instance) {
-			_which_free_peasant.target_instance.workers--;
-			if _which_free_peasant.state == work_farm {
-	
-				_which_free_peasant.target_instance.workers_working--;
+			with _which_free_peasant.target_instance {
+				workers--;
+				if _which_free_peasant.state == work_farm {
+					workers_working--;
+					}
 				}
 			}
 		}
 	else if _which_free_peasant.job==jobs.miner {
 		if instance_exists(_which_free_peasant.target_instance) {
-			_which_free_peasant.target_instance.workers--;
-			if _which_free_peasant.state == work_mine {
-	
-				_which_free_peasant.target_instance.workers_working--;
+			with _which_free_peasant.target_instance {
+				workers--;
+				if _which_free_peasant.state == work_mine {
+					workers_working--;
+					}
 				}
 			}
 		}
@@ -53,9 +56,14 @@ function before_switching_jobs(_which_free_peasant){
 			with _which_free_peasant {
 				cancel_tower();
 				}
-			with _which_free_peasant.target_instance {
-				slots--;
-				}
 			}
+		if instance_exists(_which_free_peasant.target_instance) {
+			with _which_free_peasant.target_instance {
+				if object_index==obj_building_watchtower {
+					slots--;
+					}
+				}
+			}	
+		
 		}
 }

@@ -14,19 +14,19 @@ function get_enemies_amount(day){
 			_val = 4;
 			break;
 		case 4:
-			_val = 6;
-			break;
-		case 5: 
 			_val = 14;
 			break;
-		case 6:
+		case 5: 
 			_val = 18;
 			break;
+		case 6:
+			_val = 30;
+			break;
 		case 7:
-			_val = 24;
+			_val = 40;
 			break;
 		case 8:
-			_val = 30;
+			_val = 56;
 			break;
 		case 9:
 			_val = 35;
@@ -35,7 +35,9 @@ function get_enemies_amount(day){
 			_val = 40;
 			break;
 		default:
-			_val = day * 6 + 4;
+			enemy_scaling++;
+			_val = day * 24+(1+enemy_scaling)+ 4;
+			break;
 		}
 	
 	return _val;

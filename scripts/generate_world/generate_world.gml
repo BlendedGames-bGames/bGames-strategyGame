@@ -9,7 +9,7 @@ function generate_world(_size){
 	// set up background
 	_sprite_width = sprite_get_width(spr_mountain);
 	_world.background = {
-		sprite_size : [_sprite_width,_sprite_width*.9,_sprite_width*0.8,_sprite_width*0.7],
+		sprite_size : [_sprite_width,_sprite_width*0.9,_sprite_width*0.8,_sprite_width*0.7],
 		mountain_repeats: [3,4,7,8]
 		}
 	
@@ -54,12 +54,14 @@ function generate_world(_size){
 	var _start = _size/2;
 	var _pos_bonus = 0;
 	var _can_place = true;
-	var _side = -1
+	var _side = choose(1,-1);
 	var _deposit_start = _start;
+	var _chance = 1.;
 	while (_deposits>0 and in_range(_deposit_start,0,_size-4)) {
-		_can_place = (irandom(1)+_side/_start)>.5;
-		_deposit_start = _start + (_pos_bonus+20)*_side;
-
+		
+		show_debug_message("chance de colocar deposito: "+string(_chance))
+		_deposit_start = _start + (_pos_bonus+15+_side*2)*_side;
+		if _can_place show_debug_message("dis from start: "+string((_pos_bonus+5)*_side))
 		if _can_place {
 			for (var i = 0; i<4;i++) {
 				_world.chunk_type[clamp(_deposit_start+i,0,_size)]=4;
@@ -67,6 +69,10 @@ function generate_world(_size){
 				}
 			instance_create_layer((_deposit_start)*64,global.ground_level,"Buildings",obj_quarry);
 			_deposits--;
+			_chance-=0.75;
+			}
+		else {
+			_chance=min(_chance+0.50,1.);
 			}
 		if _side == 1 {
 			_pos_bonus+=10;
@@ -75,7 +81,7 @@ function generate_world(_size){
 		else {
 			_side = 1;
 			}
-		
+		_can_place = (random(_chance))>.5;
 		
 		
 		}

@@ -156,3 +156,13 @@ if !pause {
 		}
 	
 	}
+
+//if keyboard_check_pressed(ord("O")) {
+//	surface_save(surf_lighting,"light_surf.png");
+//	surface_save(surf_rendered_water,"water_surf.png");
+//	surface_save(surf_entities,"entities_surf.png");
+//	surface_save(surf_shaded_entities,"shaded_surf.png");
+//	surface_save(surf_menu,"menu_surf.png");
+//	surface_save(surf_submenu,"submenu_surf.png");
+//	surface_save(surf_resources,"resources_surf.png");
+//	}

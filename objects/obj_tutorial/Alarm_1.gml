@@ -10,7 +10,7 @@ image_alpha = 0;
 arrow_x = 0;
 arrow_alpha = 0;
 
-show_debug_message("tutorial step: "+string(current_tutorial));
+//show_debug_message("tutorial step: "+string(current_tutorial));
 
 if current_tutorial>=array_length(tutorial_condition) {
 	instance_destroy();

@@ -19,7 +19,7 @@ function lumberjack_job_assigner(){
 						}
 					}
 				if _free_lumberjack != noone {
-					show_debug_message("lumberjack,assigned to work: "+string(_free_lumberjack));
+					//show_debug_message("lumberjack,assigned to work: "+string(_free_lumberjack));
 					_free_lumberjack.state = move_to_object;
 					_free_lumberjack.check_state = -1;
 					_free_lumberjack.next_state = work_lumberjack;
@@ -30,11 +30,11 @@ function lumberjack_job_assigner(){
 					}
 				}
 			if built and cut_zone!=noone {
-				show_debug_message("Tengo un cut zone")
+				//show_debug_message("Tengo un cut zone")
 				for (var i = 0 ; i < _lumberjacks ; i++) {
 					var _lumberjack = global.peasant_list[jobs.lumberjack][|i];
 					if _lumberjack.target_instance == id and _lumberjack.state!=clear_forest {
-						show_debug_message("Iré a trabajar pue")
+						//show_debug_message("Iré a trabajar pue")
 						if _lumberjack.state == work_lumberjack {
 							workers_working--;
 							}

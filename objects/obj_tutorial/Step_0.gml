@@ -5,7 +5,7 @@
 if global.can_help!= -1 {
 
 	if global.can_help == 0 {
-		show_debug_message("I DIE");
+		//show_debug_message("I DIE");
 		instance_destroy();
 		}
 	else if global.can_help == 1 {
@@ -19,7 +19,7 @@ if global.can_help!= -1 {
 			y += (0-y)/8;
 			image_alpha = min(1,image_alpha+.025);
 			if tutorial_condition[current_tutorial]() {
-					show_debug_message("condition accepted");
+					//show_debug_message("condition accepted");
 					current_tutorial_sucessful = true;
 					alarm[1] = room_speed;
 				}

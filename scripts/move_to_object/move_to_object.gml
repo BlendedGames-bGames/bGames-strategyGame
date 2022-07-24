@@ -10,7 +10,7 @@ function move_to_object(){
 		image_xscale = sign(target_instance.x-x+0.001);
 		x+=image_xscale*global.peasant_run_speed;
 		if in_range(x,target_instance.x,target_instance.x+target_instance.sprite_width*target_instance.image_xscale) {
-			show_debug_message("llegue");
+			//show_debug_message("llegue");
 			sprite_index = spr_idle;
 			image_index=0;
 			timer = 0;

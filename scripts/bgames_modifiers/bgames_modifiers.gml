@@ -1,6 +1,6 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function bgames_modifiers(){
+function bgames_modifiers() {
 	global.pop_cap = global.pop_cap_base + global.pop_cap_bonus;
 	
 	global.daily_wood_gather  = global.daily_wood_gather_base  * (1+global.daily_wood_gather_percent_bonus + global.daily_gather_percent_bonus);

@@ -3,7 +3,7 @@
 
 var e = async_load;
 
-show_debug_message("load: "+string(json_encode(e)));
+//show_debug_message("load: "+string(json_encode(e)));
 
 if e[? "type"] == 3 {
 
@@ -11,5 +11,5 @@ if e[? "type"] == 3 {
 
 	var _str = buffer_read(_buffer,buffer_string);
 
-	show_debug_message("buffer: "+_str);
+	//show_debug_message("buffer: "+_str);
 	}

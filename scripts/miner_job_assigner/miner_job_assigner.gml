@@ -19,7 +19,7 @@ function miner_job_assigner(){
 						}
 					}
 				if _free_miner != noone {
-					show_debug_message("farmer,assigned to work: "+string(_free_miner));
+					//show_debug_message("farmer,assigned to work: "+string(_free_miner));
 					_free_miner.state = move_to_object;
 					_free_miner.check_state = -1;
 					_free_miner.next_state = work_mine;

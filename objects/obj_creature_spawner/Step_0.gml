@@ -12,12 +12,12 @@ if  (global.time/global.day_time >=global.night_attack_time) {
 			}
 		right_side+=64*8;
 		left_side-=64*8;
-		show_debug_message(string(left_side)+","+string(right_side));
+		//show_debug_message(string(left_side)+","+string(right_side));
 		enemies_left = get_enemies_amount(global.day);
 		need_to_calculate_pos = false;
 		}
 	spawn_cooldown = max(0,spawn_cooldown-1);
-	if spawn_cooldown == 0 and enemies_left>0 {
+	if spawn_cooldown == 0 and enemies_left>0  and instance_number(obj_enemy)<40 {
 		instance_create_layer(right_side+irandom(64)*choose(1,-1),global.ground_level,"Units",obj_enemy);
 		instance_create_layer(left_side+irandom(64)*choose(1,-1),global.ground_level,"Units",obj_enemy);
 		spawn_cooldown = max_spawn_cooldown;

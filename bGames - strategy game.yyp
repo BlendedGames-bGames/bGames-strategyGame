@@ -11,6 +11,7 @@
     {"id":{"name":"snd_night","path":"sounds/snd_night/snd_night.yy",},"order":2,},
     {"id":{"name":"run_scared","path":"scripts/run_scared/run_scared.yy",},"order":14,},
     {"id":{"name":"spr_build_zone","path":"sprites/spr_build_zone/spr_build_zone.yy",},"order":14,},
+    {"id":{"name":"obj_net_stat","path":"objects/obj_net_stat/obj_net_stat.yy",},"order":28,},
     {"id":{"name":"rMain","path":"rooms/rMain/rMain.yy",},"order":4,},
     {"id":{"name":"spr_castle2","path":"sprites/spr_castle2/spr_castle2.yy",},"order":8,},
     {"id":{"name":"spr_stone_deposit","path":"sprites/spr_stone_deposit/spr_stone_deposit.yy",},"order":9,},
@@ -213,8 +214,8 @@
   "RoomOrderNodes": [
     {"roomId":{"name":"rm_load","path":"rooms/rm_load/rm_load.yy",},},
     {"roomId":{"name":"rm_map","path":"rooms/rm_map/rm_map.yy",},},
-    {"roomId":{"name":"rm_online_test","path":"rooms/rm_online_test/rm_online_test.yy",},},
     {"roomId":{"name":"rMain","path":"rooms/rMain/rMain.yy",},},
+    {"roomId":{"name":"rm_online_test","path":"rooms/rm_online_test/rm_online_test.yy",},},
   ],
   "Folders": [
     {"folderPath":"folders/Sprites.yy","order":1,"resourceVersion":"1.0","name":"Sprites","tags":[],"resourceType":"GMFolder",},
@@ -272,7 +273,7 @@
   ],
   "IncludedFiles": [],
   "MetaData": {
-    "IDEVersion": "2022.3.0.625",
+    "IDEVersion": "2022.6.0.23",
   },
   "resourceVersion": "1.5",
   "name": "bGames - strategy game",

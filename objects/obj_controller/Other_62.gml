@@ -3,7 +3,7 @@
 if bgames_settings_request_timer>0 {
 	if ds_map_find_value(async_load, "id") == get {
 		var _end_time = get_timer();
-		show_debug_message("time: "+string((_end_time-request_time)/1000)+"ms");
+		show_debug_message("REQUEST TIME: "+string((_end_time-request_time)/1000)+"ms");
 		
 		if request_type = request.login {
 			if ds_map_find_value(async_load, "status") == 0 {
@@ -12,6 +12,10 @@ if bgames_settings_request_timer>0 {
 					bgames_user.id = real(_result);
 					current_pause_menu = bgames_settings;
 					bgames_user_has_logon = true;
+					request_type = request.attributes;
+					request_time = get_timer();
+					bgames_settings_request_timer = bgames_settings_request_wait;
+					get = http_get(dimensions_get_service+"/player_all_attributes/"+string(bgames_user.id));
 					}
 				catch(_err) {
 					show_debug_message(_err.message);
@@ -27,6 +31,7 @@ if bgames_settings_request_timer>0 {
 		else if request_type = request.attributes {
 			if ds_map_find_value(async_load, "status") == 0 {
 				var _result = ds_map_find_value(async_load, "result");
+				bgames_settings_request_timer = 0;
 				try {
 					var _temp_map=ds_map_create();
 					
@@ -46,6 +51,7 @@ if bgames_settings_request_timer>0 {
 		else if request_type = request.consume {
 			if ds_map_find_value(async_load, "status") == 0 {
 				var _result = ds_map_find_value(async_load, "result");
+				bgames_settings_request_timer = 0;
 				try {
 					
 					current_pause_menu = bgames_bonus;
@@ -90,13 +96,13 @@ if bgames_settings_request_timer>0 {
 					
 					}
 				catch(_err) {
-					show_debug_message(_err.message);
+					//show_debug_message(_err.message);
 					error_message.content="Couldn't get attributes."
 					error_message.time = room_speed*3;
 					}
 				}
 			}
 		}
-	request_type = -1;
-	bgames_settings_request_timer = 0;
+	//request_type = -1;
+	//bgames_settings_request_timer = 0;
 	}

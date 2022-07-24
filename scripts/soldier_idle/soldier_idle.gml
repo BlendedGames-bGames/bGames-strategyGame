@@ -1,7 +1,7 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function soldier_idle(){
-	//show_debug_message(string(id)+": step start. Tick: "+string((global.time + clock_offset) mod 10));
+	////show_debug_message(string(id)+": step start. Tick: "+string((global.time + clock_offset) mod 10));
 	attack_cooldown = max(0,attack_cooldown-1);
 	time_before_going_back_to_pos = max(0,time_before_going_back_to_pos-1);
 	//The soldier will find a target then shoot it.
@@ -22,8 +22,8 @@ function soldier_idle(){
 		can_attack = true;
 		
 		if time_before_going_back_to_pos==0 and !instance_exists(attack_instance) and abs(x-target_x)>global.peasant_run_speed*2  {
-				//show_debug_message("<<"+string(id)+">>: no target, so I move again.");
-				show_debug_message(string(id)+": I can move back");
+				////show_debug_message("<<"+string(id)+">>: no target, so I move again.");
+				//show_debug_message(string(id)+": I can move back");
 				state = attack_to_pos;
 			}	
 		attack_instance = noone;
@@ -35,7 +35,7 @@ function soldier_idle(){
 			if instance_exists(attack_instance) {
 				image_xscale = sign(attack_x-x+0.001);
 				attack_x = attack_instance.x;
-				//show_debug_message("<<"+string(id)+">>: attack_x is "+string(attack_x));
+				////show_debug_message("<<"+string(id)+">>: attack_x is "+string(attack_x));
 				}
 			}
 

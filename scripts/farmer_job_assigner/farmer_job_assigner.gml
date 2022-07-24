@@ -19,7 +19,7 @@ function farmer_job_assigner(){
 						}
 					}
 				if _free_farmer != noone {
-					show_debug_message("farmer,assigned to work: "+string(_free_farmer));
+					//show_debug_message("farmer,assigned to work: "+string(_free_farmer));
 					_free_farmer.state = move_to_object;
 					_free_farmer.is_busy = true;
 					_free_farmer.check_state = -1;

@@ -9,20 +9,15 @@ function collect_resources(){
 			global.wood_weekly +=gather;
 			}
 		global.wood+=global.wood_weekly;
-	
-	
 		with obj_building_windmill {
 			global.food_weekly +=gather;
 			}
 		global.food+=global.food_weekly;
-	
-	
 		with obj_building_mining_camp {
 			global.stone_weekly +=gather;
 			}
 		global.stone+=global.stone_weekly;
-	
-		render_resources=true;
-		render_submenu = true;
 		}
+	render_resources=true;
+	render_submenu = true;
 }

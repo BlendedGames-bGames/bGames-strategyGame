@@ -11,7 +11,7 @@ surface_resize(application_surface,global.res_w,global.res_h);
 camera_set_view_size(view_camera[0],global.w,global.h);
 
 
-global.resource_font = font_add_sprite_ext(spr_resource_font,"ABCDE1234567890+/",1,1);
+global.resource_font = font_add_sprite_ext(spr_resource_font,"ABCDE1234567890+/FGHIJK",1,1);
 
 global.day_time = 5*60*60//minutos*segundos*ticks;
 global.job_endtime = 0.65; // [0,1]

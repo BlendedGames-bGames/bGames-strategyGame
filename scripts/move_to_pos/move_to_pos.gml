@@ -18,7 +18,7 @@ function move_to_pos(){
 		}	
 	else {
 		if job = jobs.soldier {
-			show_debug_message("pa la casa");
+			//show_debug_message("pa la casa");
 			}
 		cancel_state();
 		}

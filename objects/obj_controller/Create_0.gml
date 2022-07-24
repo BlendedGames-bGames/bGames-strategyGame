@@ -181,7 +181,7 @@ ambient_day = audio_play_sound(snd_forest,10,1);
 ambient_night = audio_play_sound(snd_night,10,1);
 
 audio_sound_gain(ambient_night,0,0);
-show_debug_message(ambient_night);
+//show_debug_message(ambient_night);
 need_to_change_ambient_sound = false;
 initialize_global_modifiers();
 
@@ -298,7 +298,7 @@ bgames_user = {
 input = false;
 
 //bgames_attributes = ds_list_create();
-
+bgames_stat_open = 0;
 bgames_attributes = noone
 get = 1;
 request_type = -1;
@@ -451,6 +451,12 @@ submenu_peasant_function = function(_mouse_x,_mouse_y) {
 
 #endregion
 
+click_bgames_dimensions_button = function(_mouse_x,_mouse_y) {
+	if !pause and point_in_rectangle(_mouse_x,_mouse_y,global.w-24-48*2,24+16,global.w-24-48*2+32,24+16+32) {
+		bgames_stat_open= !bgames_stat_open;
+		render_menu = true;
+		}
+	}
 
 click_pause = function(_mouse_x,_mouse_y) {
 	if !pause and point_in_rectangle(_mouse_x,_mouse_y,24,24,72,72) {
@@ -461,9 +467,24 @@ click_pause = function(_mouse_x,_mouse_y) {
 
 pause_game = function() {
 	instance_deactivate_all(1);
+	instance_activate_object(obj_stat_reader);
 	pause_sprite = sprite_create_from_surface(application_surface,0,0,res_w,res_h,0,0,0,0);
 	pause = true;
 	current_pause_menu = main_options;
+	}
+
+
+click_pause_bgames = function(_mouse_x,_mouse_y) {
+	if !pause and point_in_rectangle(_mouse_x,_mouse_y,global.w-24-48,24,global.w-24,24+48) {
+		pause_game();	
+		if bgames_user.id == -1 {
+			current_pause_menu = bgames_login;
+			}
+		else {
+			current_pause_menu = bgames_settings;
+			}
+		exit;
+		}
 	}
 
 //day night cycle functions
@@ -518,6 +539,8 @@ main_options_step = function(_mouse_x,_mouse_y,_len) {
 					pause = false;
 					sprite_delete(pause_sprite);
 					instance_activate_all();
+					render_resources = true;
+					render_menu = true;
 					break;
 					}
 				case 1: {
@@ -592,7 +615,7 @@ bgames_login_step = function(_mouse_x,_mouse_y) {
 		if os_type==os_android keyboard_virtual_show(kbv_type_default, kbv_returnkey_done, kbv_autocapitalize_none, false);
 		}
 	else {
-		show_debug_message("Nothing else, closing the virtual keyboard");
+		//show_debug_message("Nothing else, closing the virtual keyboard");
 		input = false;
 		bgames_login_selection = -1;
 		keyboard_virtual_hide(); 

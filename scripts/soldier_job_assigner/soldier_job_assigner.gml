@@ -37,7 +37,7 @@ function soldier_job_assigner(){
 							}
 						}
 					if _free_soldier != noone {
-						show_debug_message("adding instance: "+string(_free_soldier));
+						//show_debug_message("adding instance: "+string(_free_soldier));
 					
 						_free_soldier.check_state = exploration_is_active;
 						_free_soldier.state = move_to_pos;

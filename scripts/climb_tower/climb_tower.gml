@@ -1,11 +1,11 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function climb_tower(){
-	//show_debug_message("can I stay in tower? :"+string(target_instance.open));
+	////show_debug_message("can I stay in tower? :"+string(target_instance.open));
 	if instance_exists(target_instance) and target_instance.open {
 		y = global.ground_level - 128 + 63;
 		x = target_instance.x+6+16*tower_pos;
-		//show_debug_message(string(id)+": step start. Tick: "+string((global.time + clock_offset) mod 10));
+		////show_debug_message(string(id)+": step start. Tick: "+string((global.time + clock_offset) mod 10));
 		attack_cooldown = max(0,attack_cooldown-1);
 		time_before_going_back_to_pos = max(0,time_before_going_back_to_pos-1);
 		//The soldier will find a target then shoot it.

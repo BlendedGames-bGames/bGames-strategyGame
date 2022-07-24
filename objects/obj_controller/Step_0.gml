@@ -90,8 +90,8 @@ if !pause {
 		
 		//pause 
 		click_pause(_mouse_x,_mouse_y);
-
-		
+		click_pause_bgames(_mouse_x,_mouse_y);
+		click_bgames_dimensions_button(_mouse_x,_mouse_y);
 		//check if selecting a structure
 		if current_menu!=menu.place_lumberjack_zone and position_meeting(x-global.w/2+_mouse_x,_mouse_y,obj_building_parent) {
 			touched_an_instance = true;
@@ -502,7 +502,7 @@ if !pause {
 								}
 							else if sel_index == 1 {
 								var _building = current_instance;
-								show_debug_message(_building);
+								//show_debug_message(_building);
 								current_instance = noone;
 								if !_building.built {
 									var _id = _building.building_id;
@@ -529,7 +529,7 @@ if !pause {
 		
 				if show_min_button and point_in_rectangle(_mouse_x,_mouse_y,24,global.h/2-24,24+48,global.h/2-24+48) {
 					exploration_active[explore.left_side] = !exploration_active[explore.left_side];
-					show_debug_message("EXPLORING");
+					//show_debug_message("EXPLORING");
 					_can_move_camera = false;
 					}
 				else if show_max_button and point_in_rectangle(_mouse_x,_mouse_y,global.w-72,global.h/2-24,global.w-72+48,global.h/2-24+48){

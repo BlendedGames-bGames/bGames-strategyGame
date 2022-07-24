@@ -25,7 +25,7 @@ function builder_job_assigner(){
 					_free_builder.target_instance = id;
 					_free_builder.is_busy = true;
 					builders++;
-					show_debug_message("assigning "+string(_free_builder));
+					//show_debug_message("assigning "+string(_free_builder));
 					}
 				}
 			}

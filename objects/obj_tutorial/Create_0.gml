@@ -34,7 +34,7 @@ tutorial_text[0,1] = "Drag the screen to move the camera.";
 
 tutorial_condition[0] = function() {
 	stored_movement+=abs(obj_controller.camera_acceleration.x);
-	//show_debug_message(stored_movement);
+	////show_debug_message(stored_movement);
 	return stored_movement>10;
 	}
 

@@ -12,3 +12,4 @@ right_side = 0;
 need_to_calculate_pos = true;
 
 enemies_left = 0;
+enemy_scaling = 0;

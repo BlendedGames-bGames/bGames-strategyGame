@@ -47,7 +47,7 @@ if pause {
 		draw_text(_guiw/2-3*_bar_width+12,_yy+12,"User:"+bgames_user.user);	
 			
 		draw_sprite_ext(spr_hud_bar,bgames_login_selection==1,_guiw/2-3*_bar_width,_yy+48,6,.75,0,c_white,1);
-		draw_text(_guiw/2-3*_bar_width+12,_yy+48+12,"Password:"+bgames_user.password);	
+		draw_text(_guiw/2-3*_bar_width+12,_yy+48+12,"Password:"+string_repeat("*",string_length(bgames_user.password)));	
 			
 		draw_set_halign(fa_center);
 		draw_sprite_ext(spr_hud_bar,0,_guiw/2-3*_bar_width,_yy+96,2.5,.75,0,c_white,1);
@@ -91,7 +91,6 @@ if pause {
 		_len = array_length(bgames_attributes);
 		draw_set_halign(fa_center);
 		draw_set_valign(fa_middle);
-		
 		for (var i = 0; i < _len ;i++) {
 			draw_sprite_ext(spr_hud_bar,0,_guiw/2-1.5*128+(i mod 3) * 128+16,_yy+128*floor(i/3),2,2,0,c_white,1);
 			//draw_sprite(spr_points_shop,i,_guiw/2-1.5*128+(i mod 3) * 128+16+24,_yy+128*floor(i/3)+24);
@@ -188,7 +187,25 @@ else {
 	
 		draw_sprite(spr_hud_bar,0,24,24);
 		draw_sprite(spr_config_icon,0,32,32);
-	
+		
+		draw_sprite(spr_hud_bar,0,global.w-24-48,24);
+		var _user_exists = (bgames_user.id!=-1);
+		draw_sprite(spr_config_icon,1+(_user_exists),global.w-24-48+8,32);
+		if _user_exists {
+			draw_set_font(global.resource_font);
+			draw_sprite_ext(spr_hud_bar,0,global.w-24-48*2,24+16,32/48,32/48,0,c_white,1);
+			draw_sprite(spr_hud_icon,19+bgames_stat_open,global.w-24-48*2+16,24+32);
+			if bgames_stat_open {
+				_len = array_length(bgames_attributes);
+				for (var i = 0; i < _len ;i++) {
+					draw_text(_guiw/2-_len/2*48+48*i,48,string_char_at("FGHIJK",i+1)+string(bgames_attributes[i].data));
+					}
+				
+				
+				}
+			draw_set_font(fnt_small); 
+			}
+		draw_text(032,room_height-80-16,"Days: "+string(global.day));
 		//draw_sprite_ext(spr_hud_bar,0,_guiw/2-33,room_height-80,66/_bar_width,1,0,c_white,1);
 		draw_sprite(spr_hud_center,1,0,room_height-80);
 		draw_set_halign(fa_center);
